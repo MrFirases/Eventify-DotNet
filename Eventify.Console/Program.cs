@@ -27,6 +27,7 @@ namespace Eventify.Console
             /*The End of Adding a transaction*/
 
             System.Console.WriteLine("Good Bye Brogrammer");
+            System.Console.WriteLine("Good Bye Brogrammers :p ");
             System.Console.ReadKey();
         }
     }
