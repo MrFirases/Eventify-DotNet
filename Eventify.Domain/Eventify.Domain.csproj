@@ -54,14 +54,16 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Favorite.cs" />
-    <Compile Include="Entities\medium.cs" />
+    <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Myevent.cs" />
+    <Compile Include="Entities\Mymedia.cs" />
     <Compile Include="Entities\Notification.cs" />
     <Compile Include="Entities\Organization.cs" />
     <Compile Include="Entities\Organizer.cs" />
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\Rate.cs" />
     <Compile Include="Entities\Referreluser.cs" />
+    <Compile Include="Entities\Report.cs" />
     <Compile Include="Entities\Reservation.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\Ticket.cs" />
@@ -74,6 +76,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

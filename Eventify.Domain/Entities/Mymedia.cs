@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Eventify.Data.Models
 {
-    public partial class medium
+    public partial class Mymedia
     {
         public int id { get; set; }
         public Nullable<System.DateTime> mediaDate { get; set; }

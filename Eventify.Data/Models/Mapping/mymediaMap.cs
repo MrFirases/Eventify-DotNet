@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace Eventify.Data.Models.Mapping
 {
-    public class mediumMap : EntityTypeConfiguration<medium>
+    public class mymediaMap : EntityTypeConfiguration<Mymedia>
     {
-        public mediumMap()
+        public mymediaMap()
         {
             // Primary Key
             this.HasKey(t => t.id);
@@ -21,7 +21,7 @@ namespace Eventify.Data.Models.Mapping
                 .HasMaxLength(255);
 
             // Table & Column Mappings
-            this.ToTable("media", "eventify");
+            this.ToTable("mymedia", "eventify");
             this.Property(t => t.id).HasColumnName("id");
             this.Property(t => t.mediaDate).HasColumnName("mediaDate");
             this.Property(t => t.pathMedia).HasColumnName("pathMedia");
@@ -30,7 +30,7 @@ namespace Eventify.Data.Models.Mapping
 
             // Relationships
             this.HasOptional(t => t.myevent)
-                .WithMany(t => t.media)
+                .WithMany(t => t.mymedias)
                 .HasForeignKey(d => d.event_id);
 
         }
