@@ -8,9 +8,10 @@ namespace Eventify.Data.Models
         public Myevent()
         {
             this.comments = new List<Comment>();
-            this.media = new List<medium>();
             this.rates = new List<Rate>();
+            this.reports = new List<Report>();
             this.tickets = new List<Ticket>();
+            this.mymedias = new List<Mymedia>();
             this.tasks = new List<Task>();
             this.questions = new List<Question>();
             this.wishlists = new List<Wishlist>();
@@ -34,10 +35,11 @@ namespace Eventify.Data.Models
         public Nullable<int> organization_id { get; set; }
         public virtual Category category { get; set; }
         public virtual ICollection<Comment> comments { get; set; }
-        public virtual ICollection<medium> media { get; set; }
         public virtual ICollection<Rate> rates { get; set; }
+        public virtual ICollection<Report> reports { get; set; }
         public virtual Organization organization { get; set; }
         public virtual ICollection<Ticket> tickets { get; set; }
+        public virtual ICollection<Mymedia> mymedias { get; set; }
         public virtual ICollection<Task> tasks { get; set; }
         public virtual ICollection<Question> questions { get; set; }
         public virtual ICollection<Wishlist> wishlists { get; set; }
