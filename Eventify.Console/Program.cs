@@ -23,7 +23,7 @@ namespace Eventify.Console
             transactionService.commit();
             transactionService.Dispose();
             System.Console.WriteLine("Transaction added");
-            */
+
             //The End of Adding a transaction
 
 
