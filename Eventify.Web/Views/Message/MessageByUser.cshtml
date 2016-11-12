@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Eventify.Data.Models.Message>
+
+@{
+    ViewBag.Title = "MessageByUser";
+}
+
+
+@section Styles {
+    <link href="@Url.Content("~/Content/")assets/apps/css/chat-style.css" rel="stylesheet" type="text/css" />
+}
+
+<h2>@ViewBag.UserFullName</h2>
+
+<div class="wrapper">
+    <div class="container-chat">
+
+        <div class="right">
+            <div class="top">
+                <span>To: <span class="name">@ViewBag.UserFullName</span></span>
+            </div>
+            <div class="chat active-chat" data-chat="person2">
+                <div class="conversation-start">
+                    <span>Today</span>
+                </div>
+                @foreach (var item in Model)
+                {
+
+                    if (item.sended == true)
+                    {
+                        <div class="bubble me">
+                            @Html.DisplayFor(modelItem => item.message1) 
+                        </div>
+                        <br /> <span>@Html.DisplayFor(modelItem => item.date)</span>
+                    }
+                    else
+                    {
+                        <div class="bubble you">
+                            @Html.DisplayFor(modelItem => item.message1) 
+                        </div>
+                        <br /> <span>@Html.DisplayFor(modelItem => item.date)</span>
+
+                    }
+
+
+                }
+            </div>
+            @using (Html.BeginForm())
+            {
+
+                <div class="write">
+                    @*<input type="text"/>*@
+                    @Html.TextBox("msgResponse") 
+                    <button class="write-link send"  type="submit"></button>
+                    <input class="write-link send" type="submit" name="submit" value="Respond" />
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
