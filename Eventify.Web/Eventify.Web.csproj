@@ -303,6 +303,24 @@
       <DependentUpon>201611111610544_UserIntegrationInTheSameDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Eventify.Data\Eventify.Data.csproj">
+      <Project>{10606037-55a8-4daa-afcb-8dc5c8ee133f}</Project>
+      <Name>Eventify.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eventify.Domain\Eventify.Domain.csproj">
+      <Project>{ec544aa9-d5dc-4ae6-b41b-fddf6b188278}</Project>
+      <Name>Eventify.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eventify.Service\Eventify.Service.csproj">
+      <Project>{e6013a4e-7a6f-4334-8c37-e22fdc8ac7bc}</Project>
+      <Name>Eventify.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service.Pattern\Service.Pattern.csproj">
+      <Project>{d48e861d-ad35-4087-bc15-955f3c98d185}</Project>
+      <Name>Service.Pattern</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
