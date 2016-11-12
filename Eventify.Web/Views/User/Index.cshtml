@@ -4,91 +4,72 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!--GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG-->
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.accountState)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.confirmationToken)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.creationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.firstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.loyaltyPoint)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.numTel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.profileImage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.username)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.accountState)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.confirmationToken)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.creationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.loyaltyPoint)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.numTel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.profileImage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.username)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-layers font-green"></i>
+                    <span class="caption-subject font-green bold uppercase">All Users</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="mt-element-card mt-card-round mt-element-overlay">
+                    <div class="row">
+@foreach (var item in Model)
+{
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="@Html.DisplayFor(modelItem => item.profileImage)" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="javascript:;">
+                                                    <i>Ban</i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                
+                                                    @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn default btn-outline" })
+                                                    
+                                                
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">@Html.DisplayFor(modelItem => item.firstName) @Html.DisplayFor(modelItem => item.lastName)</h3>
+                                    <p class="mt-card-desc font-grey-mint">@Html.DisplayFor(modelItem => item.username)</p>
+                                    <div class="mt-card-social">
+                                        <ul>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <i class="icon-social-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <i class="icon-social-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <i class="icon-social-dribbble"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 }
-
-</table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

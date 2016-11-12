@@ -24,7 +24,12 @@ namespace Eventify.Web.Controllers
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            
+            IUserService userService = new UserService();
+            User user = userService.GetById(id);
+            userService.commit();
+
+            return View(user);
         }
 
         // GET: User/Create
