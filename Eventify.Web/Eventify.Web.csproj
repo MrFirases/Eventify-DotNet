@@ -212,6 +212,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -289,6 +290,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Event\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -302,6 +304,20 @@
     <EmbeddedResource Include="Migrations\201611111610544_UserIntegrationInTheSameDatabase.resx">
       <DependentUpon>201611111610544_UserIntegrationInTheSameDatabase.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Eventify.Domain\Eventify.Domain.csproj">
+      <Project>{ec544aa9-d5dc-4ae6-b41b-fddf6b188278}</Project>
+      <Name>Eventify.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eventify.Service\Eventify.Service.csproj">
+      <Project>{E6013A4E-7A6F-4334-8C37-E22FDC8AC7BC}</Project>
+      <Name>Eventify.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service.Pattern\Service.Pattern.csproj">
+      <Project>{D48E861D-AD35-4087-BC15-955F3C98D185}</Project>
+      <Name>Service.Pattern</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
