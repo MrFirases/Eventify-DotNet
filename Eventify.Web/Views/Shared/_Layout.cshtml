@@ -44,6 +44,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <link href="@Url.Content("~/Content/")assets/pages/css/profile-2.min.css" rel="stylesheet" type="text/css" />
     <!-- END THEME LAYOUT STYLES -->
+    @RenderSection("Styles", false)
+
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <!-- END HEAD -->
@@ -588,7 +590,31 @@ License: You must have a valid license purchased only from themeforest(the above
                            
                     </ul>
                 </li>
-                     <!--End Hakim Event Menu Part-->
+                    <!--End Hakim Event Menu Part-->
+                    
+                    
+                    
+                    <!--Ibra Chat Menu Part-->
+                    <li class="nav-item  ">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-envelope-open"></i>
+                            <span class="title">Message</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item  ">
+                                <a href="@Url.Action("Index", "Message")" class="nav-link ">
+                                    <span class="title">Display Message</span>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <!--End Ibra Chat Menu Part-->
+
+
+                    
 
                 </ul>
                 <!-- END SIDEBAR MENU -->

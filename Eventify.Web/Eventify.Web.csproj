@@ -85,6 +85,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.JScript" />
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MySQL\Connector.NET 6.9\Assemblies\v4.5\MySql.Data.dll</HintPath>
@@ -223,7 +224,7 @@
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -304,8 +305,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Message\MessageByUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -324,20 +325,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eventify.Data\Eventify.Data.csproj">
-      <Project>{10606037-55a8-4daa-afcb-8dc5c8ee133f}</Project>
-      <Name>Eventify.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Eventify.Domain\Eventify.Domain.csproj">
       <Project>{ec544aa9-d5dc-4ae6-b41b-fddf6b188278}</Project>
       <Name>Eventify.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Eventify.Service\Eventify.Service.csproj">
-      <Project>{e6013a4e-7a6f-4334-8c37-e22fdc8ac7bc}</Project>
+      <Project>{E6013A4E-7A6F-4334-8C37-E22FDC8AC7BC}</Project>
       <Name>Eventify.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\Service.Pattern\Service.Pattern.csproj">
-      <Project>{d48e861d-ad35-4087-bc15-955f3c98d185}</Project>
+      <Project>{D48E861D-AD35-4087-BC15-955F3C98D185}</Project>
       <Name>Service.Pattern</Name>
     </ProjectReference>
   </ItemGroup>
