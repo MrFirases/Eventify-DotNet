@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Eventify.Service
 {
-    interface IUserService : IMyServiceGeneric<User>
+    public interface IUserService : IMyServiceGeneric<User>
     {
     }
 }
