@@ -26,7 +26,9 @@ namespace Eventify.Web.Controllers
         // GET: Event/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var myEvent = eventService.GetById(id);
+            return View(myEvent);
+
         }
 
         // GET: Event/Create
@@ -54,7 +56,8 @@ namespace Eventify.Web.Controllers
         // GET: Event/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var myEvent = eventService.GetById(id);
+            return View(myEvent);
         }
 
         // POST: Event/Edit/5
