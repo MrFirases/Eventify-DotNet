@@ -22,7 +22,7 @@ namespace Eventify.Web.Controllers
         public ActionResult Index()
         {
             IEnumerable<Message> messages = 
-                MessageService.GetMany(message => message.sended == true && message.claim == true).DistinctBy(message => message.user_id);
+                MessageService.GetMany(message => message.sended == true && message.claim == true).DistinctBy(message => message.user_id).ToList();
             return View(messages); 
         }
 
@@ -93,29 +93,33 @@ namespace Eventify.Web.Controllers
         // GET: Message/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            
+            return View(MessageService.GetById(id));
         }
 
         // POST: Message/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id,Message message)
         {
             try
             {
-                // TODO: Add update logic here
-
+                message.date = DateTime.Now;
+                MessageService.Update(message);
+                MessageService.commit();
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 
         // GET: Message/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            MessageService.Delete(MessageService.GetById(id));
+            MessageService.commit();
+            return RedirectToAction("Index");
         }
 
         // POST: Message/Delete/5
@@ -133,5 +137,86 @@ namespace Eventify.Web.Controllers
                 return View();
             }
         }
+
+
+        public static string GetPrettyDate(DateTime d)
+        {
+            // 1.
+            // Get time span elapsed since the date.
+            TimeSpan s = DateTime.Now.Subtract(d);
+
+            // 2.
+            // Get total number of days elapsed.
+            int dayDiff = (int)s.TotalDays;
+
+            // 3.
+            // Get total number of seconds elapsed.
+            int secDiff = (int)s.TotalSeconds;
+
+            // 4.
+            // Don't allow out of range values.
+            if (dayDiff < 0 || dayDiff >= 31)
+            {
+                return null;
+            }
+
+            // 5.
+            // Handle same-day times.
+            if (dayDiff == 0)
+            {
+                // A.
+                // Less than one minute ago.
+                if (secDiff < 60)
+                {
+                    return "just now";
+                }
+                // B.
+                // Less than 2 minutes ago.
+                if (secDiff < 120)
+                {
+                    return "1 minute ago";
+                }
+                // C.
+                // Less than one hour ago.
+                if (secDiff < 3600)
+                {
+                    return string.Format("{0} minutes ago",
+                        Math.Floor((double)secDiff / 60));
+                }
+                // D.
+                // Less than 2 hours ago.
+                if (secDiff < 7200)
+                {
+                    return "1 hour ago";
+                }
+                // E.
+                // Less than one day ago.
+                if (secDiff < 86400)
+                {
+                    return string.Format("{0} hours ago",
+                        Math.Floor((double)secDiff / 3600));
+                }
+            }
+            // 6.
+            // Handle previous days.
+            if (dayDiff == 1)
+            {
+                return "yesterday";
+            }
+            if (dayDiff < 7)
+            {
+                return string.Format("{0} days ago",
+                dayDiff);
+            }
+            if (dayDiff < 31)
+            {
+                return string.Format("{0} weeks ago",
+                Math.Ceiling((double)dayDiff / 7));
+            }
+            return null;
+        }
+
+
+
     }
 }
