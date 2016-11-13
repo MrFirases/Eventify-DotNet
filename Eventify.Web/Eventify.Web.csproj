@@ -225,6 +225,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -310,6 +311,7 @@
     <Content Include="Views\Message\MessageByUser.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -328,6 +330,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Eventify.Data\Eventify.Data.csproj">
+      <Project>{10606037-55a8-4daa-afcb-8dc5c8ee133f}</Project>
+      <Name>Eventify.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Eventify.Domain\Eventify.Domain.csproj">
       <Project>{ec544aa9-d5dc-4ae6-b41b-fddf6b188278}</Project>
       <Name>Eventify.Domain</Name>
