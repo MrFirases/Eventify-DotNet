@@ -313,6 +313,7 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\Details.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
