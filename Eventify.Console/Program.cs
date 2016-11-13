@@ -24,7 +24,7 @@ namespace Eventify.Console
             transactionService.Dispose();
             System.Console.WriteLine("Transaction added");
 
-            //The End of Adding a transaction
+            //The End of Adding a transaction.
 
 
 
