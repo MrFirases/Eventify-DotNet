@@ -19,18 +19,18 @@
             <div class="portlet-body">
                 <div class="mt-element-card mt-card-round mt-element-overlay">
                     <div class="row">
-@foreach (var item in Model)
-{
+                        @foreach (var item in Model)
+                        {
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="mt-card-item">
                                 <div class="mt-card-avatar mt-overlay-1">
-                                    <img src="@Html.DisplayFor(modelItem => item.profileImage)" />
+                                    <img  src="@Html.DisplayFor(modelItem => item.profileImage)" />
                                     <div class="mt-overlay">
                                         <ul class="mt-info">
                                             <li>
-                                                <a class="btn default btn-outline" href="javascript:;">
-                                                    <i>Ban</i>
-                                                </a>
+                                               
+                                                    @Html.ActionLink("Ban", "Ban", new { id = item.id }, new { @class = "btn default btn-outline" })
+                                               
                                             </li>
                                             <li>
                                                 

@@ -18,6 +18,7 @@ namespace Eventify.Data.Models
             this.referrelusers = new List<Referreluser>();
             this.referrelusers1 = new List<Referreluser>();
             this.reports = new List<Report>();
+            this.reports1 = new List<Report>();
             this.reservations = new List<Reservation>();
             this.wishlists = new List<Wishlist>();
         }
@@ -45,6 +46,7 @@ namespace Eventify.Data.Models
         public virtual ICollection<Referreluser> referrelusers { get; set; }
         public virtual ICollection<Referreluser> referrelusers1 { get; set; }
         public virtual ICollection<Report> reports { get; set; }
+        public virtual ICollection<Report> reports1 { get; set; }
         public virtual ICollection<Reservation> reservations { get; set; }
         public virtual ICollection<Wishlist> wishlists { get; set; }
     }
