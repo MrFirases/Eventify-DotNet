@@ -310,6 +310,7 @@
     <Content Include="Views\Message\MessageByUser.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Message\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
