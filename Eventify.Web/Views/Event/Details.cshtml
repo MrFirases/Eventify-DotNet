@@ -123,6 +123,18 @@
         <dd>
             @Html.DisplayFor(model => model.organization_id)
         </dd>
+        <dt>
+           @Html.DisplayNameFor(model => model.mymedias)
+        </dt>
+        
+        <dd>
+        @foreach (var item in ViewBag.MyImgs)
+        {
+            <dd>
+                <img width="200" height="200" src="@Html.DisplayFor(modelItem => item)" class="img-responsive pic-bordered" alt=""/>
+            </dd>
+        }
+       
 
     </dl>
 </div>
