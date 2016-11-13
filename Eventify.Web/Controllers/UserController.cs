@@ -10,14 +10,31 @@ namespace Eventify.Web.Controllers
 {
     public class UserController : Controller
     {
+        private IUserService userService = null;
+        
+
+        public UserController()
+        {
+            userService = new UserService();
+           
+        }
+
         // GET: User
         public ActionResult Index()
         {
             IEnumerable<User> user;
-            IUserService userService = new UserService();
             user = userService.GetMany();
             userService.commit();
 
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Index(string searchString)
+        {
+            IEnumerable<User> user;
+
+            user = userService.GetMany(u=>u.firstName.Contains(searchString));
             return View(user);
         }
 
