@@ -20,6 +20,7 @@
 <!-- END PAGE HEADER-->
 
 
+
 <div class="portfolio-content portfolio-1">
     <div id="js-filters-juicy-projects" class="cbp-l-filters-button">
         <div style="padding: 5px 10px;" data-filter="*" class="cbp-filter-item-active cbp-filter-item btn dark btn-outline uppercase">
@@ -60,8 +61,8 @@
                     <div class="cbp-caption-activeWrap">
                         <div class="cbp-l-caption-alignCenter">
                             <div class="cbp-l-caption-body">
-                                <a href="@Url.Content("~/Content/")assets/global/plugins/cubeportfolio/ajax/project1.html" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">more info</a>
-                                <a href=" @{  foreach (var oneMedia in item.mymedias) { @oneMedia.pathMedia  break; } } " class="cbp-lightbox cbp-l-caption-buttonRight btn red uppercase btn red uppercase" data-title="Dashboard<br>by Paul Flavius Nechita">
+                                <a href="@Url.Action("Details", "Event", new {id = item.id })" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">more info</a>
+                                <a href=" @{  foreach (var oneMedia in item.mymedias) { @oneMedia.pathMedia  break; } } " class="cbp-lightbox cbp-l-caption-buttonRight btn red uppercase btn red uppercase" data-title="@item.title <br>by @item.organization.organizationName">
                                     view larger
                                 </a>
                             </div>
