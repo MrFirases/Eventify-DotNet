@@ -1,0 +1,144 @@
+﻿@model Eventify.Data.Models.Myevent
+
+<div>
+    <h4>Myevent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.createdAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createdAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eventState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eventState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eventType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eventType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.facebookLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.facebookLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nbViews)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nbViews)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.placeNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.placeNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.startTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.theme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.theme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.twitterLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.twitterLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.category_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.category_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.organization_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.organization_id)
+        </dd>
+        <dt>
+           @Html.DisplayNameFor(model => model.mymedias)
+        </dt>
+        
+        <dd>
+        @foreach (var item in ViewBag.MyImgs)
+        {
+            <dd>
+                <img width="200" height="200" src="@Html.DisplayFor(modelItem => item)" class="img-responsive pic-bordered" alt=""/>
+            </dd>
+        }
+       
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
