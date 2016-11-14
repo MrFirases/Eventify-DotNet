@@ -54,6 +54,36 @@ namespace Eventify.Web.Controllers
             return View(user);
         }
 
+        
+            public ActionResult Ban(int id)
+        {
+
+
+            User user = userService.GetById(id);
+            user.banState = 1;
+            userService.Update(user);
+            userService.commit();
+
+            var userlistToRedirect = userService.GetMany();
+            return RedirectToAction("Index", "User", new { user = user });
+           
+        }
+
+        public ActionResult UnBan(int id)
+        {
+
+
+            User user = userService.GetById(id);
+            user.banState = 0;
+            userService.Update(user);
+            userService.commit();
+
+            var userlistToRedirect = userService.GetMany();
+            return RedirectToAction("Index", "User", new { user = user });
+
+        }
+
+
         // GET: User/Create
         public ActionResult Create()
         {

@@ -49,9 +49,13 @@
                                         <div class="mt-overlay">
                                             <ul class="mt-info">
                                                 <li>
-
+                                                    @if(item.banState==0)
+                                                    {
                                                     @Html.ActionLink("Ban", "Ban", new { id = item.id }, new { @class = "btn default btn-outline" })
-
+                                                    }
+                                                    else 
+                                                    {@Html.ActionLink("UnBan", "UnBan", new { id = item.id }, new { @class = "btn default btn-outline" })
+                                                    }
                                                 </li>
                                                 <li>
 
