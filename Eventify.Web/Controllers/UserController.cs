@@ -41,6 +41,48 @@ namespace Eventify.Web.Controllers
             return View(user);
         }
 
+
+        
+        public ActionResult BannedUsers()
+        {
+            IEnumerable<User> user;
+
+            user = userService.GetMany(u => u.banState==1);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult BannedUsers(string searchString)
+        {
+            IEnumerable<User> user;
+
+            //user = userService.GetMany(u => u.banState == 1);
+            user = userService.GetMany(u => (u.firstName.Contains(searchString) || u.lastName.Contains(searchString) || u.username.Contains(searchString)) &&  u.banState == 1);
+            return View(user);
+        }
+
+
+
+        public ActionResult UnBannedUsers()
+        {
+            IEnumerable<User> user;
+
+            user = userService.GetMany(u => u.banState == 0);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult UnBannedUsers(string searchString)
+        {
+            IEnumerable<User> user;
+
+            //er = userService.GetMany(u => u.banState == 0);
+            user = userService.GetMany(u => (u.firstName.Contains(searchString) || u.lastName.Contains(searchString) || u.username.Contains(searchString)) && u.banState == 0);
+            return View(user);
+        }
+
+
+
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
@@ -65,7 +107,7 @@ namespace Eventify.Web.Controllers
             userService.commit();
 
             var userlistToRedirect = userService.GetMany();
-            return RedirectToAction("Index", "User", new { user = user });
+            return RedirectToAction("Index", "User");
            
         }
 
@@ -79,7 +121,7 @@ namespace Eventify.Web.Controllers
             userService.commit();
 
             var userlistToRedirect = userService.GetMany();
-            return RedirectToAction("Index", "User", new { user = user });
+            return RedirectToAction("Index", "User");
 
         }
 
