@@ -1,19 +1,24 @@
-﻿using Eventify.Service;
+﻿using Eventify.Data.Models;
+using Eventify.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Eventify.Web.Controllers
 {
     public class ReportController : Controller
     {
         private IReportService reportService = null;
+        private UserService UserService = null;
+     //   private EventService EventService = new EventService();
 
         public ReportController()
         {
             reportService = new ReportService();
+            UserService = new UserService();
         }
         // GET: Report
         public ActionResult Index()
@@ -26,7 +31,13 @@ namespace Eventify.Web.Controllers
         // GET: Report/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            int? x = reportService.GetById(id).userWhoReport_id;
+            string myString = x.ToString();
+            ViewBag.UserFullName = UserService.GetById(myString).lastName + " " + UserService.GetById(myString).firstName;
+            var report = reportService.GetById(id);
+            reportService.commit();
+
+            return View(report);
         }
 
         // GET: Report/Create
@@ -50,33 +61,36 @@ namespace Eventify.Web.Controllers
                 return View();
             }
         }
-
+        [HttpGet]
+        
         // GET: Report/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Report report = reportService.GetById(id);
+            return View(report);
         }
 
         // POST: Report/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Report report)
         {
-            try
-            {
-                // TODO: Add update logic here
 
+            if (ModelState.IsValid)
+            {
+                reportService.Update(report);
+                reportService.commit();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(report);
         }
 
         // GET: Report/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Report report = reportService.GetById(id);
+            reportService.Delete(report);
+            reportService.commit();
+            return RedirectToAction("Index");
         }
 
         // POST: Report/Delete/5

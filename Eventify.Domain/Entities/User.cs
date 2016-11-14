@@ -31,6 +31,7 @@ namespace Eventify.Data.Models
         public string firstName { get; set; }
         public string lastName { get; set; }
         public int loyaltyPoint { get; set; }
+        public int banState { get; set; }
         public string numTel { get; set; }
         public string password { get; set; }
         public string profileImage { get; set; }

@@ -1,8 +1,10 @@
-﻿@model IEnumerable<Eventify.Data.Models.Message>
+﻿@using Eventify.Web.Controllers
+@model IEnumerable<Eventify.Data.Models.Message>
 
 @{
     ViewBag.Title = "Index";
 }
+
 
 <h2>Messages</h2>
 
@@ -33,19 +35,19 @@
                         <div class="item">
                             <div class="item-head">
                                 <div class="item-details">
-                                    <img class="item-pic rounded" src="@Url.Content("~/Content/")assets/pages/media/users/avatar4.jpg">
+                                    <img class="item-pic rounded" src="@Html.DisplayFor(modelItem => item.user.profileImage) ">
                                     <a href="" class="item-name primary-link">
-                                       User Id :  @Html.DisplayFor(modelItem => item.user_id) 
+                                        @Html.DisplayFor(modelItem => item.user.firstName)  @Html.DisplayFor(modelItem => item.user.lastName) 
 
                                     </a>
-                                    <span class="item-label">@Html.DisplayFor(modelItem => item.date)</span>
+                                    <span class="item-label">
+                                               @MessageController.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))
+                                            </span>
                                 </div>
                                 <span class="item-status">
                                     <a class="btn red compose-btn btn-block" href="@Url.Action("MessageByUser", "Message", new {id = item.user_id})">
-                                        <i class="fa fa-edit"></i> Responde
+                                        <i class="fa fa-edit"></i> Respond
                                     </a> 
-
-
 
                             </span>
                             </div>

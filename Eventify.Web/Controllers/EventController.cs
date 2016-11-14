@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Eventify.Data.Models;
 using Eventify.Service;
+using WebGrease.Css.Extensions;
 
 namespace Eventify.Web.Controllers
 {
@@ -11,22 +13,32 @@ namespace Eventify.Web.Controllers
     public class EventController : Controller
     {
         private IEventService eventService = null;
+        private ICategoryService categoryService = null;
 
         public EventController()
         {
             eventService = new EventService();
+            categoryService= new CategoryService();
         }
         // GET: Event
         public ActionResult Index()
         {
-            var events = eventService.GetMany();
+            var events = eventService.GetMany().ToList();
+            var categories = categoryService.GetMany();
+
+
+            ViewBag.MyCategories = categories;
+
             return View(events);
         }
 
         // GET: Event/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var myEvent = eventService.GetById(id);
+            ViewBag.MyImgs = myEvent.mymedias.Select(med => med.pathMedia);
+            return View(myEvent);
+
         }
 
         // GET: Event/Create
@@ -54,7 +66,8 @@ namespace Eventify.Web.Controllers
         // GET: Event/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var myEvent = eventService.GetById(id);
+            return View(myEvent);
         }
 
         // POST: Event/Edit/5

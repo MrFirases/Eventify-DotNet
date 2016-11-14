@@ -58,6 +58,7 @@ namespace Eventify.Data.Models.Mapping
             this.Property(t => t.password).HasColumnName("password");
             this.Property(t => t.profileImage).HasColumnName("profileImage");
             this.Property(t => t.username).HasColumnName("username");
+            this.Property(t => t.banState).HasColumnName("banState");
         }
     }
 }
