@@ -75,14 +75,16 @@
     <Compile Include="Models\Mapping\categoryMap.cs" />
     <Compile Include="Models\Mapping\commentMap.cs" />
     <Compile Include="Models\Mapping\favoriteMap.cs" />
-    <Compile Include="Models\Mapping\mediumMap.cs" />
+    <Compile Include="Models\Mapping\messageMap.cs" />
     <Compile Include="Models\Mapping\myeventMap.cs" />
+    <Compile Include="Models\Mapping\mymediaMap.cs" />
     <Compile Include="Models\Mapping\notificationMap.cs" />
     <Compile Include="Models\Mapping\organizationMap.cs" />
     <Compile Include="Models\Mapping\organizerMap.cs" />
     <Compile Include="Models\Mapping\questionMap.cs" />
     <Compile Include="Models\Mapping\rateMap.cs" />
     <Compile Include="Models\Mapping\referreluserMap.cs" />
+    <Compile Include="Models\Mapping\reportMap.cs" />
     <Compile Include="Models\Mapping\reservationMap.cs" />
     <Compile Include="Models\Mapping\taskMap.cs" />
     <Compile Include="Models\Mapping\ticketMap.cs" />

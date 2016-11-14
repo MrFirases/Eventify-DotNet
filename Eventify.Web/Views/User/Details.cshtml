@@ -1,0 +1,166 @@
+﻿@model Eventify.Data.Models.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="profile">
+    <div class="tabbable-line tabbable-full-width">
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1_1">
+                <div class="row">
+                    <div class="col-md-3">
+                        <ul class="list-unstyled profile-nav">
+                            <li>
+                                <img src="@Html.DisplayFor(model => model.profileImage)" class="img-responsive pic-bordered" alt="" />
+                                
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-8 profile-info">
+                                <h1 class="font-green sbold uppercase">@Html.DisplayFor(model => model.firstName) @Html.DisplayFor(model => model.lastName)</h1>
+                                
+                              <br />
+                                <ul class="list-inline">
+                                    <li>
+                                        <i class="glyphicon glyphicon-user"></i> @Html.DisplayFor(model => model.username)
+                                    </li>
+                                    <li>
+                                        <i class="glyphicon glyphicon-user"></i> @Html.DisplayFor(model => model.email)
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-calendar"></i> @Html.DisplayFor(model => model.creationDate)
+                                    </li>
+                                   
+
+                                </ul>
+
+
+
+
+
+                                <div class="caption">
+                                    <i class="glyphicon glyphicon-user font-green"></i>
+                                    <span class="caption-subject font-green bold uppercase">User Details:</span>
+                                </div>
+                                <br />
+
+                                <ul style="text-decoration:none; list-style: none;">
+                                    <li>
+                                        <span style="font-family: Trebuchet MS;font-size: 14px;text-transform: uppercase;letter-spacing: 1px;">Username:</span> @Html.DisplayFor(model => model.username)
+                                    </li>
+
+                                    <li>
+
+                                    </li>
+
+                                    <li>
+                                        <span style="font-family: Trebuchet MS;font-size: 14px;text-transform: uppercase;letter-spacing: 1px;">Account State:</span> @Html.DisplayFor(model => model.accountState)
+                                        </li>
+
+                                    <li>
+                                       
+                                    </li>
+
+                                    <li>
+                                        <span style="font-family: Trebuchet MS;font-size: 14px;text-transform: uppercase;letter-spacing: 1px;">Phone Number:</span> @Html.DisplayFor(model => model.numTel)
+                                        </li>
+
+                                    <li>
+                                       
+                                    </li>
+
+
+                                    <li>
+                                        <span style="font-family: Trebuchet MS;font-size: 14px;text-transform: uppercase;letter-spacing: 1px;">Crypted Password:</span> @Html.DisplayFor(model => model.password)
+                                       </li>
+
+                                    <li>
+                                     
+                                    </li>
+
+                                    <li>
+                                        <span style="font-family: Trebuchet MS;font-size: 14px;text-transform: uppercase;letter-spacing: 1px;">Ban Staut:</span> @Html.DisplayFor(model => model.banState)
+                                      </li>
+
+                                    <li>
+                                       
+                                    </li>
+
+                                </ul>
+
+
+
+
+
+
+                                <div class="caption">
+                                    <i class="glyphicon glyphicon-plus-sign font-green"></i>
+                                    <span class="caption-subject font-green bold uppercase">Events that the user organize:</span>
+                                </div>
+                                <br />
+
+                                @foreach (var events in ViewBag.MyEvents)
+                                {
+                                    <div style="padding: 5px 10px;" data-filter=".@events.title" class="cbp-filter-item btn dark btn-outline uppercase">
+                                        @events.title
+                                        <div class="cbp-filter-counter"></div>
+                                    </div>
+
+                                }
+
+
+                            </div>
+                            <!--end col-md-8-->
+                            <div class="col-md-4">
+                                <div class="portlet sale-summary">
+                                    <div class="portlet-title">
+                                        <div class="caption font-red sbold"> Loyalty Points: </div>
+                                        <div class="tools">
+                                            <span class="sale-num"> 23 </span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <ul class="list-unstyled">
+                                     
+                                            <li>
+                                                <span class="sale-info">
+                                                    Organizations Belongs
+                                                    <i class="fa fa-img-down"></i>
+                                                </span>
+                                                <span class="sale-num">
+                                                   @{ int i = 0; }
+                                                 @foreach (var events in ViewBag.MyEvents)
+                                                 {
+                                                     i++; }
+                                                   @i
+                                                </span>
+                                            </li>
+                                        
+                                        </ul>
+
+                                        
+                                            <a class="btn btn-lg red"  href="@Url.Action("Edit", "User",new { id = @Html.DisplayFor(model => model.id) })">
+                                                Edit User  <i class="fa fa-edit"></i> 
+                                            </a>
+                                      
+
+
+                                     
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end col-md-4-->
+                        </div>
+                        <!--end row-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

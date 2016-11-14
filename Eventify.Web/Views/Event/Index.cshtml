@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Eventify.Data.Models.Myevent>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-calendar"></i>
+            <a href="@Url.Action("Index", "Event")">EVENTS</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Event")">All Events</a>
+           
+        </li>
+      
+    </ul>
+ 
+</div>
+<!-- END PAGE HEADER-->
+
+
+
+<div class="portfolio-content portfolio-1">
+    <div id="js-filters-juicy-projects" class="cbp-l-filters-button">
+        <div style="padding: 5px 10px;" data-filter="*" class="cbp-filter-item-active cbp-filter-item btn dark btn-outline uppercase">
+            All
+            <div class="cbp-filter-counter"></div>
+        </div>
+        @foreach (var itemCategories in ViewBag.MyCategories)
+        {
+            <div style="padding: 5px 10px;" data-filter=".@itemCategories.categoryName" class="cbp-filter-item btn dark btn-outline uppercase">
+                @itemCategories.categoryName
+                <div class="cbp-filter-counter"></div>
+            </div>
+
+        }
+
+    </div>
+
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+
+    <div id="js-grid-juicy-projects" class="cbp">
+
+        @foreach (var item in Model)
+        {
+
+
+            <div class="cbp-item graphic @Html.DisplayFor(modelItem => item.category.categoryName)">
+                <div class="cbp-caption">
+                    <div class="cbp-caption-defaultWrap">
+                        <img src="
+                             @{  foreach (var oneMedia in item.mymedias) { @oneMedia.pathMedia  break; } }
+                             " alt="">
+
+                    </div>
+                    <div class="cbp-caption-activeWrap">
+                        <div class="cbp-l-caption-alignCenter">
+                            <div class="cbp-l-caption-body">
+                                <a href="@Url.Action("Details", "Event", new {id = item.id })" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">more info</a>
+                                <a href=" @{  foreach (var oneMedia in item.mymedias) { @oneMedia.pathMedia  break; } } " class="cbp-lightbox cbp-l-caption-buttonRight btn red uppercase btn red uppercase" data-title="@item.title <br>by @item.organization.organizationName">
+                                    view larger
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cbp-l-grid-projects-title uppercase text-center uppercase text-center">@Html.DisplayFor(modelItem => item.title)</div>
+                <div class="cbp-l-grid-projects-desc uppercase text-center uppercase text-center">@Html.DisplayFor(modelItem => item.category.categoryName)</div>
+            </div>
+
+
+
+
+
+
+    }
+    </div>
+    <div id="js-loadMore-juicy-projects" class="cbp-l-loadMore-button">
+        <a style="padding: 5px 25px;"  href="#" class="cbp-l-loadMore-link btn grey-mint btn-outline" rel="nofollow">
+            <span class="cbp-l-loadMore-defaultText">LOAD MORE</span>
+            <span class="cbp-l-loadMore-loadingText">LOADING...</span>
+            <span class="cbp-l-loadMore-noMoreLoading">NO MORE EVENTS</span>
+        </a>
+    </div>
+
+
+</div>

@@ -21,7 +21,7 @@ namespace Eventify.Web.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("eventifyContext", throwIfV1Schema: false)
         {
         }
 

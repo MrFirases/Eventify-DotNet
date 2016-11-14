@@ -1,0 +1,83 @@
+﻿@using Eventify.Web.Controllers
+@model IEnumerable<Eventify.Data.Models.Message>
+
+@{
+    ViewBag.Title = "MessageByUser";
+}
+
+
+@section Styles {
+    <link href="@Url.Content("~/Content/")assets/apps/css/chat-style.css" rel="stylesheet" type="text/css" />
+}
+
+<h2>@ViewBag.UserFullName</h2>
+
+<div class="wrapper">
+    <div class="container-chat">
+
+        <div class="right">
+            <div class="top">
+                <span>To: <span class="name">@ViewBag.UserFullName</span></span>
+            </div>
+            <div class="chat active-chat scroller" data-chat="person2">
+                <div class="conversation-start">
+                    <span>Today</span>
+                </div>
+                @foreach (var item in Model)
+                {
+
+                    if (item.sended == true)
+                    {
+                        <div class="bubble me">
+                            @Html.DisplayFor(modelItem => item.message1) 
+                            <br />
+                            <span style="opacity: 0.5">@MessageController.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))</span>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="bubble you">
+                            @Html.DisplayFor(modelItem => item.message1) 
+                            <a class="btn btn-circle btn-icon-only blue" href="@Url.Action("Edit", "Message", new {id = item.id})">
+                                <i class="icon-wrench"></i>
+                            </a>
+                            <a class="btn btn-circle btn-icon-only red" href="@Url.Action("Delete", "Message", new {id = item.id})">
+                                <i class="icon-trash"></i>
+                            </a>
+
+
+                            <br/>
+                            <span style="opacity: 0.5">@MessageController.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))</span>
+
+                        </div>
+
+                    }
+
+
+                }
+            </div>
+            @using (Html.BeginForm())
+            {
+
+                <div class="col-md-12">
+                    @*<input type="text"/>*@
+                    
+                    <div class="form-group form-md-line-input form-md-floating-label has-success col-lg-9">
+                        @Html.TextBox("msgResponse", "", new { @class = "form-control" })
+
+                        <label for="form_control_1">Write Something</label>
+                    </div>
+                    <div class="col-lg-3">
+                        <span class="input-group-btn btn-right">
+                            <button class="btn green-haze" type="submit">Respond</button>
+                        </span>
+                    </div>
+
+
+
+                </div>
+            }
+        </div>
+    </div>
+</div>

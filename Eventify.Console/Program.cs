@@ -14,8 +14,8 @@ namespace Eventify.Console
         {
             System.Console.WriteLine("Start Working...");
 
-            /*Adding a transaction
-
+            //Adding a transaction
+            /*
             System.Console.WriteLine("Start adding a transaction...");
             Transaction transaction = new Transaction { amount = 20.04f, token = "AX5H4EH4U7" };
             ITransactionService transactionService = new TransactionService();
@@ -24,7 +24,7 @@ namespace Eventify.Console
             transactionService.Dispose();
             System.Console.WriteLine("Transaction added");
 
-            The End of Adding a transaction*/
+            //The End of Adding a transaction
 
 
 
@@ -54,10 +54,25 @@ namespace Eventify.Console
             System.Console.WriteLine("event added");
 
             The End of Adding an event*/
-            IEventService eventService = new EventService();
-            System.Console.WriteLine(eventService.GetById(5).createdAt);
+            //IEventService eventService = new EventService();
+            //System.Console.WriteLine(eventService.GetById(5).createdAt);
 
 
+            //Testing Message Service
+            IMessageService messageService = new MessageService();
+            //System.Console.WriteLine("Claim Not Responded  :" + messageService.countClaimNotResponded()o());
+            //System.Console.WriteLine("Claim Count  :" + messageService.countClaim());
+
+            //foreach (var message in messageService.getClaimsNotResponded())
+            //{
+            //    System.Console.WriteLine(message.message1);
+            //}
+
+            //Test Reservation Service
+            IReservationService reservationService =new ReservationService();
+
+                System.Console.WriteLine("Our Amount " + reservationService.getAllAmount());
+            
 
             
 
