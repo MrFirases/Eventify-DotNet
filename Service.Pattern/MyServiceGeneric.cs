@@ -53,7 +53,7 @@ namespace Service.Pattern
 
         public virtual void Update(T t)
         {
-            itw.getRepository<T>().Update(t);
+            itw.getRepository<T>().Update(t); 
         }
 
         public virtual void commit()
