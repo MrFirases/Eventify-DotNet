@@ -6,29 +6,49 @@
 }
 
 @section scripts{
-    
-<script src="@Url.Content("~/Content/")assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
-<script src="@Url.Content("~/Content/")assets/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
-<script src="@Url.Content("~/Content/")assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Content/")assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
     <script src="@Url.Content("~/Content/")assets/global/plugins/morris/morris.min.js" type="text/javascript"></script>
-<script src="@Url.Content("~/Content/")assets/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
+
+
+    <script src="@Url.Content("~/Content/")assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/amcharts/amcharts/radar.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/amcharts/amcharts/themes/patterns.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/amcharts/amcharts/themes/chalk.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/amcharts/ammap/ammap.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/amcharts/ammap/maps/js/worldLow.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/")assets/global/plugins/amcharts/amstockcharts/amstock.js" type="text/javascript"></script>
+
+
+
 
     <script>
-        var EcommerceDashboard = function () {
+        var EcommerceDashboard = function() {
             //First Chart
             function showTooltip(x, y, labelX, labelY) {
-                $('<div id="tooltip" class="chart-tooltip">' + (labelY.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')) + 'USD<\/div>').css({
-                    position: 'absolute',
-                    display: 'none',
-                    top: y - 40,
-                    left: x - 60,
-                    border: '0px solid #ccc',
-                    padding: '2px 6px',
-                    'background-color': '#fff'
-                }).appendTo("body").fadeIn(200);
+                $('<div id="tooltip" class="chart-tooltip">' +
+                        (labelY.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')) +
+                        'USD<\/div>')
+                    .css({
+                        position: 'absolute',
+                        display: 'none',
+                        top: y - 40,
+                        left: x - 60,
+                        border: '0px solid #ccc',
+                        padding: '2px 6px',
+                        'background-color': '#fff'
+                    })
+                    .appendTo("body")
+                    .fadeIn(200);
             }
 
-            var initChart1 = function () {
+            var initChart1 = function() {
 
                 var data = [
                     //['01/2013', 4],
@@ -47,31 +67,34 @@
                     {
 
 
-                        <text>[@item.id,@item.amount],</text>
+                        <text>[@item.id, @item.amount],</text>
                     }
                 ];
 
                 var plot_statistics = $.plot(
-                    $("#statistics_1"), [{
-                        data: data,
-                        lines: {
-                            fill: 0.6,
-                            lineWidth: 0
-                        },
-                        color: ['#f89f9f']
-                    }, {
-                        data: data,
-                        points: {
-                            show: true,
-                            fill: true,
-                            radius: 5,
-                            fillColor: "#f89f9f",
-                            lineWidth: 3
-                        },
-                        color: '#fff',
-                        shadowSize: 0
-                    }], {
-
+                    $("#statistics_1"),
+                    [
+                        {
+                            data: data,
+                            lines: {
+                                fill: 0.6,
+                                lineWidth: 0
+                            },
+                            color: ['#f89f9f']
+                        }, {
+                            data: data,
+                            points: {
+                                show: true,
+                                fill: true,
+                                radius: 5,
+                                fillColor: "#f89f9f",
+                                lineWidth: 3
+                            },
+                            color: '#fff',
+                            shadowSize: 0
+                        }
+                    ],
+                    {
                         xaxis: {
                             tickLength: 0,
                             tickDecimals: 0,
@@ -116,28 +139,30 @@
 
                 var previousPoint = null;
 
-                $("#statistics_1").bind("plothover", function (event, pos, item) {
-                    $("#x").text(pos.x.toFixed(2));
-                    $("#y").text(pos.y.toFixed(2));
-                    if (item) {
-                        if (previousPoint != item.dataIndex) {
-                            previousPoint = item.dataIndex;
+                $("#statistics_1")
+                    .bind("plothover",
+                        function(event, pos, item) {
+                            $("#x").text(pos.x.toFixed(2));
+                            $("#y").text(pos.y.toFixed(2));
+                            if (item) {
+                                if (previousPoint != item.dataIndex) {
+                                    previousPoint = item.dataIndex;
 
-                            $("#tooltip").remove();
-                            var x = item.datapoint[0].toFixed(2),
-                                y = item.datapoint[1].toFixed(2);
+                                    $("#tooltip").remove();
+                                    var x = item.datapoint[0].toFixed(2),
+                                        y = item.datapoint[1].toFixed(2);
 
-                            showTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1]);
-                        }
-                    } else {
-                        $("#tooltip").remove();
-                        previousPoint = null;
-                    }
-                });
+                                    showTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1]);
+                                }
+                            } else {
+                                $("#tooltip").remove();
+                                previousPoint = null;
+                            }
+                        });
 
             }
 
-            var initChart2 = function () {
+            var initChart2 = function() {
 
                 var data = [
                     ['01/2013', 10],
@@ -154,26 +179,29 @@
                 ];
 
                 var plot_statistics = $.plot(
-                    $("#statistics_2"), [{
-                        data: data,
-                        lines: {
-                            fill: 0.6,
-                            lineWidth: 0
-                        },
-                        color: ['#BAD9F5']
-                    }, {
-                        data: data,
-                        points: {
-                            show: true,
-                            fill: true,
-                            radius: 5,
-                            fillColor: "#BAD9F5",
-                            lineWidth: 3
-                        },
-                        color: '#fff',
-                        shadowSize: 0
-                    }], {
-
+                    $("#statistics_2"),
+                    [
+                        {
+                            data: data,
+                            lines: {
+                                fill: 0.6,
+                                lineWidth: 0
+                            },
+                            color: ['#BAD9F5']
+                        }, {
+                            data: data,
+                            points: {
+                                show: true,
+                                fill: true,
+                                radius: 5,
+                                fillColor: "#BAD9F5",
+                                lineWidth: 3
+                            },
+                            color: '#fff',
+                            shadowSize: 0
+                        }
+                    ],
+                    {
                         xaxis: {
                             tickLength: 0,
                             tickDecimals: 0,
@@ -218,45 +246,45 @@
 
                 var previousPoint = null;
 
-                $("#statistics_2").bind("plothover", function (event, pos, item) {
-                    $("#x").text(pos.x.toFixed(2));
-                    $("#y").text(pos.y.toFixed(2));
-                    if (item) {
-                        if (previousPoint != item.dataIndex) {
-                            previousPoint = item.dataIndex;
+                $("#statistics_2")
+                    .bind("plothover",
+                        function(event, pos, item) {
+                            $("#x").text(pos.x.toFixed(2));
+                            $("#y").text(pos.y.toFixed(2));
+                            if (item) {
+                                if (previousPoint != item.dataIndex) {
+                                    previousPoint = item.dataIndex;
 
-                            $("#tooltip").remove();
-                            var x = item.datapoint[0].toFixed(2),
-                                y = item.datapoint[1].toFixed(2);
+                                    $("#tooltip").remove();
+                                    var x = item.datapoint[0].toFixed(2),
+                                        y = item.datapoint[1].toFixed(2);
 
-                            showTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1]);
-                        }
-                    } else {
-                        $("#tooltip").remove();
-                        previousPoint = null;
-                    }
-                });
+                                    showTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1]);
+                                }
+                            } else {
+                                $("#tooltip").remove();
+                                previousPoint = null;
+                            }
+                        });
 
             }
 
             return {
 
                 //main function
-                init: function () {
+                init: function() {
                     initChart1();
 
-                    $('#statistics_orders_tab').on('shown.bs.tab', function (e) {
-                        initChart2();
-                    });
+                    $('#statistics_orders_tab')
+                        .on('shown.bs.tab',
+                            function(e) {
+                                initChart2();
+                            });
                 }
 
             };
 
         }();
-
-        jQuery(document).ready(function () {
-            EcommerceDashboard.init();
-        });
 
 
         //PIE Chart Reservation By State
@@ -264,16 +292,174 @@
             element: 'reservationByState',
             data: [
 
-                    @foreach (dynamic item in @ViewBag.ReservationByState)
-        {
+                @foreach (dynamic item in @ViewBag.ReservationByState)
+                {
 
 
-            <text>{ label:"@item.reservationState.ToString()", value: @item.id },</text>
-        }
+                    <text>{ label: "@item.reservationState.ToString()", value: @item.id },</text>
+                }
 
             ]
         });
 
+
+        //Pie Chart Reservation By Payment Method
+        var ChartsAmcharts = function() {
+            reservationByTimerState
+           
+            var initChartReservationByPayment = function() {
+                var chart = AmCharts.makeChart("reservationByPayment",
+                {
+                    "type": "pie",
+                    "theme": "patterns",
+
+                    "fontFamily": 'Open Sans',
+
+                    "color": '#888',
+
+                    "dataProvider": [
+                        @foreach (dynamic item in @ViewBag.ReservationByPayment)
+                        {
+                          <text>{
+                            "country": "@item.paymentMethod.ToString()",
+                            "value": @item.id
+                        },</text>
+
+                        }
+
+
+                    ],
+                    "valueField": "value",
+                    "titleField": "country",
+                    "outlineAlpha": 0.4,
+                    "depth3D": 15,
+                    "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+                    "angle": 30,
+                    "exportConfig": {
+                        menuItems: [
+                            {
+                                icon: '/lib/3/images/export.png',
+                                format: 'png'
+                            }
+                        ]
+                    }
+                });
+
+                jQuery('.reservationByPayment_chart_input')
+                    .off()
+                    .on('input change',
+                        function() {
+                            var property = jQuery(this).data('property');
+                            var target = chart;
+                            var value = Number(this.value);
+                            chart.startDuration = 0;
+
+                            if (property == 'innerRadius') {
+                                value += "%";
+                            }
+
+                            target[property] = value;
+                            chart.validateNow();
+                        });
+
+                $('#reservationByPayment')
+                    .closest('.portlet')
+                    .find('.fullscreen')
+                    .click(function() {
+                        chart.invalidateSize();
+                    });
+            };
+
+
+
+
+
+            var initChartreservationByTimerState = function() {
+                var chart = AmCharts.makeChart("reservationByTimerState",
+                {
+                    "type": "pie",
+                    "theme": "light",
+
+                    "fontFamily": 'Open Sans',
+                    
+                    "color": '#888',
+
+                    "dataProvider": [
+                @foreach (dynamic item in @ViewBag.reservationsByTimerState)
+                        {
+                          <text>{
+                            "country": "@item.timerState.ToString()",
+                            "value": @item.id
+                        },</text>
+
+                        }
+
+
+                    ],
+                    "valueField": "value",
+                    "titleField": "country",
+                    "outlineAlpha": 0.4,
+                    "depth3D": 15,
+                    "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+                    "angle": 30,
+                    "exportConfig": {
+                        menuItems: [
+                            {
+                                icon: '/lib/3/images/export.png',
+                                format: 'png'
+                            }
+                        ]
+                    }
+                });
+
+                jQuery('.reservationByTimerState_chart_input')
+                    .off()
+                    .on('input change',
+                        function() {
+                            var property = jQuery(this).data('property');
+                            var target = chart;
+                            var value = Number(this.value);
+                            chart.startDuration = 0;
+
+                            if (property == 'innerRadius') {
+                                value += "%";
+                            }
+
+                            target[property] = value;
+                            chart.validateNow();
+                        });
+
+                $('#reservationByTimerState')
+                    .closest('.portlet')
+                    .find('.fullscreen')
+                    .click(function() {
+                        chart.invalidateSize();
+                    });
+            }
+
+
+
+
+
+
+            return {
+                //main function to initiate the module
+
+                init: function() {
+
+                    initChartReservationByPayment();
+                    initChartreservationByTimerState();
+                }
+
+            };
+
+        }();
+        jQuery(document)
+            .ready(function() {
+                EcommerceDashboard.init();
+                ChartsAmcharts.init();
+
+            });
 
 
     </script>
@@ -400,7 +586,6 @@
 </div>
 
 
-                            <!-- BEGIN PORTLET-->
 <div class="portlet light ">
     <div class="portlet-title tabbable-line">
         <div class="caption">
@@ -466,6 +651,72 @@
     </div>
 </div>
 
+<div class="col-md-12">
+    
+    <div class="col-md-6">
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-green-haze"></i>
+                    <span class="caption-subject bold uppercase font-green-haze"> Reservation By Payment Method</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"> </a>
+                    <a href="javascript:;" class="fullscreen"> </a>
+                    <a href="javascript:;" class="remove"> </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="reservationByPayment" class="chart" style="height: 400px;"> </div>
+                <div class="well margin-top-20">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class="text-left">Angle:</label>
+                            <input class="reservationByPayment_chart_input" data-property="angle" type="range" min="0" max="89" value="30" step="1" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="text-left">Depth:</label>
+                            <input class="reservationByPayment_chart_input" data-property="depth3D" type="range" min="1" max="120" value="40" step="1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-green-haze"></i>
+                    <span class="caption-subject bold uppercase font-green-haze"> Reservation By Timer State</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"> </a>
+                    <a href="javascript:;" class="fullscreen"> </a>
+                    <a href="javascript:;" class="remove"> </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="reservationByTimerState" class="chart" style="height: 400px;"> </div>
+                <div class="well margin-top-20">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class="text-left">Angle:</label>
+                            <input class="reservationByTimerState_chart_input" data-property="angle" type="range" min="0" max="89" value="30" step="1" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="text-left">Depth:</label>
+                            <input class="reservationByTimerState_chart_input" data-property="depth3D" type="range" min="1" max="120" value="40" step="1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 <table class="table table-bordered">
     @foreach (dynamic var in @ViewBag.AmountByDate)
@@ -476,3 +727,5 @@
         </tr>
     }
 </table>
+
+
