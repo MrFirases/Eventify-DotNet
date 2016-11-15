@@ -31,9 +31,8 @@ namespace Eventify.Web.Controllers
         // GET: Report/Details/5
         public ActionResult Details(int id)
         {
-            int? x = reportService.GetById(id).userWhoReport_id;
-            string myString = x.ToString();
-            ViewBag.UserFullName = UserService.GetById(myString).lastName + " " + UserService.GetById(myString).firstName;
+           int? x = reportService.GetById(id).userWhoReport_id;
+            ViewBag.User = UserService.GetById((int)x);
             var report = reportService.GetById(id);
             reportService.commit();
 
@@ -72,16 +71,22 @@ namespace Eventify.Web.Controllers
 
         // POST: Report/Edit/5
         [HttpPost]
-        public ActionResult Edit(Report report)
+        public ActionResult Edit(int id, FormCollection collection)
         {
 
             if (ModelState.IsValid)
             {
+                Report report = reportService.GetById(id);
+                report.content = Request.Form["content"];
+                report.reportDate = DateTime.Parse(Request.Form["reportDate"]);
+                report.state = Int32.Parse(Request.Form["state"]);
+                report.subject = Request.Form["subject"];
+
                 reportService.Update(report);
                 reportService.commit();
                 return RedirectToAction("Index");
             }
-            return View(report);
+            return View();
         }
 
         // GET: Report/Delete/5
