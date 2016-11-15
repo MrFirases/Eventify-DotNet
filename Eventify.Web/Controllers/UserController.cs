@@ -164,7 +164,14 @@ namespace Eventify.Web.Controllers
             {
 
                 User user = userService.GetById(id);
+                user.accountState = Request.Form["accountState"];
+                user.email = Request.Form["email"];
                 user.firstName = Request.Form["firstName"];
+                user.lastName = Request.Form["lastName"];
+                user.loyaltyPoint = Int32.Parse(Request.Form["firstName"]);
+                user.numTel = Request.Form["numTel"];
+                user.password = Request.Form["password"];
+                user.username = Request.Form["username"];
                 userService.Update(user);
                 userService.commit();
                
@@ -198,5 +205,20 @@ namespace Eventify.Web.Controllers
                 return View();
             }
         }
+
+
+
+
+
+        public ActionResult Insights()
+        {
+
+
+            return View();
+        }
+
+
+
+
     }
 }

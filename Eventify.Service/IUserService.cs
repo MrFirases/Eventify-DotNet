@@ -10,5 +10,6 @@ namespace Eventify.Service
 {
     public interface IUserService : IMyServiceGeneric<User>
     {
+
     }
 }
