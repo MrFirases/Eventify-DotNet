@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Eventify.Data.Models.Message>
+﻿@using Eventify.Web.Controllers
+@model IEnumerable<Eventify.Data.Models.Message>
 
 @{
     ViewBag.Title = "MessageByUser";
@@ -18,7 +19,7 @@
             <div class="top">
                 <span>To: <span class="name">@ViewBag.UserFullName</span></span>
             </div>
-            <div class="chat active-chat" data-chat="person2">
+            <div class="chat active-chat scroller" data-chat="person2">
                 <div class="conversation-start">
                     <span>Today</span>
                 </div>
@@ -29,15 +30,27 @@
                     {
                         <div class="bubble me">
                             @Html.DisplayFor(modelItem => item.message1) 
+                            <br />
+                            <span style="opacity: 0.5">@MessageController.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))</span>
+
                         </div>
-                        <br /> <span>@Html.DisplayFor(modelItem => item.date)</span>
                     }
                     else
                     {
                         <div class="bubble you">
                             @Html.DisplayFor(modelItem => item.message1) 
+                            <a class="btn btn-circle btn-icon-only blue" href="@Url.Action("Edit", "Message", new {id = item.id})">
+                                <i class="icon-wrench"></i>
+                            </a>
+                            <a class="btn btn-circle btn-icon-only red" href="@Url.Action("Delete", "Message", new {id = item.id})">
+                                <i class="icon-trash"></i>
+                            </a>
+
+
+                            <br/>
+                            <span style="opacity: 0.5">@MessageController.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))</span>
+
                         </div>
-                        <br /> <span>@Html.DisplayFor(modelItem => item.date)</span>
 
                     }
 
@@ -47,11 +60,21 @@
             @using (Html.BeginForm())
             {
 
-                <div class="write">
+                <div class="col-md-12">
                     @*<input type="text"/>*@
-                    @Html.TextBox("msgResponse") 
-                    <button class="write-link send"  type="submit"></button>
-                    <input class="write-link send" type="submit" name="submit" value="Respond" />
+                    
+                    <div class="form-group form-md-line-input form-md-floating-label has-success col-lg-9">
+                        @Html.TextBox("msgResponse", "", new { @class = "form-control" })
+
+                        <label for="form_control_1">Write Something</label>
+                    </div>
+                    <div class="col-lg-3">
+                        <span class="input-group-btn btn-right">
+                            <button class="btn green-haze" type="submit">Respond</button>
+                        </span>
+                    </div>
+
+
 
                 </div>
             }

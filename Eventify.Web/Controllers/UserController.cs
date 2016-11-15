@@ -10,14 +10,34 @@ namespace Eventify.Web.Controllers
 {
     public class UserController : Controller
     {
+        private IUserService userService = null;
+        private IEventService eventService = null;
+        private IReservationService reservationService = null;
+
+
+        public UserController()
+        {
+            userService = new UserService();
+            eventService = new EventService();
+            reservationService = new ReservationService();
+        }
+
         // GET: User
         public ActionResult Index()
         {
             IEnumerable<User> user;
-            IUserService userService = new UserService();
             user = userService.GetMany();
             userService.commit();
 
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Index(string searchString)
+        {
+            IEnumerable<User> user;
+
+            user = userService.GetMany(u=>u.firstName.Contains(searchString) || u.lastName.Contains(searchString) || u.username.Contains(searchString));
             return View(user);
         }
 
@@ -25,9 +45,11 @@ namespace Eventify.Web.Controllers
         public ActionResult Details(int id)
         {
             
-            IUserService userService = new UserService();
+            
             User user = userService.GetById(id);
-            userService.commit();
+
+            
+            ViewBag.MyEvents = eventService.GetMany(e => e.organization.user_id == id);
 
             return View(user);
         }
@@ -57,7 +79,9 @@ namespace Eventify.Web.Controllers
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            User user = userService.GetById(id);
+
+            return View(user);
         }
 
         // POST: User/Edit/5
@@ -66,7 +90,12 @@ namespace Eventify.Web.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+
+                User user = userService.GetById(id);
+                user.firstName = Request.Form["firstName"];
+                userService.Update(user);
+                userService.commit();
+               
 
                 return RedirectToAction("Index");
             }
