@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Eventify.Data.Models;
 using Eventify.Service;
+using Microsoft.Ajax.Utilities;
 
 namespace Eventify.Web.Controllers
 {
@@ -25,7 +26,7 @@ namespace Eventify.Web.Controllers
                     .Count();
 
             //Amount by Month
-            IEnumerable<Reservation> queryable = ReservationService.
+            IEnumerable<Reservation> AmountByMonth = ReservationService.
                 GetMany(
                     reservation => reservation.reservationState == "CONFIRMED" && reservation.timerState == "FINISHED")
                 .GroupBy(reservation => reservation.reservationDate.Value.Month)
@@ -36,7 +37,24 @@ namespace Eventify.Web.Controllers
                             id = grouping.Key,
                             amount = grouping.Sum(reservation => reservation.amount)
                         });
-            ViewBag.AmountByDate = queryable;
+            ViewBag.AmountByMonth = AmountByMonth;
+
+
+            //Amount by Year
+            IEnumerable<Reservation> AmountByYear = ReservationService.
+                GetMany(
+                    reservation => reservation.reservationState == "CONFIRMED" && reservation.timerState == "FINISHED")
+                .GroupBy(reservation => reservation.reservationDate.Value.Year)
+                .Select(
+                    grouping =>
+                        new Reservation()
+                        {
+                            id = grouping.Key,
+                            amount = grouping.Sum(reservation => reservation.amount)
+                        });
+            ViewBag.AmountByYear = AmountByYear;
+
+
 
 
             //Reservation By Reservation State
@@ -164,20 +182,48 @@ namespace Eventify.Web.Controllers
         public ActionResult StatisticsbyEventsAndTickets()
         {
 
+            System.Globalization.CultureInfo customCulture = (System.Globalization.CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
+            customCulture.NumberFormat.NumberDecimalSeparator = ".";
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
+
+
+            //Reservation By Events
             IEnumerable<Reservation> reservationsByEvents = ReservationService
                 .GetMany(
                     reservation => reservation.timerState == "FINISHED" && reservation.reservationState == "CONFIRMED").ToList()
-                .GroupBy(reservation => reservation.ticket_id)
+                .GroupBy(reservation => reservation.ticket.myevent.title)
                 .Select(
                     grouping => new Reservation()
                     {
-                        id = (int) grouping.Key,
+                        reservationState =  grouping.Key,
                         amount = grouping.Sum(reservation => reservation.amount)
                     }
                 );
 
             ViewBag.reservationsByEvents = reservationsByEvents;
-                return View();
+
+
+
+            //Reservation By Tickets In Events
+            IEnumerable<Reservation> reservationsByTicketsEvents = ReservationService
+                .GetMany(
+                    reservation => reservation.timerState == "FINISHED" && reservation.reservationState == "CONFIRMED").ToList()
+                .GroupBy(reservation => new { reservation.ticket.myevent.title , reservation.ticket.typeTicket})
+                .Select(
+                    grouping => new Reservation()
+                    {
+                         reservationState= grouping.Key.title,
+                        paymentMethod = grouping.Key.typeTicket,
+                        amount = grouping.Sum(reservation => reservation.amount)
+                    }
+                );
+            ViewBag.reservationsByTicketsEvents = reservationsByTicketsEvents;
+
+
+
+
+            return View();
         }
 
 

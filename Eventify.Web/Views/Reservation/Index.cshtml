@@ -51,19 +51,8 @@
             var initChart1 = function() {
 
                 var data = [
-                    //['01/2013', 4],
-                    //['02/2013', 8],
-                    //['03/2013', 10],
-                    //['04/2013', 25],
-                    //['05/2013', 2125],
-                    //['06/2013', 324],
-                    //['07/2013', 1223],
-                    //['08/2013', 1365],
-                    //['09/2013', 250],
-                    //['10/2013', 999],
-                    //['11/2013', 390],
 
-                    @foreach (dynamic item in @ViewBag.AmountByDate)
+                    @foreach (dynamic item in @ViewBag.AmountByMonth)
                     {
 
 
@@ -165,109 +154,105 @@
             var initChart2 = function() {
 
                 var data = [
-                    ['01/2013', 10],
-                    ['02/2013', 0],
-                    ['03/2013', 10],
-                    ['04/2013', 12],
-                    ['05/2013', 212],
-                    ['06/2013', 324],
-                    ['07/2013', 122],
-                    ['08/2013', 136],
-                    ['09/2013', 250],
-                    ['10/2013', 99],
-                    ['11/2013', 190]
-                ];
-
-                var plot_statistics = $.plot(
-                    $("#statistics_2"),
-                    [
-                        {
-                            data: data,
-                            lines: {
-                                fill: 0.6,
-                                lineWidth: 0
-                            },
-                            color: ['#BAD9F5']
-                        }, {
-                            data: data,
-                            points: {
-                                show: true,
-                                fill: true,
-                                radius: 5,
-                                fillColor: "#BAD9F5",
-                                lineWidth: 3
-                            },
-                            color: '#fff',
-                            shadowSize: 0
-                        }
-                    ],
+                   
+                    @foreach (dynamic item in @ViewBag.AmountByYear)
                     {
-                        xaxis: {
-                            tickLength: 0,
-                            tickDecimals: 0,
-                            mode: "categories",
-                            min: 2,
-                            font: {
-                                lineHeight: 14,
-                                style: "normal",
-                                variant: "small-caps",
-                                color: "#6F7B8A"
-                            }
-                        },
-                        yaxis: {
-                            ticks: 3,
-                            tickDecimals: 0,
-                            tickColor: "#f0f0f0",
-                            font: {
-                                lineHeight: 14,
-                                style: "normal",
-                                variant: "small-caps",
-                                color: "#6F7B8A"
-                            }
-                        },
-                        grid: {
-                            backgroundColor: {
-                                colors: ["#fff", "#fff"]
-                            },
-                            borderWidth: 1,
-                            borderColor: "#f0f0f0",
-                            margin: 0,
-                            minBorderMargin: 0,
-                            labelMargin: 20,
-                            hoverable: true,
-                            clickable: true,
-                            mouseActiveRadius: 6
-                        },
-                        legend: {
-                            show: false
-                        }
-                    }
-                );
 
-                var previousPoint = null;
+
+                        <text>[@item.id, @item.amount],</text>
+                }
+        ];
+
+            var plot_statistics = $.plot(
+                $("#statistics_2"),
+                [
+                    {
+                        data: data,
+                        lines: {
+                            fill: 0.6,
+                            lineWidth: 0
+                        },
+                        color: ['#f89f9f']
+                    }, {
+                        data: data,
+                        points: {
+                            show: true,
+                            fill: true,
+                            radius: 5,
+                            fillColor: "#f89f9f",
+                            lineWidth: 3
+                        },
+                        color: '#fff',
+                        shadowSize: 0
+                    }
+                ],
+                {
+                    xaxis: {
+                        tickLength: 0,
+                        tickDecimals: 0,
+                        mode: "categories",
+                        min: 0,
+                        font: {
+                            lineHeight: 15,
+                            style: "normal",
+                            variant: "small-caps",
+                            color: "#6F7B8A"
+                        }
+                    },
+                    yaxis: {
+                        ticks: 3,
+                        tickDecimals: 0,
+                        tickColor: "#f0f0f0",
+                        font: {
+                            lineHeight: 15,
+                            style: "normal",
+                            variant: "small-caps",
+                            color: "#6F7B8A"
+                        }
+                    },
+                    grid: {
+                        backgroundColor: {
+                            colors: ["#fff", "#fff"]
+                        },
+                        borderWidth: 1,
+                        borderColor: "#f0f0f0",
+                        margin: 0,
+                        minBorderMargin: 0,
+                        labelMargin: 20,
+                        hoverable: true,
+                        clickable: true,
+                        mouseActiveRadius: 6
+                    },
+                    legend: {
+                        show: false
+                    }
+                }
+            );
+
+            var previousPoint = null;
 
                 $("#statistics_2")
-                    .bind("plothover",
-                        function(event, pos, item) {
-                            $("#x").text(pos.x.toFixed(2));
-                            $("#y").text(pos.y.toFixed(2));
-                            if (item) {
-                                if (previousPoint != item.dataIndex) {
-                                    previousPoint = item.dataIndex;
+                .bind("plothover",
+                    function(event, pos, item) {
+                        $("#x").text(pos.x.toFixed(2));
+                        $("#y").text(pos.y.toFixed(2));
+                        if (item) {
+                            if (previousPoint != item.dataIndex) {
+                                previousPoint = item.dataIndex;
 
-                                    $("#tooltip").remove();
-                                    var x = item.datapoint[0].toFixed(2),
-                                        y = item.datapoint[1].toFixed(2);
-
-                                    showTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1]);
-                                }
-                            } else {
                                 $("#tooltip").remove();
-                                previousPoint = null;
-                            }
-                        });
+                                var x = item.datapoint[0].toFixed(2),
+                                    y = item.datapoint[1].toFixed(2);
 
-            }
+                                showTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1]);
+                            }
+                        } else {
+                            $("#tooltip").remove();
+                            previousPoint = null;
+                        }
+                    });
+
+        }
 
             return {
 
@@ -590,14 +575,14 @@
     <div class="portlet-title tabbable-line">
         <div class="caption">
             <i class="icon-globe font-red"></i>
-            <span class="caption-subject font-red bold uppercase">Revenue</span>
+            <span class="caption-subject font-red bold uppercase">Reservation Amount</span>
         </div>
         <ul class="nav nav-tabs">
             <li class="active">
-                <a href="#portlet_ecommerce_tab_1" data-toggle="tab"> Amounts </a>
+                <a href="#portlet_ecommerce_tab_1" data-toggle="tab"> By Month </a>
             </li>
             <li>
-                <a href="#portlet_ecommerce_tab_2" id="statistics_orders_tab" data-toggle="tab"> Orders </a>
+                <a href="#portlet_ecommerce_tab_2" id="statistics_orders_tab" data-toggle="tab"> By Year </a>
             </li>
         </ul>
     </div>
@@ -610,7 +595,7 @@
                 <div id="statistics_2" class="chart"> </div>
             </div>
         </div>
-        <div class="well margin-top-20">
+        @*<div class="well margin-top-20">
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
                     <span class="label label-success"> Revenue: </span>
@@ -629,7 +614,7 @@
                     <h3>235090</h3>
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
 </div>
 
@@ -718,14 +703,6 @@
 </div>
 
 
-<table class="table table-bordered">
-    @foreach (dynamic var in @ViewBag.AmountByDate)
-    {
-        <tr>
-            <td>@var.id</td>
-            <td>@var.amount</td>
-        </tr>
-    }
-</table>
+
 
 
