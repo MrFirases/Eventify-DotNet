@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Eventify.Data.Models.Organization>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Display all Organizations </h2>
+<!--
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.creationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.organizationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.organizationType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.creationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.organizationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.organizationType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
+-->
+
+
+
+@foreach (var item in Model)
+{
+<div class="col-md-6">
+    <!-- BEGIN Portlet PORTLET-->
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-speech"></i>
+                <span class="caption-subject bold uppercase"> @Html.DisplayFor(modelItem => item.organizationName)</span>
+                <span class="caption-helper">@Html.DisplayFor(modelItem => item.creationDate)</span>
+            </div>
+            <div class="actions">
+                <a href="javascript:;" class="btn btn-circle btn-default">
+                    <i class="fa fa-pencil"></i> Edit
+                </a>
+                <a href="javascript:;" class="btn btn-circle btn-default">
+                    <i class="fa fa-plus"></i> Add
+                </a>
+                <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="scroller" style="height:200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+
+
+                <h4>
+
+                    @foreach (var users in ViewBag.User)
+                    {
+                        if (item.user_id == users.id)
+                            {
+                            <h3>Name of creator :</h3>  @users.firstName <html></html> @users.lastName
+                            }
+                       
+                    }
+                    
+    </h4>
+               <div>
+               @if (item.organizationType == "MORALE")
+               {
+                <h3>Type of organization :</h3> <span class="label label-sm label-success">@Html.DisplayFor(modelItem => item.organizationType)</span>
+               }
+               else
+               {
+                   <h3>Type of organization :</h3><span class="label label-sm label-warning">@Html.DisplayFor(modelItem => item.organizationType)</span>
+               }
+               </div>
+       
+            </div>
+        </div>
+    </div>
+    <!-- END Portlet PORTLET-->
+</div>
+
+}
