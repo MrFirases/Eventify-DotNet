@@ -213,25 +213,14 @@ namespace Eventify.Web.Controllers
         public ActionResult Insights()
         {
             //PIE CHART INSIGHT
-            List<String> ct = new List<string>();
-            List<Int32> nb = new List<Int32>();
-
-            foreach (var line in userService.GetMany().GroupBy(info => info.country)
-                        .Select(group => new {
-                            country = group.Key,
-                            Count = group.Count()
-                        })
-                        .OrderBy(x => x.country))
-                
-            {
-                ct.Add(line.country);
-                nb.Add(line.Count);
-                
-                System.Diagnostics.Debug.WriteLine("{0} {1}", line.country, line.Count);
-            }
-            ViewBag.Countries = ct;
-            ViewBag.NbCountries = nb;
+            Dictionary<String, Int32> data = userService.GetPieChartStat();
+            ViewBag.Countries = data.Keys.ToList();
+            ViewBag.NbCountries = data.Values.ToList();
             //PIE CHART INSIGHT
+
+            //AMCHART
+            userService.GetUsersByDateChart();
+            //AMCHART
 
             ViewBag.Allusersnumber = userService.AllUsersNumber();
             ViewBag.AllBannednumber = userService.AllBanndUsersNumber();

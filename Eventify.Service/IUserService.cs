@@ -15,7 +15,9 @@ namespace Eventify.Service
         int AllBanndUsersNumber();
         int AllUnbannedUsersNumber();
 
-        HashSet<String> GetAllCountries();
-        
+
+        Dictionary<String, Int32> GetPieChartStat();
+        Dictionary<String, Int32> GetUsersByDateChart();
+
     }
 }
