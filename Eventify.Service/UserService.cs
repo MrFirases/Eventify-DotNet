@@ -19,5 +19,37 @@ namespace Eventify.Service
         public UserService() : base(itw)
         {
         }
+
+        public int AllActivedUsersNumber()
+        {
+            return this.GetMany(u => u.accountState == "ACTIVATED").Count();
+        }
+
+        public int AllBanndUsersNumber()
+        {
+            return this.GetMany(u => u.banState == 1).Count();
+        }
+
+        public int AllUnbannedUsersNumber()
+        {
+            return this.GetMany(u => u.banState == 0).Count();
+        }
+
+        public int AllUsersNumber()
+        {
+            return this.GetMany().Count();
+        }
+
+        public HashSet<String> GetAllCountries()
+        {
+            HashSet<String> countries=new HashSet<String>();
+            var user = this.GetMany().ToList();
+            foreach (User users in user )
+            {
+                countries.Add(users.country);
+            }
+
+            return countries;
+        }
     }
 }

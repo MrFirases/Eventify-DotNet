@@ -10,6 +10,12 @@ namespace Eventify.Service
 {
     public interface IUserService : IMyServiceGeneric<User>
     {
+        int AllUsersNumber();
+        int AllActivedUsersNumber();
+        int AllBanndUsersNumber();
+        int AllUnbannedUsersNumber();
 
+        HashSet<String> GetAllCountries();
+        
     }
 }

@@ -168,7 +168,7 @@ namespace Eventify.Web.Controllers
                 user.email = Request.Form["email"];
                 user.firstName = Request.Form["firstName"];
                 user.lastName = Request.Form["lastName"];
-                user.loyaltyPoint = Int32.Parse(Request.Form["firstName"]);
+                user.loyaltyPoint = Int32.Parse(Request.Form["loyaltyPoint"]);
                 user.numTel = Request.Form["numTel"];
                 user.password = Request.Form["password"];
                 user.username = Request.Form["username"];
@@ -212,12 +212,40 @@ namespace Eventify.Web.Controllers
 
         public ActionResult Insights()
         {
+            //PIE CHART INSIGHT
+            List<String> ct = new List<string>();
+            List<Int32> nb = new List<Int32>();
 
+            foreach (var line in userService.GetMany().GroupBy(info => info.country)
+                        .Select(group => new {
+                            country = group.Key,
+                            Count = group.Count()
+                        })
+                        .OrderBy(x => x.country))
+                
+            {
+                ct.Add(line.country);
+                nb.Add(line.Count);
+                
+                System.Diagnostics.Debug.WriteLine("{0} {1}", line.country, line.Count);
+            }
+            ViewBag.Countries = ct;
+            ViewBag.NbCountries = nb;
+            //PIE CHART INSIGHT
 
+            ViewBag.Allusersnumber = userService.AllUsersNumber();
+            ViewBag.AllBannednumber = userService.AllBanndUsersNumber();
+            ViewBag.AllUnbannednumber = userService.AllUnbannedUsersNumber();
+            ViewBag.AllActivednumber = userService.AllActivedUsersNumber();
             return View();
         }
 
-
+        [HttpGet]
+        public int GetNumberOfCountries(String country)
+        {
+            
+            return userService.GetMany(u => u.country == "country").Count();
+        }
 
 
     }
