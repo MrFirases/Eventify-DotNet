@@ -34,10 +34,8 @@ namespace Eventify.Data.Models
         public int loyaltyPoint { get; set; }
         public int banState { get; set; }
         public string numTel { get; set; }
-        [NotMapped]
         public string password { get; set; }
         public string profileImage { get; set; }
-        [NotMapped]
         public string username { get; set; }
         public string country { get; set; }
         public virtual ICollection<Answer> answers { get; set; }
