@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 
 namespace Eventify.Web.Controllers
@@ -21,11 +22,12 @@ namespace Eventify.Web.Controllers
             UserService = new UserService();
         }
         // GET: Report
-        public ActionResult Index()
+        public ActionResult Index(int? pageNumber)
         {
-            var reports = reportService.GetMany();
-     
+             
+            var reports = reportService.GetMany().ToList().ToPagedList(pageNumber ?? 1, 3); 
             return View(reports);
+            
         }
 
         // GET: Report/Details/5
@@ -113,5 +115,25 @@ namespace Eventify.Web.Controllers
                 return View();
             }
         }
+
+
+
+
+
+
+
+
+        //search function
+        [HttpPost]
+        public ActionResult Index(string searchString)
+        {
+            IEnumerable<Report> report;
+
+            report = reportService.GetMany(u => u.subject.Contains(searchString) || u.content.Contains(searchString) );
+            return View(report);
+        }
+
+
+
     }
 }

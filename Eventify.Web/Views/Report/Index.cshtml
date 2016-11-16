@@ -1,5 +1,11 @@
-﻿@model IEnumerable<Eventify.Data.Models.Report>
-
+﻿
+@model  IPagedList<Eventify.Data.Models.Report>
+@using PagedList.Mvc;
+@using PagedList; 
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "reports";
+}
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,25 +20,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.content)
+           content
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.reportDate)
+           reportDate
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.state)
+           state
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.subject)
+          subject
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.event_id)
+        event_id
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.user_id)
+            user_id
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.userWhoReport_id)
+           userWhoReport_id
         </th>
         <th></th>
     </tr>
@@ -83,25 +89,25 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.content)
+                content
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.reportDate)
+                reportDate
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.state)
+                state
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.subject)
+                subject
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.event_id)
+                event_id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.user_id)
+                user_id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.userWhoReport_id)
+                userWhoReport_id
             </th>
             <th></th>
         </tr>
@@ -140,3 +146,10 @@
             }
         }
     </table>
+
+
+<br />
+@Html.PagedListPager(Model, pageNumber => Url.Action("Index", new
+{
+    pageNumber
+}))
