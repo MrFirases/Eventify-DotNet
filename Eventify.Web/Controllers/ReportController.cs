@@ -125,11 +125,11 @@ namespace Eventify.Web.Controllers
 
         //search function
         [HttpPost]
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, int? pageNumber)
         {
             IEnumerable<Report> report;
 
-            report = reportService.GetMany(u => u.subject.Contains(searchString) || u.content.Contains(searchString) );
+            report = reportService.GetMany(u => u.subject.Contains(searchString) || u.content.Contains(searchString) ).ToList().ToPagedList(pageNumber ?? 1, 3); ;
             return View(report);
         }
 
