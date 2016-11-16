@@ -333,6 +333,7 @@
     <Content Include="Views\Organization\Index.cshtml" />
     <Content Include="Views\User\BannedUsers.cshtml" />
     <Content Include="Views\User\UnBannedUsers.cshtml" />
+    <Content Include="Views\User\ahi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

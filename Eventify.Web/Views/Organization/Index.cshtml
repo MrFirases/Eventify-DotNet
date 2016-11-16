@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
+<h2>Display all Organizations </h2>
+<!--
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -50,7 +50,7 @@
 }
 
 </table>
-
+-->
 
 
 
@@ -77,9 +77,30 @@
         </div>
         <div class="portlet-body">
             <div class="scroller" style="height:200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
-                .
-                <h4>@Html.DisplayFor(modelItem => item.user_id)  </h4>
-               <div>@Html.DisplayFor(modelItem => item.organizationType)</div>
+
+
+                <h4>
+
+                    @foreach (var users in ViewBag.User)
+                    {
+                        if (item.user_id == users.id)
+                            {
+                            <h3>Name of creator :</h3>  @users.firstName <html></html> @users.lastName
+                            }
+                       
+                    }
+                    
+    </h4>
+               <div>
+               @if (item.organizationType == "MORALE")
+               {
+                <h3>Type of organization :</h3> <span class="label label-sm label-success">@Html.DisplayFor(modelItem => item.organizationType)</span>
+               }
+               else
+               {
+                   <h3>Type of organization :</h3><span class="label label-sm label-warning">@Html.DisplayFor(modelItem => item.organizationType)</span>
+               }
+               </div>
        
             </div>
         </div>

@@ -10,10 +10,12 @@ namespace Eventify.Web.Controllers
     public class OrganizationController : Controller
     {
         private IOrganizationService organizationService = null;
+        private IUserService userService = null;
 
         public OrganizationController()
         {
             organizationService = new OrganizationService();
+            userService = new UserService();
         }
 
 
@@ -22,6 +24,7 @@ namespace Eventify.Web.Controllers
         public ActionResult Index()
         {
             var oranizations = organizationService.GetMany();
+            ViewBag.User = userService.GetMany();
             return View(oranizations);
         }
 
