@@ -1,0 +1,24 @@
+﻿@model Eventify.Data.Models.Category
+
+@{
+    ViewBag.Title = "Category Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Categorie Details </div>
+    <div class="panel-body"><br /><h2>Category Name :</h2> <h4> @Html.DisplayFor(model => model.categoryName)</h4>   <br /> 
+        <h2>Category id :</h2> <h4>@Html.DisplayFor(model => model.id)</h4>
+        <br />
+    </div>
+</div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }, new  {@class = "btn btn-primary" })     
+    @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-primary" })
+</p>

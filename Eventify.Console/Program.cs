@@ -69,6 +69,19 @@ namespace Eventify.Console
             //}
 
             //Test Reservation Service
+
+            //Category tests wiww
+            /*
+            System.Console.WriteLine("Begin wiw opration of category ");
+            ICategoryService categoryService = new CategoryService();
+            IEnumerable<Category> listCategory = categoryService.getAllCategory();
+            foreach (var item in listCategory)
+            {
+                System.Console.WriteLine(item.categoryName);
+            }
+            
+            System.Console.WriteLine("End Wiiiw");
+                */  
             IReservationService reservationService =new ReservationService();
 
                 System.Console.WriteLine("Our Amount " + reservationService.getAllAmount());
