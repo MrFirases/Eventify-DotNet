@@ -1,5 +1,8 @@
 ﻿
 @model  IPagedList<Eventify.Data.Models.Report>
+
+
+@using System.Collections.Generic;
 @using PagedList.Mvc;
 @using PagedList; 
 <link href="~/Content/PagedList.css" rel="stylesheet" />
@@ -16,6 +19,22 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>Search : @Html.TextBox("searchString")</td>
+            <td><input id="submit" type="submit" value="search" /></td>
+        </tr>
+
+    </table>
+}
+
+
+
 <h1> Reports not checked</h1>
 <table class="table">
     <tr>
