@@ -9,7 +9,7 @@ using Microsoft.Owin.Security;
 using Eventify.Web.Models;
 
 namespace Eventify.Web.Controllers
-{
+{/*
     [Authorize]
     public class ManageController : Controller
     {
@@ -385,5 +385,5 @@ namespace Eventify.Web.Controllers
         }
 
 #endregion
-    }
+    }*/
 }

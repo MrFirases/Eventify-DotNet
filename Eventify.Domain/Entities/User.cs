@@ -1,10 +1,15 @@
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Eventify.Data.Models
 {
-    public partial class User
+    public partial class User : IdentityUser<int, MyLogin,
+    MyUserRole, MyClaim>
     {
         public User()
         {
@@ -24,7 +29,6 @@ namespace Eventify.Data.Models
             this.wishlists = new List<Wishlist>();
         }
 
-        public int id { get; set; }
         public string accountState { get; set; }
         public string confirmationToken { get; set; }
         public Nullable<System.DateTime> creationDate { get; set; }
@@ -52,5 +56,38 @@ namespace Eventify.Data.Models
         public virtual ICollection<Report> reports1 { get; set; }
         public virtual ICollection<Reservation> reservations { get; set; }
         public virtual ICollection<Wishlist> wishlists { get; set; }
+
+
+
+
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(
+       UserManager<User, int> manager)
+        {
+            // Note the authenticationType must match the one defined in
+            // CookieAuthenticationOptions.AuthenticationType 
+            var userIdentity = await manager.CreateIdentityAsync(
+                this, DefaultAuthenticationTypes.ApplicationCookie);
+            // Add custom user claims here 
+            return userIdentity;
+        }
     }
+    public class MyUserRole : IdentityUserRole<int> { public int id { get; set; } }
+    public class MyRole : IdentityRole<int, MyUserRole>
+    {
+        public MyRole()
+        {
+
+        }
+        public MyRole(string name)
+        : this()
+        {
+            this.Name = name;
+        }
+    }
+    public class MyClaim : IdentityUserClaim<int> { }
+    public class MyLogin : IdentityUserLogin<int> { public int id { get; set; } }
+
+
+
 }
