@@ -21,7 +21,7 @@ namespace Eventify.Data.Models.Mapping
                 .HasMaxLength(255);
 
             // Table & Column Mappings
-            this.ToTable("reservation", "eventify");
+            this.ToTable("reservation");
             this.Property(t => t.id).HasColumnName("id");
             this.Property(t => t.amount).HasColumnName("amount");
             this.Property(t => t.paymentMethod).HasColumnName("paymentMethod");

@@ -10,5 +10,14 @@ namespace Eventify.Service
 {
     public interface IUserService : IMyServiceGeneric<User>
     {
+        int AllUsersNumber();
+        int AllActivedUsersNumber();
+        int AllBanndUsersNumber();
+        int AllUnbannedUsersNumber();
+
+
+        Dictionary<String, Int32> GetPieChartStat();
+        Dictionary<String, Int32> GetUsersByDateChart();
+
     }
 }

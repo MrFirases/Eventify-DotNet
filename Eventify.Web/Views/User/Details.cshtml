@@ -93,15 +93,15 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="page_user_profile_1_account.html">
+                                            <a href="@Url.Action("Edit", "User",new { id = @Html.DisplayFor(model => model.Id) })">
                                                 <i class="icon-settings"></i> Account Settings
                                             </a>
+
+                                    
+
+
                                         </li>
-                                        <li>
-                                            <a href="page_user_profile_1_help.html">
-                                                <i class="icon-info"></i> Help
-                                            </a>
-                                        </li>
+                  
                                     </ul>
                                 </div>
                                 <!-- END MENU -->
@@ -419,7 +419,7 @@
                                         </ul>
 
                                         
-                                            <a class="btn btn-lg red"  href="@Url.Action("Edit", "User",new { id = @Html.DisplayFor(model => model.id) })">
+                                            <a class="btn btn-lg red"  href="@Url.Action("Edit", "User",new { id = @Html.DisplayFor(model => model.Id) })">
                                                 Edit User  <i class="fa fa-edit"></i> 
                                             </a>
                                       

@@ -21,5 +21,83 @@ namespace Eventify.Service
 
         }
 
+        public bool addCategory(Category cateegory)
+        {
+            
+            try
+            {
+
+                itw.getRepository<Category>().Add(cateegory);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+          
+            
+            
+        }
+
+        public bool deteCategory(int idCategory)
+        {
+            try
+            {
+
+             Category categorie=   itw.getRepository<Category>().GetById(idCategory);
+                itw.getRepository<Category>().Delete(categorie);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+
+        }
+
+        public IEnumerable<Category> getAllCategory()
+        {
+            return itw.getRepository<Category>()
+                .GetMany();
+        }
+
+        public IEnumerable<Category> getCategoryById()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Category> getCategoryByName()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool updateCategory(Category category)
+        {
+            try
+            {
+              //  System.Diagnostics.Debug.WriteLine("wiw2" + category.id);
+               
+                itw.getRepository<Category>().Update(category);
+                
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
+
+
+
+
+
+
+
     }
+
+
+
 }

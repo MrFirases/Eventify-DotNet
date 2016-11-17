@@ -164,7 +164,14 @@ namespace Eventify.Web.Controllers
             {
 
                 User user = userService.GetById(id);
+                user.accountState = Request.Form["accountState"];
+                user.email = Request.Form["email"];
                 user.firstName = Request.Form["firstName"];
+                user.lastName = Request.Form["lastName"];
+                user.loyaltyPoint = Int32.Parse(Request.Form["loyaltyPoint"]);
+                user.numTel = Request.Form["numTel"];
+                user.password = Request.Form["password"];
+                user.username = Request.Form["username"];
                 userService.Update(user);
                 userService.commit();
                
@@ -198,5 +205,37 @@ namespace Eventify.Web.Controllers
                 return View();
             }
         }
+
+
+
+
+
+        public ActionResult Insights()
+        {
+            //PIE CHART INSIGHT
+            Dictionary<String, Int32> data = userService.GetPieChartStat();
+            ViewBag.Countries = data.Keys.ToList();
+            ViewBag.NbCountries = data.Values.ToList();
+            //PIE CHART INSIGHT
+
+            //AMCHART
+            userService.GetUsersByDateChart();
+            //AMCHART
+
+            ViewBag.Allusersnumber = userService.AllUsersNumber();
+            ViewBag.AllBannednumber = userService.AllBanndUsersNumber();
+            ViewBag.AllUnbannednumber = userService.AllUnbannedUsersNumber();
+            ViewBag.AllActivednumber = userService.AllActivedUsersNumber();
+            return View();
+        }
+
+        [HttpGet]
+        public int GetNumberOfCountries(String country)
+        {
+            
+            return userService.GetMany(u => u.country == "country").Count();
+        }
+
+
     }
 }
