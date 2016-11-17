@@ -7,8 +7,7 @@ namespace Eventify.Data.Models.Mapping
     {
         public userMap()
         {
-            // Primary Key
-            this.HasKey(t => t.id);
+
 
             // Properties
             this.Property(t => t.accountState)
@@ -49,8 +48,7 @@ namespace Eventify.Data.Models.Mapping
                 .HasMaxLength(255);
 
             // Table & Column Mappings
-            this.ToTable("user", "eventify");
-            this.Property(t => t.id).HasColumnName("id");
+            this.ToTable("user");
             this.Property(t => t.accountState).HasColumnName("accountState");
             this.Property(t => t.confirmationToken).HasColumnName("confirmationToken");
             this.Property(t => t.creationDate).HasColumnName("creationDate");

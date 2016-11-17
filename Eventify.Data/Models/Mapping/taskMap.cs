@@ -18,7 +18,7 @@ namespace Eventify.Data.Models.Mapping
                 .HasMaxLength(255);
 
             // Table & Column Mappings
-            this.ToTable("task", "eventify");
+            this.ToTable("task");
             this.Property(t => t.id).HasColumnName("id");
             this.Property(t => t.createdAt).HasColumnName("createdAt");
             this.Property(t => t.taskDescription).HasColumnName("taskDescription");

@@ -21,7 +21,7 @@ namespace Eventify.Data.Models.Mapping
                 .HasMaxLength(255);
 
             // Table & Column Mappings
-            this.ToTable("referreluser", "eventify");
+            this.ToTable("referreluser");
             this.Property(t => t.idUserReferral).HasColumnName("idUserReferral");
             this.Property(t => t.idUserReferred).HasColumnName("idUserReferred");
             this.Property(t => t.dateInvitation).HasColumnName("dateInvitation");

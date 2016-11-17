@@ -18,7 +18,7 @@ namespace Eventify.Data.Models.Mapping
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Table & Column Mappings
-            this.ToTable("rate", "eventify");
+            this.ToTable("rate");
             this.Property(t => t.idEvent).HasColumnName("idEvent");
             this.Property(t => t.idUser).HasColumnName("idUser");
             this.Property(t => t.note).HasColumnName("note");
