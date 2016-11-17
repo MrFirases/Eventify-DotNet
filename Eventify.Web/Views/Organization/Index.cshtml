@@ -5,60 +5,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<title>Display Organization</title>
 <h2>Display all Organizations </h2>
-<!--
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.creationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.organizationName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.organizationType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.user_id)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.creationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.organizationName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.organizationType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.user_id)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
-
-</table>
--->
 
 
 
-@foreach (var item in Model)
-{
+
+<div class="col-md-7">
+    @using (Html.BeginForm())
+    {
+        <div class="input-group">
+
+
+            <input type="text" class="form-control" name="searchString" placeholder="Search for...">
+
+            <span class="input-group-btn">
+                <button class="btn blue uppercase bold" type="submit" id="submitId">Search</button>s
+            </span>
+
+        </div>
+    }
+</div>
+
+   <br /> <br /> <br /> <br />
+
+@if (Model != null)
+{ foreach (var item in Model)
+    {
 <div class="col-md-6">
-    <!-- BEGIN Portlet PORTLET-->
-    <div class="portlet light">
+    <!-- BEGIN Portlet PORTLET      rgb(48, 63, 93);-->
+    <div class="portlet light"style="border-color:rgba(53, 197, 14, 0.33); border:outset">
         <div class="portlet-title">
             <div class="caption">
                 <i class="icon-speech"></i>
@@ -66,12 +42,12 @@
                 <span class="caption-helper">@Html.DisplayFor(modelItem => item.creationDate)</span>
             </div>
             <div class="actions">
-                <a href="javascript:;" class="btn btn-circle btn-default">
-                    <i class="fa fa-pencil"></i> Edit
-                </a>
-                <a href="javascript:;" class="btn btn-circle btn-default">
-                    <i class="fa fa-plus"></i> Add
-                </a>
+
+                @Html.ActionLink("Edit", "Edit", "Organization", new { item.id }, new { @class = "fa fa-pencil btn btn-circle btn-default" })
+
+     
+                     @Html.ActionLink("Details", "Details", "Organization",  new {  item.id }, new { @class = "fa fa-plus btn btn-circle btn-default" })
+                                     
                 <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>
             </div>
         </div>
@@ -83,6 +59,7 @@
 
                     @foreach (var users in ViewBag.User)
                     {
+
                         if (item.user_id == users.id)
                             {
                             <h3>Name of creator :</h3>  @users.firstName <html></html> @users.lastName
@@ -108,4 +85,4 @@
     <!-- END Portlet PORTLET-->
 </div>
 
-}
+}}

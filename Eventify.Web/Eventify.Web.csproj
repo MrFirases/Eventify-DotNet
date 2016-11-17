@@ -325,6 +325,8 @@
     <Content Include="Views\User\BannedUsers.cshtml" />
     <Content Include="Views\User\UnBannedUsers.cshtml" />
     <Content Include="Views\User\ahi.cshtml" />
+    <Content Include="Views\Organization\Details.cshtml" />
+    <Content Include="Views\Organization\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
