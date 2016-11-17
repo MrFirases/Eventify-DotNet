@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Eventify.Data.Models
 {
@@ -7,6 +8,9 @@ namespace Eventify.Data.Models
     {
         public int id { get; set; }
         public string content { get; set; }
+        [Display(Name = "Release Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> reportDate { get; set; }
         public int state { get; set; }
         public string subject { get; set; }

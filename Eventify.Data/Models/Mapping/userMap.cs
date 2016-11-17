@@ -44,6 +44,10 @@ namespace Eventify.Data.Models.Mapping
                 .IsRequired()
                 .HasMaxLength(255);
 
+            this.Property(t => t.country)
+                .IsRequired()
+                .HasMaxLength(255);
+
             // Table & Column Mappings
             this.ToTable("user", "eventify");
             this.Property(t => t.id).HasColumnName("id");
@@ -51,6 +55,7 @@ namespace Eventify.Data.Models.Mapping
             this.Property(t => t.confirmationToken).HasColumnName("confirmationToken");
             this.Property(t => t.creationDate).HasColumnName("creationDate");
             this.Property(t => t.email).HasColumnName("email");
+            this.Property(t => t.country).HasColumnName("country");
             this.Property(t => t.firstName).HasColumnName("firstName");
             this.Property(t => t.lastName).HasColumnName("lastName");
             this.Property(t => t.loyaltyPoint).HasColumnName("loyaltyPoint");

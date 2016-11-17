@@ -41,6 +41,48 @@ namespace Eventify.Web.Controllers
             return View(user);
         }
 
+
+        
+        public ActionResult BannedUsers()
+        {
+            IEnumerable<User> user;
+
+            user = userService.GetMany(u => u.banState==1);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult BannedUsers(string searchString)
+        {
+            IEnumerable<User> user;
+
+            //user = userService.GetMany(u => u.banState == 1);
+            user = userService.GetMany(u => (u.firstName.Contains(searchString) || u.lastName.Contains(searchString) || u.username.Contains(searchString)) &&  u.banState == 1);
+            return View(user);
+        }
+
+
+
+        public ActionResult UnBannedUsers()
+        {
+            IEnumerable<User> user;
+
+            user = userService.GetMany(u => u.banState == 0);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult UnBannedUsers(string searchString)
+        {
+            IEnumerable<User> user;
+
+            //er = userService.GetMany(u => u.banState == 0);
+            user = userService.GetMany(u => (u.firstName.Contains(searchString) || u.lastName.Contains(searchString) || u.username.Contains(searchString)) && u.banState == 0);
+            return View(user);
+        }
+
+
+
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
@@ -53,6 +95,36 @@ namespace Eventify.Web.Controllers
 
             return View(user);
         }
+
+        
+            public ActionResult Ban(int id)
+        {
+
+
+            User user = userService.GetById(id);
+            user.banState = 1;
+            userService.Update(user);
+            userService.commit();
+
+            var userlistToRedirect = userService.GetMany();
+            return RedirectToAction("Index", "User");
+           
+        }
+
+        public ActionResult UnBan(int id)
+        {
+
+
+            User user = userService.GetById(id);
+            user.banState = 0;
+            userService.Update(user);
+            userService.commit();
+
+            var userlistToRedirect = userService.GetMany();
+            return RedirectToAction("Index", "User");
+
+        }
+
 
         // GET: User/Create
         public ActionResult Create()
@@ -92,7 +164,14 @@ namespace Eventify.Web.Controllers
             {
 
                 User user = userService.GetById(id);
+                user.accountState = Request.Form["accountState"];
+                user.email = Request.Form["email"];
                 user.firstName = Request.Form["firstName"];
+                user.lastName = Request.Form["lastName"];
+                user.loyaltyPoint = Int32.Parse(Request.Form["loyaltyPoint"]);
+                user.numTel = Request.Form["numTel"];
+                user.password = Request.Form["password"];
+                user.username = Request.Form["username"];
                 userService.Update(user);
                 userService.commit();
                
@@ -126,5 +205,48 @@ namespace Eventify.Web.Controllers
                 return View();
             }
         }
+
+
+
+
+
+        public ActionResult Insights()
+        {
+            //PIE CHART INSIGHT
+            List<String> ct = new List<string>();
+            List<Int32> nb = new List<Int32>();
+
+            foreach (var line in userService.GetMany().GroupBy(info => info.country)
+                        .Select(group => new {
+                            country = group.Key,
+                            Count = group.Count()
+                        })
+                        .OrderBy(x => x.country))
+                
+            {
+                ct.Add(line.country);
+                nb.Add(line.Count);
+                
+                System.Diagnostics.Debug.WriteLine("{0} {1}", line.country, line.Count);
+            }
+            ViewBag.Countries = ct;
+            ViewBag.NbCountries = nb;
+            //PIE CHART INSIGHT
+
+            ViewBag.Allusersnumber = userService.AllUsersNumber();
+            ViewBag.AllBannednumber = userService.AllBanndUsersNumber();
+            ViewBag.AllUnbannednumber = userService.AllUnbannedUsersNumber();
+            ViewBag.AllActivednumber = userService.AllActivedUsersNumber();
+            return View();
+        }
+
+        [HttpGet]
+        public int GetNumberOfCountries(String country)
+        {
+            
+            return userService.GetMany(u => u.country == "country").Count();
+        }
+
+
     }
 }

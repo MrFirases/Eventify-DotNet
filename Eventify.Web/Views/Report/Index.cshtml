@@ -1,5 +1,14 @@
-﻿@model IEnumerable<Eventify.Data.Models.Report>
+﻿
+@model  IPagedList<Eventify.Data.Models.Report>
 
+
+@using System.Collections.Generic;
+@using PagedList.Mvc;
+@using PagedList; 
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "reports";
+}
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,29 +19,45 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>Search : @Html.TextBox("searchString")</td>
+            <td><input id="submit" type="submit" value="search" /></td>
+        </tr>
+
+    </table>
+}
+
+
+
 <h1> Reports not checked</h1>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.content)
+           content
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.reportDate)
+           reportDate
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.state)
+           state
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.subject)
+          subject
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.event_id)
+        event_id
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.user_id)
+            user_id
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.userWhoReport_id)
+           userWhoReport_id
         </th>
         <th></th>
     </tr>
@@ -67,7 +92,8 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
             @Html.ActionLink("Details", "Details", new { id = item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            @Html.ActionLink("Delete", "Delete", new { id = item.id },new { onclick = "return confirm('Are sure wants to delete?');" })
+
         </td>
     </tr>
         }
@@ -82,25 +108,25 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.content)
+                content
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.reportDate)
+                reportDate
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.state)
+                state
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.subject)
+                subject
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.event_id)
+                event_id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.user_id)
+                user_id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.userWhoReport_id)
+                userWhoReport_id
             </th>
             <th></th>
         </tr>
@@ -139,3 +165,10 @@
             }
         }
     </table>
+
+
+<br />
+@Html.PagedListPager(Model, pageNumber => Url.Action("Index", new
+{
+    pageNumber
+}))

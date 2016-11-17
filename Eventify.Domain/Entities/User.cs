@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Eventify.Data.Models
 {
@@ -36,6 +37,7 @@ namespace Eventify.Data.Models
         public string password { get; set; }
         public string profileImage { get; set; }
         public string username { get; set; }
+        public string country { get; set; }
         public virtual ICollection<Answer> answers { get; set; }
         public virtual ICollection<Comment> comments { get; set; }
         public virtual ICollection<Favorite> favorites { get; set; }
