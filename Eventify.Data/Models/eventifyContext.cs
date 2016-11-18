@@ -1,10 +1,13 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using Eventify.Data.Models.Mapping;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Eventify.Data.Models
 {
-    public partial class eventifyContext : DbContext
+    public partial class eventifyContext : IdentityDbContext<User, MyRole,
+    int, MyLogin, MyUserRole, MyClaim>
     {
         static eventifyContext()
         {
@@ -35,8 +38,15 @@ namespace Eventify.Data.Models
         public DbSet<Task> tasks { get; set; }
         public DbSet<Ticket> tickets { get; set; }
         public DbSet<Transaction> transactions { get; set; }
-        public DbSet<User> users { get; set; }
         public DbSet<Wishlist> wishlists { get; set; }
+
+
+
+        public static eventifyContext Create()
+        {
+            return new eventifyContext();
+        }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -61,6 +71,19 @@ namespace Eventify.Data.Models
             modelBuilder.Configurations.Add(new transactionMap());
             modelBuilder.Configurations.Add(new userMap());
             modelBuilder.Configurations.Add(new wishlistMap());
+
+            modelBuilder.Entity<User>().ToTable("user");
+            modelBuilder.Entity<MyRole>().ToTable("Role");
+            modelBuilder.Entity<MyClaim>().ToTable("UserClaim");
+            modelBuilder.Entity<MyLogin>().ToTable("UserLogin");
+            // Set AutoIncrement-Properties
+            modelBuilder.Entity<User>().Property(r => r.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<MyClaim>().Property(r => r.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<MyRole>().Property(r => r.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            //Override Attributes Matched
+            modelBuilder.Entity<User>().Property(r => r.UserName).HasColumnName("Login");
+            modelBuilder.Entity<User>().Property(r => r.PasswordHash).HasColumnName("PasswordHash");
+            modelBuilder.Entity<User>().Property(r => r.Email).HasColumnName("EmalIdentity");
         }
     }
 }

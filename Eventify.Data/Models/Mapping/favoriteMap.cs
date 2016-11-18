@@ -18,7 +18,7 @@ namespace Eventify.Data.Models.Mapping
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Table & Column Mappings
-            this.ToTable("favorite", "eventify");
+            this.ToTable("favorite");
             this.Property(t => t.categoryId).HasColumnName("categoryId");
             this.Property(t => t.userId).HasColumnName("userId");
             this.Property(t => t.priority).HasColumnName("priority");

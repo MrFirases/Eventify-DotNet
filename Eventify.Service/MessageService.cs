@@ -39,10 +39,13 @@ namespace Eventify.Service
 
         public IEnumerable<Message> getClaimsNotResponded()
         {
+            /*
             return dbfac.DBcontext.messages
                 .Where(message => message.claim == true && message.sended == true)
                 .Join(dbfac.DBcontext.users,message => message.user_id,user => user.id,(message, user) => new { message=message,user=user}).Select(arg => arg.message);
-
+            */
+            IEnumerable<Message> m = null;
+            return  m;
         }
 
 
