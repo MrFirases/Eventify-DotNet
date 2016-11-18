@@ -407,6 +407,7 @@
     <Content Include="Views\Event\ConsumeExternalAPI.cshtml" />
     <Content Include="Views\Reservation\StatisticsbyEventsAndTickets.cshtml" />
     <Content Include="Views\Message\Chat.cshtml" />
+    <Content Include="Views\Message\PartialMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -240,19 +240,17 @@
             });
 
 
-        //Donut Chart
-
 
         // DONUT CHART
         var colors = Highcharts.getOptions().colors,
             categories = [
-                @foreach (dynamic item in @ViewBag.events)
+                @foreach (dynamic item in @ViewBag.reservationsByEvents)
                 {
                     <text>'@item.reservationState',</text>
                 }
             ],
             data = [
-                @foreach (dynamic item in @ViewBag.reservationsByTicketsEvents)
+                @foreach (dynamic item in @ViewBag.reservationsByEvents)
                 {
                     <text>{
                     y:
@@ -260,7 +258,15 @@
                         {
                             if (item.reservationState == item2.reservationState)
                             {
-                                <text>@item2.amount</text>
+                                float tot=0;
+                                foreach (dynamic item3 in @ViewBag.reservationsByEvents)
+                                 {
+                                    tot =
+                                     tot + item3.amount;
+                                 }
+
+                                <text>@Math.Round(@item2.amount / @tot * 100,2)</text>
+
                             }
                         }
 
@@ -282,7 +288,9 @@
                             {
                                 if (ticket.reservationState == item.reservationState)
                                 {
-                                    <text>@ticket.amount,</text>
+                                    var pourc = Math.Round(ticket.amount / item.amount * 100,1);
+
+                                    <text>@pourc,</text>
                                 }
                             }
                         ],
@@ -334,10 +342,10 @@
                     }
                 },
                 title: {
-                    text: 'Browser market share, January, 2015 to May, 2015'
+                    text: 'Reservation By Events/Tickets'
                 },
                 subtitle: {
-                    text: 'Source: <a href="http://netmarketshare.com/">netmarketshare.com</a>'
+                    text: ''
                 },
                 yAxis: {
                     title: {
@@ -355,7 +363,7 @@
                 },
                 series: [
                     {
-                        name: 'Browsers',
+                        name: 'Events',
                         data: browserData,
                         size: '60%',
                         dataLabels: {
@@ -366,7 +374,7 @@
                             distance: -30
                         }
                     }, {
-                        name: 'Versions',
+                        name: 'Tickets',
                         data: versionsData,
                         size: '80%',
                         innerSize: '60%',
@@ -487,9 +495,21 @@
     </div>
 </div>
 
-
+<h2>Ticket by events </h2>
 <table>
     @foreach (dynamic item in @ViewBag.reservationsByTicketsEvents)
+    {
+        <tr>
+            <td>@item.reservationState</td>
+            <td>@item.paymentMethod</td>
+            <td>@item.amount</td>
+        </tr>
+    }
+</table>
+<h2>DistinctEvents </h2>
+
+<table>
+    @foreach (dynamic item in @ViewBag.events)
     {
         <tr>
             <td>@item.reservationState</td>
