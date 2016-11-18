@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Eventify.Web.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private IUserService userService = null;
@@ -21,6 +22,7 @@ namespace Eventify.Web.Controllers
             eventService = new EventService();
             reservationService = new ReservationService();
         }
+
 
         // GET: User
         public ActionResult Index()
@@ -219,7 +221,9 @@ namespace Eventify.Web.Controllers
             //PIE CHART INSIGHT
 
             //AMCHART
-            userService.GetUsersByDateChart();
+            Dictionary<String, Int32> data1 = userService.GetUsersByDateChart();
+            ViewBag.Date = data1.Keys.ToList();
+            ViewBag.NbUsers = data1.Values.ToList();
             //AMCHART
 
             ViewBag.Allusersnumber = userService.AllUsersNumber();

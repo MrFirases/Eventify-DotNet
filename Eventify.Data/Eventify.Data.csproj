@@ -129,6 +129,10 @@
     <Compile Include="Migrations\201611181630447_addingEmailMessageV2.Designer.cs">
       <DependentUpon>201611181630447_addingEmailMessageV2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611171921355_AddingSocialNetworksToUser.cs" />
+    <Compile Include="Migrations\201611171921355_AddingSocialNetworksToUser.Designer.cs">
+      <DependentUpon>201611171921355_AddingSocialNetworksToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\eventifyContext.cs" />
     <Compile Include="Models\Mapping\answerMap.cs" />
@@ -179,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611181630447_addingEmailMessageV2.resx">
       <DependentUpon>201611181630447_addingEmailMessageV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611171921355_AddingSocialNetworksToUser.resx">
+      <DependentUpon>201611171921355_AddingSocialNetworksToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
