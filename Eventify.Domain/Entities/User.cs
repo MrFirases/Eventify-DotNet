@@ -42,6 +42,8 @@ namespace Eventify.Data.Models
         public string profileImage { get; set; }
         public string username { get; set; }
         public string country { get; set; }
+        public string fblink { get; set; }
+        public string twitterlink { get; set; }
         public virtual ICollection<Answer> answers { get; set; }
         public virtual ICollection<Comment> comments { get; set; }
         public virtual ICollection<Favorite> favorites { get; set; }

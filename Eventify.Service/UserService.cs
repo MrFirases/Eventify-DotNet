@@ -68,7 +68,7 @@ namespace Eventify.Service
 
             Dictionary<String, Int32> data = new Dictionary<String, Int32>();
 
-            foreach (var line in this.GetMany().GroupBy(info => info.creationDate.Value.Year.ToString())
+            foreach (var line in this.GetMany().GroupBy(info => info.creationDate.Value.ToString("yyyy"))
                        .Select(group => new {
                            year = group.Key,
                            Count = group.Count()

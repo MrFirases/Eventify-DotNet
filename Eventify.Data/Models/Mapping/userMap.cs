@@ -47,6 +47,14 @@ namespace Eventify.Data.Models.Mapping
                 .IsRequired()
                 .HasMaxLength(255);
 
+            this.Property(t => t.fblink)
+                .IsRequired()
+                .HasMaxLength(255);
+
+            this.Property(t => t.twitterlink)
+                .IsRequired()
+                .HasMaxLength(255);
+
             // Table & Column Mappings
             this.ToTable("user");
             this.Property(t => t.accountState).HasColumnName("accountState");
@@ -62,6 +70,8 @@ namespace Eventify.Data.Models.Mapping
             this.Property(t => t.profileImage).HasColumnName("profileImage");
             this.Property(t => t.username).HasColumnName("username");
             this.Property(t => t.banState).HasColumnName("banState");
+            this.Property(t => t.fblink).HasColumnName("fblink");
+            this.Property(t => t.twitterlink).HasColumnName("twitterlink");
         }
     }
 }
