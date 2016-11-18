@@ -221,6 +221,11 @@ namespace Eventify.Web.Controllers
             ViewBag.reservationsByTicketsEvents = reservationsByTicketsEvents;
 
 
+            IEnumerable<Reservation> events =
+                reservationsByTicketsEvents.DistinctBy(reservation => reservation.reservationState);
+            ViewBag.events = events;
+
+
 
 
             return View();

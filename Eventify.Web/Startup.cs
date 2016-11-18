@@ -15,6 +15,7 @@ namespace Eventify.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            app.MapSignalR();
         }
 
         //public void ConfigureServices(IServiceCollection services)
