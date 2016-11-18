@@ -121,6 +121,14 @@
     <Compile Include="Migrations\201611170050260_IntegratingUserandIdentity.Designer.cs">
       <DependentUpon>201611170050260_IntegratingUserandIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611181628190_addingEmailMessage.cs" />
+    <Compile Include="Migrations\201611181628190_addingEmailMessage.Designer.cs">
+      <DependentUpon>201611181628190_addingEmailMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611181630447_addingEmailMessageV2.cs" />
+    <Compile Include="Migrations\201611181630447_addingEmailMessageV2.Designer.cs">
+      <DependentUpon>201611181630447_addingEmailMessageV2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201611171921355_AddingSocialNetworksToUser.cs" />
     <Compile Include="Migrations\201611171921355_AddingSocialNetworksToUser.Designer.cs">
       <DependentUpon>201611171921355_AddingSocialNetworksToUser.cs</DependentUpon>
@@ -169,6 +177,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611170050260_IntegratingUserandIdentity.resx">
       <DependentUpon>201611170050260_IntegratingUserandIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611181628190_addingEmailMessage.resx">
+      <DependentUpon>201611181628190_addingEmailMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611181630447_addingEmailMessageV2.resx">
+      <DependentUpon>201611181630447_addingEmailMessageV2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611171921355_AddingSocialNetworksToUser.resx">
       <DependentUpon>201611171921355_AddingSocialNetworksToUser.cs</DependentUpon>
