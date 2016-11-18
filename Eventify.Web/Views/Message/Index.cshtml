@@ -15,7 +15,7 @@
             <div class="caption caption-md">
                 <i class="icon-bar-chart font-dark hide"></i>
                 <span class="caption-subject font-dark bold uppercase">Messages </span>
-                <span class="caption-helper">45 pending</span>
+                <span class="caption-helper"></span>
             </div>
             <div class="inputs">
                 <div class="portlet-input input-inline input-small ">
@@ -36,7 +36,7 @@
                             <div class="item-head">
                                 <div class="item-details">
                                     <img class="item-pic rounded" src="@Html.DisplayFor(modelItem => item.user.profileImage) ">
-                                    <a href="" class="item-name primary-link">
+                                    <a href="@Url.Action("MessageByUser", "Message", new {id = item.user_id})" class="item-name primary-link">
                                         @Html.DisplayFor(modelItem => item.user.firstName)  @Html.DisplayFor(modelItem => item.user.lastName) 
 
                                     </a>

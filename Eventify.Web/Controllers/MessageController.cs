@@ -142,6 +142,12 @@ namespace Eventify.Web.Controllers
         }
 
 
+        public ActionResult Chat()
+        {
+            return View();
+        }
+
+
         public static string GetPrettyDate(DateTime d)
         {
             // 1.

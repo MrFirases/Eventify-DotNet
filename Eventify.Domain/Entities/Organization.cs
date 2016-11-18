@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Eventify.Data.Models
 {
@@ -12,6 +13,8 @@ namespace Eventify.Data.Models
         }
 
         public int id { get; set; }
+        [JsonProperty(".created")]
+
         public Nullable<System.DateTime> creationDate { get; set; }
         public string organizationName { get; set; }
         public string organizationType { get; set; }

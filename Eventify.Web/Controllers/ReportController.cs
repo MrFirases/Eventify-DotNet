@@ -24,8 +24,11 @@ namespace Eventify.Web.Controllers
         // GET: Report
         public ActionResult Index(int? pageNumber)
         {
-             
-            var reports = reportService.GetMany().ToList().ToPagedList(pageNumber ?? 1, 3); 
+            var users = UserService.GetMany();
+
+
+            ViewBag.MyUsers = users;
+            var reports = reportService.GetMany().ToList().ToPagedList(pageNumber ?? 1, 9); 
             return View(reports);
             
         }
@@ -129,7 +132,7 @@ namespace Eventify.Web.Controllers
         {
             IEnumerable<Report> report;
 
-            report = reportService.GetMany(u => u.subject.Contains(searchString) || u.content.Contains(searchString) ).ToList().ToPagedList(pageNumber ?? 1, 3); ;
+            report = reportService.GetMany(u => u.subject.Contains(searchString) || u.content.Contains(searchString) ).ToList().ToPagedList(pageNumber ?? 1, 9); ;
             return View(report);
         }
 

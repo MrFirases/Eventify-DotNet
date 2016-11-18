@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Eventify.Data.Models.Message>
+
+@foreach (var item in Model)
+{
+    <li>
+        <a href="#">
+            <span class="photo">
+                <img src="@Url.Content("~/Content/")assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt="">
+            </span>
+            <span class="subject">
+                <span class="from"> Lisa Wong </span>
+                <span class="time">Just Now </span>
+            </span>
+            <span class="message"> Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+        </a>
+    </li>
+
+}
