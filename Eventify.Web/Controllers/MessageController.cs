@@ -102,7 +102,10 @@ namespace Eventify.Web.Controllers
         public ActionResult Edit(int id,Message message)
         {
             try
-            {
+            {   Message message1 = new Message();
+                message1 = MessageService.GetById(id);
+                message1.message1 = Request.Form["message1"];
+
                 message.date = DateTime.Now;
                 MessageService.Update(message);
                 MessageService.commit();

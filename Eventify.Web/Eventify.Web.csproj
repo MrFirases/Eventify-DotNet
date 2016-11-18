@@ -229,6 +229,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -319,6 +320,7 @@
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Message\Edit.cshtml" />
     <Content Include="Views\Message\MessageByUser.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
@@ -335,6 +337,13 @@
     <Content Include="Views\User\UnBannedUsers.cshtml" />
     <Content Include="Views\User\ahi.cshtml" />
     <Content Include="Views\User\Insights.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Organization\Details.cshtml" />
+    <Content Include="Views\Organization\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

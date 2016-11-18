@@ -21,7 +21,7 @@ namespace Eventify.Data.Models.Mapping
                 .HasMaxLength(255);
 
             // Table & Column Mappings
-            this.ToTable("mymedia", "eventify");
+            this.ToTable("mymedia");
             this.Property(t => t.id).HasColumnName("id");
             this.Property(t => t.mediaDate).HasColumnName("mediaDate");
             this.Property(t => t.pathMedia).HasColumnName("pathMedia");
