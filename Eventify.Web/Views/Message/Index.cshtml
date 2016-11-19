@@ -8,106 +8,96 @@
     Session["NbNewMessage"] = 0;
 }
 
-@section Styles{
-            <!-- BEGIN PAGE LEVEL PLUGINS -->
-<link href="@Url.Content("~/Content/")assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/")assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
-<!-- END PAGE LEVEL PLUGINS -->
-
-}
-
-@section scripts
-{
-    <script src="@Url.Content("~/Content/")assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
-<script src="@Url.Content("~/Content/")assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
-
-}
-
-<h2>Messages</h2>
+    <h2>Messages</h2>
 
 
-<div class="col-md-12 col-sm-12">
-    <div class="portlet light ">
-        <div class="portlet-title">
-            <div class="caption caption-md">
-                <i class="icon-bar-chart font-dark hide"></i>
+
+<div class="row">
+
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <i class="icon-bar-chart font-dark hide"></i>
                     <h3>
                         You have
                         <span class="bold"> New</span> Messages
                     </h3>
- 
-                <span class="caption-helper"></span>
+
+                    <span class="caption-helper"></span>
+                </div>
+                <div class="inputs">
+                    <div class="portlet-input input-inline input-small ">
+                        <div class="input-icon right">
+                            <i class="icon-magnifier"></i>
+                            <input type="text" class="form-control form-control-solid input-circle" placeholder="search...">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="inputs">
-                <div class="portlet-input input-inline input-small ">
-                    <div class="input-icon right">
-                        <i class="icon-magnifier"></i>
-                        <input type="text" class="form-control form-control-solid input-circle" placeholder="search...">
+            <div class="portlet-body">
+                <div class="scroller" style="height: 338px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                    <div class="general-item-list">
+
+                        @foreach (var item in Model)
+                        {
+                            if (item.user != null)
+                            {
+                                <div class="item">
+                                    <div class="item-head">
+                                        <div class="item-details">
+                                            <img class="item-pic rounded" src="@Html.DisplayFor(modelItem => item.user.profileImage) ">
+                                            <a href="@Url.Action("MessageByUser", "Message", new {id = item.user_id})" class="item-name primary-link">
+                                                @Html.DisplayFor(modelItem => item.user.firstName)  @Html.DisplayFor(modelItem => item.user.lastName)
+
+                                            </a>
+                                            <span class="item-label">
+                                                @DateFormat.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))
+                                            </span>
+                                        </div>
+                                        <span class="item-status">
+                                            <a class="btn btn-outline red" href="@Url.Action("MessageByUser", "Message", new {id = item.user_id})">
+                                                <i class="fa fa-edit"></i> Respond
+                                            </a>
+
+                                        </span>
+                                    </div>
+                                    <br />
+                                    <div class="item-body">
+                                        @Html.DisplayFor(modelItem => item.message1)
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="item">
+                                    <div class="item-head">
+                                        <div class="item-details">
+                                            <img class="item-pic rounded" src="https://www.kirkleescollege.ac.uk/wp-content/uploads/2015/09/default-avatar.png">
+                                            <a href="@Url.Action("MessageByUser", "Message", new {id = item.user_id})" class="item-name primary-link">
+                                                @Html.DisplayFor(modelItem => item.email)
+
+                                            </a>
+                                            <span class="item-label">
+                                                @DateFormat.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))
+                                            </span>
+                                        </div>
+                                        <span class="item-status">
+                                            <a class="btn btn-outline dark" href="@Url.Action("RespondingWithMail","Message",new {email=item.email})"> Respond With Email </a>
+
+                                        </span>
+                                    </div>
+                                    <br />
+                                    <div class="item-body">
+                                        @Html.DisplayFor(modelItem => item.message1)
+                                    </div>
+                                </div>                        }
+                        }
                     </div>
                 </div>
             </div>
         </div>
-        <div class="portlet-body">
-            <div class="scroller" style="height: 338px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
-                <div class="general-item-list">
-                    
-                    @foreach (var item in Model)
-                    {
-                        if (item.user != null)
-                        {
-                            <div class="item">
-                                <div class="item-head">
-                                    <div class="item-details">
-                                        <img class="item-pic rounded" src="@Html.DisplayFor(modelItem => item.user.profileImage) ">
-                                        <a href="@Url.Action("MessageByUser", "Message", new {id = item.user_id})" class="item-name primary-link">
-                                            @Html.DisplayFor(modelItem => item.user.firstName)  @Html.DisplayFor(modelItem => item.user.lastName)
-
-                                        </a>
-                                        <span class="item-label">
-                                            @DateFormat.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))
-                                        </span>
-                                    </div>
-                                    <span class="item-status">
-                                        <a class="btn red compose-btn btn-block" href="@Url.Action("MessageByUser", "Message", new {id = item.user_id})">
-                                            <i class="fa fa-edit"></i> Respond
-                                        </a>
-
-                                    </span>
-                                </div>
-                                <div class="item-body">
-                                    @Html.DisplayFor(modelItem => item.message1)
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="item">
-                                <div class="item-head">
-                                    <div class="item-details">
-                                        <img class="item-pic rounded" src="https://www.kirkleescollege.ac.uk/wp-content/uploads/2015/09/default-avatar.png">
-                                        <a href="@Url.Action("MessageByUser", "Message", new {id = item.user_id})" class="item-name primary-link">
-                                            @Html.DisplayFor(modelItem => item.email) 
-
-                                        </a>
-                                        <span class="item-label">
-                                            @DateFormat.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))
-                                        </span>
-                                    </div>
-                                    <span class="item-status">
-                                        <a class="btn btn-outline dark" href="@Url.Action("RespondingWithMail","Message",new {email=item.email})"> Respond With Email </a>
-
-                                    </span>
-                                </div>
-                                <div class="item-body">
-                                    @Html.DisplayFor(modelItem => item.message1)
-                                </div>
-                            </div>                        }
-                    }
-                </div>
-            </div>
-        </div>
     </div>
-</div>
 
-
+    </div>
 

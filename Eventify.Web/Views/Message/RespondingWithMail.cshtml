@@ -18,13 +18,11 @@
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Responding With Email</h4>
     </div>
     <div class="modal-body">
-        <p> To :  </p>
-        <p> @Session["emailTo"].ToString() </p>
+        <h3> To : <span>@Session["emailTo"].ToString()</span>  </h3>
         <div class="form-group">
-            @Html.TextBox("contenu", "", new { @class = "form-control" })
+            @Html.TextArea("contenu", "", new { @class = "form-control" })
         </div>
     </div>
     <div class="modal-footer">
