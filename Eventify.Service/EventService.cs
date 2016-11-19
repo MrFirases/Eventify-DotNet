@@ -15,7 +15,7 @@ namespace Eventify.Service
         private static IDataBaseFactory dbfac = new DataBaseFactory();
 
         private static IUnitOfWork itw = new UnitOfWork(dbfac);
-
+        //
         public EventService() : base(itw)
         {
         }
