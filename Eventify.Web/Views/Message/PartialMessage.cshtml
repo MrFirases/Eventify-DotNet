@@ -1,0 +1,90 @@
+﻿@using Eventify.Data.Models
+@using Eventify.Web.Utils
+
+
+@section scripts{
+
+}
+
+<li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+    @if (@Session["MessageReceived"] != null)
+    {
+
+    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+        <i class="icon-envelope-open"></i>
+        <span class="badge badge-default"> @Session["NbNewMessage"] </span>
+    </a>
+        <ul class="dropdown-menu">
+            <li class="external">
+                <h3>
+                    You have
+                    <span class="bold">@Session["NbNewMessage"] New</span> Messages
+                </h3>
+                <a href="@Url.Action("Index", "Message")">view all</a>
+            </li>
+            <li>
+                <ul class="dropdown-menu-list scroller" style="height: 300px;" data-handle-color="#637283">
+                    @foreach (var item in (IEnumerable<Message>) @Session["MessageReceived"])
+                    {
+                        if (item.user != null)
+                        {
+                            <li>
+                                <a href="#">
+                                    <span class="photo">
+                                    <img src="@item.user.profileImage" class="img-circle" alt="">
+                                </span>
+                                    <span class="subject">
+                                    <span class="from"> @item.user.firstName @item.user.lastName </span>
+                                    <span class="time">
+                                        @DateFormat.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))
+                                    </span>
+                                </span>
+                                    @if (item.message1.Length > 80)
+                                    {
+                                        <span class="message"> @item.message1.Substring(0, 80)... </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="message"> @item.message1 </span>
+
+                                    }
+                                </a>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#">
+                                    <span class="photo">
+                                    <img src="https://www.kirkleescollege.ac.uk/wp-content/uploads/2015/09/default-avatar.png" class="img-circle" alt="">
+                                </span>
+                                    <span class="subject">
+                                    <span class="from"> @item.email </span>
+                                    <span class="time">
+                                        @DateFormat.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))
+                                    </span>
+                                </span>
+                                    @if (item.message1.Length > 80)
+                                    {
+                                        <span class="message"> @item.message1.Substring(0, 80)... </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="message"> @item.message1 </span>
+
+                                    }
+                                </a>
+                            </li>
+                        }
+                    }
+
+
+                </ul>
+            </li>
+        
+        </ul>
+    }
+</li>

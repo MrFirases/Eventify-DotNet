@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "RespondingWithMail";
+}
+
+@section scripts
+{
+    <script>
+        alert(@Session["emailTo"].ToString());
+    </script>
+}
+
+<h2>RespondingWithMail</h2>
+
+
+@using (Html.BeginForm("RespondingMail", "Message"))
+{
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    </div>
+    <div class="modal-body">
+        <h3> To : <span>@Session["emailTo"].ToString()</span>  </h3>
+        <div class="form-group">
+            @Html.TextArea("contenu", "", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" class="btn btn-outline dark">Close</button>
+        <input class="btn blue" type="submit" value="Send" />
+    </div>
+    @*<input class="btn blue" type="submit" value="Send" />*@
+
+
+    }

@@ -23,7 +23,8 @@ namespace Eventify.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Message", action = "MessageByUser", id = UrlParameter.Optional }
             );
-
+           
+            // IndexDetail
         }
     }
 }

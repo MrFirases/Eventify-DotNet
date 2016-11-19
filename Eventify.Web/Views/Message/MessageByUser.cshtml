@@ -1,4 +1,5 @@
 ﻿@using Eventify.Web.Controllers
+@using Eventify.Web.Utils
 @model IEnumerable<Eventify.Data.Models.Message>
 
 @{
@@ -31,7 +32,7 @@
                         <div class="bubble me">
                             @Html.DisplayFor(modelItem => item.message1) 
                             <br />
-                            <span style="opacity: 0.5">@MessageController.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))</span>
+                            <span style="opacity: 0.5">@DateFormat.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))</span>
 
                         </div>
                     }
@@ -48,7 +49,7 @@
 
 
                             <br/>
-                            <span style="opacity: 0.5">@MessageController.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))</span>
+                            <span style="opacity: 0.5">@DateFormat.GetPrettyDate(DateTime.Parse(@Html.DisplayFor(modelItem => item.date).ToString()))</span>
 
                         </div>
 

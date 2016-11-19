@@ -1,0 +1,56 @@
+﻿@using Eventify.Web.Controllers
+@model IEnumerable<Eventify.Data.Models.Message>
+
+@{
+    ViewBag.Title = "MessageByUser";
+}
+
+
+@section Styles {
+    <link href="@Url.Content("~/Content/")assets/apps/css/chat-style.css" rel="stylesheet" type="text/css" />
+}
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.signalR-2.2.1.js"></script>
+    <script src="~/SignalR/hubs"></script>
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/ChatScript.js"></script>
+}
+
+<h2>@ViewBag.UserFullName</h2>
+
+<div class="wrapper">
+    <div class="container-chat">
+
+        <div class="right">
+            <div class="top">
+                <span>To: <span class="name">@ViewBag.UserFullName</span></span>
+            </div>
+            <div class="chat active-chat scroller" data-chat="person2">
+                <div class="conversation-start">
+                    <span>Today</span>
+                </div>
+                <div data-bind="foreach:messages">
+
+                    <div data-bind="text: $data" class="bubble me">
+                        <br />
+                        <span data-bind=""></span>
+
+                    </div>
+                </div>
+
+
+                
+            </div>
+
+                <div class="col-md-12">
+
+
+                    <input type="text" placeholder="Message" data-bind="value:message"/>
+                    <button class="btn btn-circle" data-bind="click:sendMessage">Send</button>
+
+                </div>
+        </div>
+    </div>
+</div>
