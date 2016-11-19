@@ -148,5 +148,15 @@ namespace Eventify.Web.Controllers
                 return View();
             }
         }
+
+        public ActionResult Statistik ()
+        {
+            int NbMorale = organizationService.getNbMorale();
+            int NbPhysique = organizationService.getNbPhysique();
+
+            ViewBag.NbMorale = NbMorale;
+            ViewBag.NbPhysique = NbPhysique;
+            return View();
+        }
     }
 }
