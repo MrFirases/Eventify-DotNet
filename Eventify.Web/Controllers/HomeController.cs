@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Eventify.Service;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Eventify.Data.Models;
 
@@ -11,17 +12,26 @@ namespace Eventify.Web.Controllers
 {
     public class HomeController : Controller
     {
+         IEventService eventService = null;
+        private IMessageService messageService = null;
         IEventService eventService = null;
         IUserService userService = null;
 
         public HomeController()
         {
             eventService = new EventService();
+            messageService = new MessageService();
             userService = new UserService();
         }
 
         public ActionResult Index()
         {
+            IEnumerable<Message> messages =
+                messageService.GetMany(message => message.sended == true && message.claim == true).DistinctBy(message => message.user_id).ToList();
+
+            Session["MessageReceived"] = messages;
+            Session["NbNewMessage"] = messages.Count();
+            return View();
             if (Request.IsAuthenticated)
             {
 

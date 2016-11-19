@@ -316,6 +316,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\DateFormat.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -417,6 +418,7 @@
     <Content Include="Views\Message\Chat.cshtml" />
     <Content Include="Views\Message\PartialMessage.cshtml" />
     <Content Include="Views\User\_UserSessionSection.cshtml" />
+    <Content Include="Views\Message\RespondingWithMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
