@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Microsoft.AspNet.Identity;
 namespace Eventify.Web.Controllers
 {
     [Authorize]
@@ -27,6 +27,14 @@ namespace Eventify.Web.Controllers
         // GET: User
         public ActionResult Index()
         {
+            //For You Brogrammer To Pass Connected User From Views
+            if (Request.IsAuthenticated)
+            {
+                User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                ViewBag.MyConntectedUser = connectedUser;
+            }
+            //END For You Brogrammer To Pass Connected User From Views
+
             IEnumerable<User> user;
             user = userService.GetMany();
             userService.commit();
@@ -37,6 +45,14 @@ namespace Eventify.Web.Controllers
         [HttpPost]
         public ActionResult Index(string searchString)
         {
+            //For You Brogrammer To Pass Connected User From Views
+            if (Request.IsAuthenticated)
+            {
+                User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                ViewBag.MyConntectedUser = connectedUser;
+            }
+            //END For You Brogrammer To Pass Connected User From Views
+
             IEnumerable<User> user;
 
             user = userService.GetMany(u=>u.firstName.Contains(searchString) || u.lastName.Contains(searchString) || u.username.Contains(searchString));
@@ -47,6 +63,14 @@ namespace Eventify.Web.Controllers
         
         public ActionResult BannedUsers()
         {
+            //For You Brogrammer To Pass Connected User From Views
+            if (Request.IsAuthenticated)
+            {
+                User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                ViewBag.MyConntectedUser = connectedUser;
+            }
+            //END For You Brogrammer To Pass Connected User From Views
+
             IEnumerable<User> user;
 
             user = userService.GetMany(u => u.banState==1);
@@ -56,6 +80,14 @@ namespace Eventify.Web.Controllers
         [HttpPost]
         public ActionResult BannedUsers(string searchString)
         {
+            //For You Brogrammer To Pass Connected User From Views
+            if (Request.IsAuthenticated)
+            {
+                User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                ViewBag.MyConntectedUser = connectedUser;
+            }
+            //END For You Brogrammer To Pass Connected User From Views
+
             IEnumerable<User> user;
 
             //user = userService.GetMany(u => u.banState == 1);
@@ -67,6 +99,14 @@ namespace Eventify.Web.Controllers
 
         public ActionResult UnBannedUsers()
         {
+            //For You Brogrammer To Pass Connected User From Views
+            if (Request.IsAuthenticated)
+            {
+                User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                ViewBag.MyConntectedUser = connectedUser;
+            }
+            //END For You Brogrammer To Pass Connected User From Views
+
             IEnumerable<User> user;
 
             user = userService.GetMany(u => u.banState == 0);
@@ -76,6 +116,14 @@ namespace Eventify.Web.Controllers
         [HttpPost]
         public ActionResult UnBannedUsers(string searchString)
         {
+            //For You Brogrammer To Pass Connected User From Views
+            if (Request.IsAuthenticated)
+            {
+                User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                ViewBag.MyConntectedUser = connectedUser;
+            }
+            //END For You Brogrammer To Pass Connected User From Views
+
             IEnumerable<User> user;
 
             //er = userService.GetMany(u => u.banState == 0);
@@ -88,8 +136,15 @@ namespace Eventify.Web.Controllers
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
-            
-            
+            //For You Brogrammer To Pass Connected User From Views
+            if (Request.IsAuthenticated)
+            {
+                User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                ViewBag.MyConntectedUser = connectedUser;
+            }
+            //END For You Brogrammer To Pass Connected User From Views
+
+
             User user = userService.GetById(id);
 
             
@@ -101,7 +156,13 @@ namespace Eventify.Web.Controllers
         
             public ActionResult Ban(int id)
         {
-
+            //For You Brogrammer To Pass Connected User From Views
+            if (Request.IsAuthenticated)
+            {
+                User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                ViewBag.MyConntectedUser = connectedUser;
+            }
+            //END For You Brogrammer To Pass Connected User From Views
 
             User user = userService.GetById(id);
             user.banState = 1;
@@ -115,7 +176,13 @@ namespace Eventify.Web.Controllers
 
         public ActionResult UnBan(int id)
         {
-
+            //For You Brogrammer To Pass Connected User From Views
+            if (Request.IsAuthenticated)
+            {
+                User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                ViewBag.MyConntectedUser = connectedUser;
+            }
+            //END For You Brogrammer To Pass Connected User From Views
 
             User user = userService.GetById(id);
             user.banState = 0;
@@ -153,6 +220,14 @@ namespace Eventify.Web.Controllers
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
+            //For You Brogrammer To Pass Connected User From Views
+            if (Request.IsAuthenticated)
+            {
+                User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                ViewBag.MyConntectedUser = connectedUser;
+            }
+            //END For You Brogrammer To Pass Connected User From Views
+
             User user = userService.GetById(id);
 
             return View(user);
@@ -214,6 +289,14 @@ namespace Eventify.Web.Controllers
 
         public ActionResult Insights()
         {
+            //For You Brogrammer To Pass Connected User From Views
+            if (Request.IsAuthenticated)
+            {
+                User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                ViewBag.MyConntectedUser = connectedUser;
+            }
+            //END For You Brogrammer To Pass Connected User From Views
+
             //PIE CHART INSIGHT
             Dictionary<String, Int32> data = userService.GetPieChartStat();
             ViewBag.Countries = data.Keys.ToList();

@@ -44,7 +44,7 @@ namespace Eventify.Service
         public Dictionary<string, int> GetPieChartStat()
         {
             Dictionary<String, Int32> data = new Dictionary<String, Int32>();
-
+            
             foreach (var line in this.GetMany().GroupBy(info => info.country)
                        .Select(group => new {
                            country = group.Key,
