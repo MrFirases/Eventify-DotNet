@@ -495,26 +495,3 @@
     </div>
 </div>
 
-<h2>Ticket by events </h2>
-<table>
-    @foreach (dynamic item in @ViewBag.reservationsByTicketsEvents)
-    {
-        <tr>
-            <td>@item.reservationState</td>
-            <td>@item.paymentMethod</td>
-            <td>@item.amount</td>
-        </tr>
-    }
-</table>
-<h2>DistinctEvents </h2>
-
-<table>
-    @foreach (dynamic item in @ViewBag.events)
-    {
-        <tr>
-            <td>@item.reservationState</td>
-            <td>@item.paymentMethod</td>
-            <td>@item.amount</td>
-        </tr>
-    }
-</table>

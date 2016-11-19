@@ -282,28 +282,13 @@ License: You must have a valid license purchased only from themeforest(the above
                         </li>
                         <!-- END NOTIFICATION DROPDOWN -->
                         <!-- BEGIN INBOX DROPDOWN -->
-                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                        <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <i class="icon-envelope-open"></i>
-                                <span class="badge badge-default"> 4 </span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="external">
-                                    <h3>
-                                        You have
-                                        <span class="bold">7 New</span> Messages
-                                    </h3>
-                                    <a href="app_inbox.html">view all</a>
-                                </li>
-                                <li>
-                                    <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        
+                        @*Ibra part Message*@ 
+                    @Html.Partial("../Message/PartialMessage")
 
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- END INBOX DROPDOWN -->
+
+                    <!-- END INBOX DROPDOWN -->
                         <!-- BEGIN TODO DROPDOWN -->
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                         <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
