@@ -14,12 +14,10 @@ namespace Eventify.Web.Controllers
     {
          IEventService eventService = null;
         private IMessageService messageService = null;
-        IEventService eventService = null;
         IUserService userService = null;
 
         public HomeController()
         {
-            eventService = new EventService();
             messageService = new MessageService();
             userService = new UserService();
         }
@@ -29,19 +27,25 @@ namespace Eventify.Web.Controllers
             IEnumerable<Message> messages =
                 messageService.GetMany(message => message.sended == true && message.claim == true).DistinctBy(message => message.user_id).ToList();
 
-            Session["MessageReceived"] = messages;
-            Session["NbNewMessage"] = messages.Count();
-            return View();
+            
+           
             if (Request.IsAuthenticated)
             {
 
                 User user = userService.GetById(int.Parse(User.Identity.GetUserId()));
                 ViewBag.MyConntectedUser = user;
 
+
+                Session["MessageReceived"] = messages;
+                Session["NbNewMessage"] = messages.Count();
+
                 return View();
 
             }
-                return View();
+
+            Session["MessageReceived"] = messages;
+            Session["NbNewMessage"] = messages.Count();
+            return View();
         }
 
         public ActionResult About()
