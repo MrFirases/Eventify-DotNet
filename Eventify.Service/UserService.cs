@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Eventify.Data.Infrastructure;
-
+using Microsoft.AspNet.Identity;
 namespace Eventify.Service
 {
     public class UserService : MyServiceGeneric<User>, IUserService
@@ -40,7 +40,8 @@ namespace Eventify.Service
             return this.GetMany().Count();
         }
 
-        
+      
+
         public Dictionary<string, int> GetPieChartStat()
         {
             Dictionary<String, Int32> data = new Dictionary<String, Int32>();
@@ -86,5 +87,54 @@ namespace Eventify.Service
 
 
         }
+
+        public List<Myevent> GetEventThatUserParticipateIn(int idUser)
+        {
+            var query2 = from users in this.GetMany()
+                         join reservations in dbfac.DBcontext.reservations on users.Id equals reservations.user_id
+                         join tickets in dbfac.DBcontext.tickets.ToList() on reservations.ticket_id equals tickets.id
+                         join events in dbfac.DBcontext.myevents.ToList() on tickets.event_id equals events.id
+                         where users.Id == idUser && reservations.reservationState == "CONFIRMED" && reservations.timerState == "FINISHED"
+                         select events;
+
+            /*
+            IEventService eventService = new EventService();
+            IReservationService reservationService = new ReservationService();
+            
+            List<Myevent> myevents = new List<Myevent>();
+            List<Ticket> mytickets = new List<Ticket>();
+            List<Reservation> myreservations = new List<Reservation>();
+            
+                        IEnumerable<Myevent> query = from events in dbfac.DBcontext.myevents
+                                    join tickets in dbfac.DBcontext.tickets on events.id equals tickets.event_id
+                                    join reservations in dbfac.DBcontext.reservations on tickets.id equals reservations.ticket_id
+                                    join users in this.GetMany() on reservations.user_id equals 1
+                                    select events;
+            */
+            var query1 = from users in this.GetMany()
+             join reservations in dbfac.DBcontext.reservations on users.Id equals reservations.user_id
+                          join tickets in dbfac.DBcontext.tickets.ToList() on reservations.ticket_id equals tickets.id
+                          join events in dbfac.DBcontext.myevents.ToList() on tickets.event_id equals events.id
+                          where users.Id == idUser && reservations.reservationState == "CONFIRMED" && reservations.timerState == "FINISHED"
+                          select events ;
+
+            System.Diagnostics.Debug.WriteLine("**********************************************************");
+            /*
+            foreach (var obj in query)
+            {
+                System.Diagnostics.Debug.WriteLine("Title Query: " + obj.title);
+            }
+            */
+
+            foreach (var obj in query1)
+            {
+                System.Diagnostics.Debug.WriteLine("Title Query True: " + obj.title);
+            }
+            List<Myevent> list_course = query1.ToList();
+            System.Diagnostics.Debug.WriteLine("***********************************************************");
+            return list_course;
+        }
+
+
     }
 }
