@@ -38,7 +38,7 @@ namespace Eventify.Web.Controllers
             IEnumerable<User> user;
             user = userService.GetMany();
             userService.commit();
-
+            
             return View(user);
         }
 
@@ -149,7 +149,7 @@ namespace Eventify.Web.Controllers
 
             
             ViewBag.MyEvents = eventService.GetMany(e => e.organization.user_id == id);
-
+            ViewBag.ParticipatedEvents = userService.GetEventThatUserParticipateIn(id);
             return View(user);
         }
 
