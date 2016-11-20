@@ -417,7 +417,9 @@
     <Content Include="Views\Reservation\StatisticsbyEventsAndTickets.cshtml" />
     <Content Include="Views\Message\Chat.cshtml" />
     <Content Include="Views\Message\PartialMessage.cshtml" />
+    <Content Include="Views\User\_UserSessionSection.cshtml" />
     <Content Include="Views\Message\RespondingWithMail.cshtml" />
+    <Content Include="Views\Organization\Statistik.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

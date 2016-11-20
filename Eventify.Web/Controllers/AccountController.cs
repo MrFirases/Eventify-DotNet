@@ -355,6 +355,7 @@ namespace Eventify.Web.Controllers
         public ActionResult LogOff()
         {
             //   AuthenticationManager.SignOut();
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
 
