@@ -420,6 +420,7 @@
     <Content Include="Views\User\_UserSessionSection.cshtml" />
     <Content Include="Views\Message\RespondingWithMail.cshtml" />
     <Content Include="Views\Organization\Statistik.cshtml" />
+    <Content Include="Views\Shared\_NotificationPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
