@@ -26,6 +26,14 @@
                             <a href="javascript:;">
                                 <span class="time">
                             @DateFormat.GetPrettyDate(DateTime.Today)
+                                    @*@{
+                                        long unixDate = (long) @item.notificationDate;
+                                        DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
+                                        DateTime date = start.AddMilliseconds(unixDate).ToLocalTime();
+                                    }
+                                    @DateFormat.GetPrettyDate(date)*@
+
+                                    
                             
                         </span>
                                 <span class="details">

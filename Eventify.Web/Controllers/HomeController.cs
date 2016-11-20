@@ -46,7 +46,7 @@ namespace Eventify.Web.Controllers
             }
 
 
-
+            /*
             //Consuming Notification From JEE
             string url = "http://localhost:18080/Eventify-web/rest/notifications/1";
 
@@ -71,7 +71,7 @@ namespace Eventify.Web.Controllers
                     Session["MyNotificationsNB"] = tokenResponse.Count();
                 }
             }
-
+            */
 
             Session["MessageReceived"] = messages;
             Session["NbNewMessage"] = messages.Count();
