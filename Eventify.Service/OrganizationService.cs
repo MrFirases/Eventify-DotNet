@@ -32,7 +32,7 @@ namespace Eventify.Service
 
             return GetMany(o => o.organizationType == "PHYSIQUE").Count();
         }
-
+        /*
         public List<int> CreationEventStat()
         {
             IEnumerable<Organization> organizations;
@@ -47,7 +47,7 @@ namespace Eventify.Service
             }
             return  ;
         }
-
+        */
 
     }
 }
