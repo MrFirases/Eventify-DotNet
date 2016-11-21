@@ -150,6 +150,7 @@ namespace Eventify.Web.Controllers
             
             ViewBag.MyEvents = eventService.GetMany(e => e.organization.user_id == id);
             ViewBag.ParticipatedEvents = userService.GetEventThatUserParticipateIn(id);
+
             return View(user);
         }
 
