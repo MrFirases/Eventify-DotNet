@@ -32,7 +32,22 @@ namespace Eventify.Service
 
             return GetMany(o => o.organizationType == "PHYSIQUE").Count();
         }
+        /*
+        public List<int> CreationEventStat()
+        {
+            IEnumerable<Organization> organizations;
 
+            organizations = GetMany(o =>o.id != 0);
+            foreach (var item in NbDates)
+            {
+
+            }
+          
+
+            }
+            return  ;
+        }
+        */
 
     }
 }
