@@ -4,183 +4,139 @@
     Layout = null;
 }
 
+
+
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
     <title>Details</title>
     <style type="text/css">
-
         #map {
             height: 500px;
             width: 500px;
         }
     </style>
+
+
 </head>
 <body>
-    <div id="map"></div>
+
+
+<div>
+    <div class="col-md-5" id="map"></div>
+
+    <div class="col-md-5">
+
+        <div class="portlet blue-hoki box">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>Customer Information
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Created At : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.createdAt) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> End Time : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.endTime) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Event State : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.eventState) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Event Type : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.eventType) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Facebook : </div>
+                    <div class="col-md-7 value">
+                        <a href="@Html.DisplayFor(model => model.facebookLink)">Facebook</a>
+                    </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Twitter : </div>
+                    <div class="col-md-7 value">
+                        <a href="@Html.DisplayFor(model => model.twitterLink)">Twitter</a>
+                    </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Latitude : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.latitude) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Longitude : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.longitude) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Number of Views : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.nbViews) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Places° : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.placeNumber) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Start Time : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.startTime) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Theme : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.theme) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Title : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.title) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Category : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.category.categoryName) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> Organization : </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.organization.organizationName) </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+   
 
     <script>
         function initMap() {
             var theLatDot = parseFloat(@Html.DisplayFor(model => model.latitude));
-            var theLangDot= parseFloat(@Html.DisplayFor(model => model.longitude));
+            var theLangDot = parseFloat(@Html.DisplayFor(model => model.longitude));
 
 
-            var myLatLng = {lat: theLatDot , lng: theLangDot};
+            var myLatLng = { lat: theLatDot, lng: theLangDot };
 
-        // Create a map object and specify the DOM element for display.
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: myLatLng,
-          scrollwheel: false,
-          zoom: 4
-        });
+            // Create a map object and specify the DOM element for display.
+            var map = new google.maps.Map(document.getElementById('map'),
+            {
+                center: myLatLng,
+                scrollwheel: false,
+                zoom: 4
+            });
 
-        // Create a marker and set its position.
-        var marker = new google.maps.Marker({
-          map: map,
-          position: myLatLng,
-          title: 'Hello World!'
-        });
-      }
+            // Create a marker and set its position.
+            var marker = new google.maps.Marker({
+                map: map,
+                position: myLatLng,
+                title: 'Hello World!'
+            });
+        }
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYjng3LaxZV4VykkpjuvuxPS3ePdSjDBQ&callback=initMap"></script>
-
-<div>
-    <h4>Myevent</h4>
-    <hr/>
-    
-    
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.createdAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.createdAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.endTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.endTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.eventState)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.eventState)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.eventType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.eventType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.facebookLink)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.facebookLink)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.latitude)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.latitude)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.longitude)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.longitude)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nbViews)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nbViews)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.placeNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.placeNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.startTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.startTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.theme)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.theme)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.twitterLink)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.twitterLink)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.category_id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.category_id)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.organization_id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.organization_id)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new {id = Model.id}) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-
-
 
 </body>
 </html>

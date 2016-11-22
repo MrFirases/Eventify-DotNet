@@ -48,6 +48,7 @@ namespace Service.Pattern
 
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> condition = null, Expression<Func<T, bool>> orderBy = null)
         {
+            
             return itw.getRepository<T>().GetMany(condition, orderBy);
         }
 
