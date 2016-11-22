@@ -143,13 +143,12 @@
                 @foreach (var cnt in @ViewBag.Countries)
             {
 
-                  {
-
-                    <text>{ country:"@cnt", value:@ViewBag.NbCountries[i]},</text>
+                    {
+                      <text>{ country:"@cnt", value:@ViewBag.NbCountries[i]},</text>
                     }
 
                     i++;
-                }
+            }
 
 
 
@@ -311,17 +310,10 @@
         <div class="portlet light ">
             <div class="portlet-title">
                 <div class="caption ">
-                    <span class="caption-subject font-dark bold uppercase">Finance</span>
-                    <span class="caption-helper">distance stats...</span>
+                    <span class="caption-subject font-dark bold uppercase">Number Of Users By Year</span>
+                    <span class="caption-helper"></span>
                 </div>
-                <div class="actions">
-                    <a href="#" class="btn btn-circle green btn-outline btn-sm">
-                        <i class="fa fa-pencil"></i> Export
-                    </a>
-                    <a href="#" class="btn btn-circle green btn-outline btn-sm">
-                        <i class="fa fa-print"></i> Print
-                    </a>
-                </div>
+                
             </div>
             <div class="portlet-body">
                 <div id="dashboard_amchart_3" class="CSSAnimationChart"></div>

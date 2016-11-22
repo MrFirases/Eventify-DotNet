@@ -19,5 +19,35 @@ namespace Eventify.Service
         {
 
         }
+
+        public int getNbMorale()
+        {
+
+            
+            return GetMany(o => o.organizationType == "MORALE").Count();
+        }
+
+        public int getNbPhysique()
+        {
+
+            return GetMany(o => o.organizationType == "PHYSIQUE").Count();
+        }
+        /*
+        public List<int> CreationEventStat()
+        {
+            IEnumerable<Organization> organizations;
+
+            organizations = GetMany(o =>o.id != 0);
+            foreach (var item in NbDates)
+            {
+
+            }
+          
+
+            }
+            return  ;
+        }
+        */
+
     }
 }

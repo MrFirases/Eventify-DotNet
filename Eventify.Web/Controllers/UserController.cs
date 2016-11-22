@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Microsoft.AspNet.Identity;
 namespace Eventify.Web.Controllers
 {
     [Authorize]
@@ -27,16 +27,20 @@ namespace Eventify.Web.Controllers
         // GET: User
         public ActionResult Index()
         {
+            
+
             IEnumerable<User> user;
             user = userService.GetMany();
             userService.commit();
-
+            
             return View(user);
         }
 
         [HttpPost]
         public ActionResult Index(string searchString)
         {
+           
+
             IEnumerable<User> user;
 
             user = userService.GetMany(u=>u.firstName.Contains(searchString) || u.lastName.Contains(searchString) || u.username.Contains(searchString));
@@ -47,6 +51,7 @@ namespace Eventify.Web.Controllers
         
         public ActionResult BannedUsers()
         {
+           
             IEnumerable<User> user;
 
             user = userService.GetMany(u => u.banState==1);
@@ -56,6 +61,8 @@ namespace Eventify.Web.Controllers
         [HttpPost]
         public ActionResult BannedUsers(string searchString)
         {
+           
+
             IEnumerable<User> user;
 
             //user = userService.GetMany(u => u.banState == 1);
@@ -67,6 +74,7 @@ namespace Eventify.Web.Controllers
 
         public ActionResult UnBannedUsers()
         {
+
             IEnumerable<User> user;
 
             user = userService.GetMany(u => u.banState == 0);
@@ -76,6 +84,8 @@ namespace Eventify.Web.Controllers
         [HttpPost]
         public ActionResult UnBannedUsers(string searchString)
         {
+           
+
             IEnumerable<User> user;
 
             //er = userService.GetMany(u => u.banState == 0);
@@ -89,11 +99,13 @@ namespace Eventify.Web.Controllers
         public ActionResult Details(int id)
         {
             
-            
+
+
             User user = userService.GetById(id);
 
             
             ViewBag.MyEvents = eventService.GetMany(e => e.organization.user_id == id);
+            ViewBag.ParticipatedEvents = userService.GetEventThatUserParticipateIn(id);
 
             return View(user);
         }
@@ -101,7 +113,7 @@ namespace Eventify.Web.Controllers
         
             public ActionResult Ban(int id)
         {
-
+           
 
             User user = userService.GetById(id);
             user.banState = 1;
@@ -115,7 +127,7 @@ namespace Eventify.Web.Controllers
 
         public ActionResult UnBan(int id)
         {
-
+           
 
             User user = userService.GetById(id);
             user.banState = 0;
@@ -153,6 +165,8 @@ namespace Eventify.Web.Controllers
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
+            
+
             User user = userService.GetById(id);
 
             return View(user);
@@ -172,7 +186,6 @@ namespace Eventify.Web.Controllers
                 user.lastName = Request.Form["lastName"];
                 user.loyaltyPoint = Int32.Parse(Request.Form["loyaltyPoint"]);
                 user.numTel = Request.Form["numTel"];
-                user.password = Request.Form["password"];
                 user.username = Request.Form["username"];
                 userService.Update(user);
                 userService.commit();
@@ -214,6 +227,8 @@ namespace Eventify.Web.Controllers
 
         public ActionResult Insights()
         {
+           
+
             //PIE CHART INSIGHT
             Dictionary<String, Int32> data = userService.GetPieChartStat();
             ViewBag.Countries = data.Keys.ToList();

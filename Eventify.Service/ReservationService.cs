@@ -37,19 +37,103 @@ namespace Eventify.Service
                 .Sum(reservation => reservation.amount);
         }
 
-        public IEnumerable<Reservation> getAmountByEvent(Myevent myevent)
-        {
-            return itw.getRepository<Reservation>().GetMany(reservation => reservation.ticket.event_id == myevent.id);
-        }
-
-        public IEnumerable<Reservation> getAmountByEvents()
-        {
-            throw new NotImplementedException();
-        }
 
         public int countReservationByPaymentMethod(string method)
         {
             return itw.getRepository<Reservation>().GetMany(reservation => reservation.paymentMethod == method).Count();
+        }
+
+        public IEnumerable<Reservation> AmountByMonth()
+        {
+            return itw.getRepository<Reservation>().GetMany(
+                    reservation => reservation.reservationState == "CONFIRMED" && reservation.timerState == "FINISHED")
+                .GroupBy(reservation => reservation.reservationDate.Value.Month)
+                .Select(
+                    grouping =>
+                        new Reservation()
+                        {
+                            id = grouping.Key,
+                            amount = grouping.Sum(reservation => reservation.amount)
+                        });
+        }
+
+        public IEnumerable<Reservation> AmountByYear()
+        {
+            return itw.getRepository<Reservation>().GetMany(
+                    reservation => reservation.reservationState == "CONFIRMED" && reservation.timerState == "FINISHED")
+                .GroupBy(reservation => reservation.reservationDate.Value.Year)
+                .Select(
+                    grouping =>
+                        new Reservation()
+                        {
+                            id = grouping.Key,
+                            amount = grouping.Sum(reservation => reservation.amount)
+                        });
+        }
+
+        public IEnumerable<Reservation> reservationsByPaymentMethod()
+        {
+            return itw.getRepository<Reservation>().GetMany(reservation => reservation.timerState == "FINISHED")
+                .GroupBy(reservation => reservation.paymentMethod)
+                .Select(grouping => new Reservation()
+                {
+                    paymentMethod = grouping.Key,
+                    id = grouping.Count()
+                });
+        }
+
+        public IEnumerable<Reservation> reservationsByTimerState()
+        {
+            return itw.getRepository<Reservation>().GetMany()
+                .GroupBy(reservation => reservation.timerState)
+                .Select(grouping => new Reservation()
+                {
+                    timerState = grouping.Key,
+                    id = grouping.Count()
+                });
+        }
+
+        public IEnumerable<Reservation> reservationsbyState()
+        {
+            return itw.getRepository<Reservation>().GetMany(reservation => reservation.timerState == "FINISHED")
+                .GroupBy(reservation => reservation.reservationState)
+                .Select(
+                    grouping =>
+                        new Reservation()
+                        {
+                            reservationState = grouping.Key,
+                            id = grouping.Count()
+                        });
+        }
+
+        public IEnumerable<Reservation> reservationsByEvents()
+        {
+            return  itw.getRepository<Reservation>().GetMany(
+                    reservation => reservation.timerState == "FINISHED" && reservation.reservationState == "CONFIRMED").ToList()
+                .GroupBy(reservation => reservation.ticket.myevent.title)
+                .Select(
+                    grouping => new Reservation()
+                    {
+                        reservationState = grouping.Key,
+                        amount = grouping.Sum(reservation => reservation.amount)
+                    }
+                );
+        }
+
+        public IEnumerable<Reservation> reservationsByTicketsEvents()
+        {
+            return itw.getRepository<Reservation>().GetMany(
+                    reservation => reservation.timerState == "FINISHED" && reservation.reservationState == "CONFIRMED").ToList()
+                .GroupBy(reservation => new { reservation.ticket.myevent.title, reservation.ticket.typeTicket })
+                .Select(
+                    grouping => new Reservation()
+                    {
+                        reservationState = grouping.Key.title,
+                        paymentMethod = grouping.Key.typeTicket,
+                        amount = grouping.Sum(reservation => reservation.amount)
+                    }
+                );
+
         }
     }
 }

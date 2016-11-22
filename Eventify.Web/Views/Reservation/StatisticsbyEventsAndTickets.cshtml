@@ -402,8 +402,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-bar-chart font-green-haze"></i>
-                    <span class="caption-subject bold uppercase font-green-haze"> 3D Chart</span>
-                    <span class="caption-helper">3d cylinder chart</span>
+                    <span class="caption-subject bold uppercase font-green-haze"> Reservation By Event</span>
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse"> </a>
@@ -495,26 +494,3 @@
     </div>
 </div>
 
-<h2>Ticket by events </h2>
-<table>
-    @foreach (dynamic item in @ViewBag.reservationsByTicketsEvents)
-    {
-        <tr>
-            <td>@item.reservationState</td>
-            <td>@item.paymentMethod</td>
-            <td>@item.amount</td>
-        </tr>
-    }
-</table>
-<h2>DistinctEvents </h2>
-
-<table>
-    @foreach (dynamic item in @ViewBag.events)
-    {
-        <tr>
-            <td>@item.reservationState</td>
-            <td>@item.paymentMethod</td>
-            <td>@item.amount</td>
-        </tr>
-    }
-</table>

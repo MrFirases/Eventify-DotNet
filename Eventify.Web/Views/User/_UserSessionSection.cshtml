@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNet.Identity
+@using Eventify.Data.Models
+@if (Request.IsAuthenticated)
+{
+    @Html.AntiForgeryToken()
+    <li class="dropdown dropdown-user">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <img alt="" class="img-circle" src="@Session["MyConnectedUserProfilePic"]" />
+            <span class="username username-hide-on-mobile">
+
+                @Session["MyConnectedUserFirstName"]
+                </span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-default">
+            <li>
+                <a href="@Url.Action("ChangePassword", "Manage")">
+                    <i class="icon-user"></i> Change Password
+                </a>
+            </li>
+            </ul>
+
+
+
+
+</li>
+
+    <li class="dropdown dropdown-extended quick-sidebar-toggler">
+        <span class="sr-only">Toggle Quick Sidebar</span>
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {@Html.AntiForgeryToken()
+
+            <a href="javascript:document.getElementById('logoutForm').submit()">
+                <i class="icon-logout"></i>
+            </a>
+
+        }
+
+    </li>
+
+}

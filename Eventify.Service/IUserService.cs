@@ -19,5 +19,9 @@ namespace Eventify.Service
         Dictionary<String, Int32> GetPieChartStat();
         Dictionary<String, Int32> GetUsersByDateChart();
 
+        List<Myevent> GetEventThatUserParticipateIn(int idUser);
+
+        Boolean SendSMS(string userPhoneNumber);
+
     }
 }
