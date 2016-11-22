@@ -28,11 +28,7 @@
    <script type='text/javascript'>
         function updateCount() {
             $.getJSON("/Event/ViewNbCount", function (dataResponse) {
-                //dataResponse will be whatever we returned from our action
-                //so now we can just populate whatever dom element we want with the value
-                //for example we'll just replace all the html in the dom element with id 'victimCountId'
 
-               
                 $("#toto").val(dataResponse);
                 
 
