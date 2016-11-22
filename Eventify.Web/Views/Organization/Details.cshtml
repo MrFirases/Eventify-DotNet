@@ -8,12 +8,19 @@
 <title>Details Organization</title>
 <h2>Details</h2>
 
-<div  style="width:500px;float:left">
+
+  
+
+
+
+
+
+<div class="form-group form-md-line-input has-success" style="width:350px;float:left">
     <h4>Organization</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-                Creation Date :
+            <label class="col-md-3 control-label" for="form_control_1">Creation Date :</label>
         </dt>
 
         <dd>
@@ -21,7 +28,7 @@
         </dd>
 
         <dt>
-            Organization Name :
+            <label class="col-md-3 control-label" for="form_control_1">Organization Name :</label> 
         </dt>
 
         <dd>
@@ -29,7 +36,7 @@
         </dd>
 
         <dt>
-           Organization Type :
+            <label class="col-md-3 control-label" for="form_control_1">Organization Type :</label> 
         </dt>
 
         <dd>
@@ -37,7 +44,7 @@
         </dd>
 
         <dt>
-          Creator Name :
+            <label class="col-md-3 control-label" for="form_control_1">Creator Name :</label>
         </dt>
 
         <dd>
@@ -87,9 +94,44 @@
 
         </table>
     </div>
-<div style="margin-top:200px;padding-top:100px">
+<div class="col-md-offset-2">
     
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn sbold green" })
+    <div class="table-scrollable table-scrollable-borderless" style="width:800px">
+        <h1>All Orgnizers of @Html.DisplayFor(model => model.organizationName)</h1>
+        <table class="table table-hover table-light">
+            <thead>
+                <tr class="uppercase">
+                    <th colspan="2"> MEMBER </th>
+                    <th> Last Time </th>
+                    <th> Email </th>
+                    <th> Num Tel </th>
+                    <th> Loyalty Point </th>
+                </tr>
+            </thead>
+            @foreach (var user in ViewBag.Users)
+            {
+                <tr>
+                    <td class="fit">
+                        <img class="user-pic" src="@user.profileImage" />
+                    </td>
+
+                    <td>
+                        @user.firstName
+                    </td>
+                    <td> @user.lastName </td>
+                    <td> <span class="" style="color: rgba(51, 66, 183, 0.96);">@user.email</span> </td>
+                    <td> @user.numTel </td>
+                    <td align="center">
+                        <span class="bold theme-font">@user.loyaltyPoint   </span>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<div style="margin-top:100px">
+    
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn sbold red" })
    
 </div>
 

@@ -13,6 +13,7 @@ namespace Eventify.Web.Controllers
         private IOrganizationService organizationService = null;
         private IUserService userService = null;
         private IEventService eventService = null;
+       
 
         public OrganizationController()
         {
@@ -28,6 +29,9 @@ namespace Eventify.Web.Controllers
         {
             var oranizations = organizationService.GetMany();
             ViewBag.User = userService.GetMany();
+
+            
+            
             return View(oranizations);
         }
 
@@ -48,10 +52,19 @@ namespace Eventify.Web.Controllers
         {
             Organization organization = organizationService.GetById(id);
 
+            List<User> users = new List<User>();
+            
 
+            foreach (var item in organizationService.GetById(id).organizers)
+            {
+                users.Add(userService.GetById(item.idUser));
+            }
+
+            ViewBag.Users = users;
 
             ViewBag.User = userService.GetById((int)organization.user_id);
             ViewBag.Event = eventService.GetMany(e => e.organization_id == id);
+            
 
 
             return View(organizationService.GetById(id));
@@ -129,8 +142,8 @@ namespace Eventify.Web.Controllers
         public ActionResult Delete(int id)
         {
 
-
-            return View();
+            Organization organization = organizationService.GetById(id);
+            return View(organization);
         }   
 
         // POST: Organization/Delete/5
@@ -156,6 +169,9 @@ namespace Eventify.Web.Controllers
 
             ViewBag.NbMorale = NbMorale;
             ViewBag.NbPhysique = NbPhysique;
+
+            ViewBag.Months= organizationService.GetMonths();
+            ViewBag.MonthNumbers = organizationService.GetMonthsNumber();
             return View();
         }
     }
