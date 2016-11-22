@@ -75,9 +75,9 @@
                                 <!-- END SIDEBAR USER TITLE -->
                                 <!-- SIDEBAR BUTTONS -->
                                 <div class="profile-userbuttons">
-                                    <button type="button" class="btn btn-circle green btn-sm">Follow</button>
-                                    <button type="button" class="btn btn-circle red btn-sm">Message</button>
-                                </div>
+                                    <a href="http://@Html.DisplayFor(model => model.fblink)" type="button" class="btn btn-circle green btn-sm">Facebook</a>
+                                    <a href="http://@Html.DisplayFor(model => model.twitterlink)" type="button" class="btn btn-circle red btn-sm">Twitter</a>
+ </div>
                                 <!-- END SIDEBAR BUTTONS -->
                                 <!-- SIDEBAR MENU -->
                                 <div class="profile-usermenu">
@@ -120,7 +120,7 @@
 
 
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="row">
                             <!--THIS IS BODY-->
 
@@ -136,90 +136,95 @@
 
 
 
-                                    <div class="form-group">
-                                        <label class = "control-label col-md-2">Username</label>                                        <div class="col-md-10">
+
+                                    <div class="form-group form-md-line-input has-success form-md-floating-label">
+                                        <div class="input-icon">
                                             @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                                            <label for="form_control_1">Username</label>
+                                            <span class="help-block"></span>
+                                            <i class="glyphicon glyphicon-user"></i>
                                         </div>
                                     </div>
 
 
 
 
-                                    <div class="form-group">
-                                        <label class = "control-label col-md-2">Account State</label>
-                                                                                <div class="col-md-10">
+                                    <div class="form-group form-md-line-input has-success form-md-floating-label">
+                                        <div class="input-icon">
                                             @Html.EditorFor(model => model.accountState, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.accountState, "", new { @class = "text-danger" })
+                                            <label for="form_control_1">Acount State</label>
+                                            <span class="help-block"></span>
+                                            <i class="glyphicon glyphicon-ban-circle"></i>
                                         </div>
                                     </div>
 
-                        
 
-                            
 
-                                    <div class="form-group">
-                                        <label class = "control-label col-md-2">Email</label>                                        <div class="col-md-10">
+
+                                    <div class="form-group form-md-line-input has-success form-md-floating-label">
+                                        <div class="input-icon">
                                             @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                            <label for="form_control_1">Email</label>
+                                            <span class="help-block"></span>
+                                            <i class="glyphicon glyphicon-envelope"></i>
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class = "control-label col-md-2">First Name</label>
-                                        <div class="col-md-10">
+
+                                    <div class="form-group form-md-line-input has-success form-md-floating-label">
+                                        <div class="input-icon">
                                             @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+                                            <label for="form_control_1">First Name</label>
+                                            <span class="help-block"></span>
+                                            <i class="glyphicon glyphicon-user"></i>
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class = "control-label col-md-2">Last Name</label>
-                                        <div class="col-md-10">
+
+                                    <div class="form-group form-md-line-input has-success form-md-floating-label">
+                                        <div class="input-icon">
                                             @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+                                            <label for="form_control_1">Last Name</label>
+                                            <span class="help-block"></span>
+                                            <i class="glyphicon glyphicon-user"></i>
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class = "control-label col-md-2">Loylity Points</label>
-                                                                                <div class="col-md-10">
+
+                                    <div class="form-group form-md-line-input has-success form-md-floating-label">
+                                        <div class="input-icon">
                                             @Html.EditorFor(model => model.loyaltyPoint, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.loyaltyPoint, "", new { @class = "text-danger" })
+                                            <label for="form_control_1">Loyalty Point</label>
+                                            <span class="help-block"></span>
+                                            <i class="glyphicon glyphicon-star-empty"></i>
                                         </div>
                                     </div>
 
-                                   
 
-                                    <div class="form-group">
-                                        <label class = "control-label col-md-2">Phone N.</label>
-                                        <div class="col-md-10">
+                                    <div class="form-group form-md-line-input has-success form-md-floating-label">
+                                        <div class="input-icon">
                                             @Html.EditorFor(model => model.numTel, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.numTel, "", new { @class = "text-danger" })
+                                            <label for="form_control_1">Phone Number</label>
+                                            <span class="help-block"></span>
+                                            <i class="glyphicon glyphicon-phone"></i>
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class = "control-label col-md-2">Password</label>
-                                        <div class="col-md-10">
-                                            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label class = "control-label col-md-2">Profile Picture</label>                                        <div class="col-md-10">
-                                            @Html.EditorFor(model => model.profileImage, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.profileImage, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
 
                                   
 
                                     <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
                                           
-                                                <input type="submit" value="Save" class="btn btn-success" style="float:right;" />
+                                                <input type="submit" value="Save Changes" class="btn btn-success" style="float:right;" />
                                             
                                         </div>
                                     </div>
@@ -231,38 +236,6 @@
 
 
                             <!--THIS IS THE END OF THE BODY-->
-
-
-
-
-
-                       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                             <!--end col-md-4-->
