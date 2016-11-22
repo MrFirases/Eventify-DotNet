@@ -186,7 +186,6 @@ namespace Eventify.Web.Controllers
                 user.lastName = Request.Form["lastName"];
                 user.loyaltyPoint = Int32.Parse(Request.Form["loyaltyPoint"]);
                 user.numTel = Request.Form["numTel"];
-                user.password = Request.Form["password"];
                 user.username = Request.Form["username"];
                 userService.Update(user);
                 userService.commit();
