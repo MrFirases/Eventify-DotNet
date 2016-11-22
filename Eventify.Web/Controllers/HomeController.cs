@@ -38,6 +38,15 @@ namespace Eventify.Web.Controllers
                 ViewBag.MyConntectedUser = user;
 
 
+                //For You Brogrammer To Pass Connected User From Views
+               
+                    User connectedUser = userService.GetById(int.Parse(User.Identity.GetUserId()));
+                Session["MyConnectedUserProfilePic"] = connectedUser.profileImage;
+                Session["MyConnectedUserFirstName"] = connectedUser.firstName;
+
+                //END For You Brogrammer To Pass Connected User From Views
+
+
                 Session["MessageReceived"] = messages;
                 Session["NbNewMessage"] = messages.Count();
 

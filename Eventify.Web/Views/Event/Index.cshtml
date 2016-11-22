@@ -1,7 +1,145 @@
-﻿@model IEnumerable<Eventify.Data.Models.Myevent>
+﻿@using Eventify.Web.Controllers
+@model IEnumerable<Eventify.Data.Models.Myevent>
 @{
     ViewBag.Title = "Index";
 }
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/Scripts/components-date-time-pickers.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/moment.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/clockface/js/clockface.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/ui-confirmations.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap-confirmation.min.js" type="text/javascript"></script>
+   <script type='text/javascript'>
+        function updateCount() {
+            $.getJSON("/Event/ViewNbCount", function (dataResponse) {
+                //dataResponse will be whatever we returned from our action
+                //so now we can just populate whatever dom element we want with the value
+                //for example we'll just replace all the html in the dom element with id 'victimCountId'
+
+               
+                $("#toto").val(dataResponse);
+                
+
+
+            });
+        }
+</script>
+
+<script type="text/javascript">
+
+</script>
+    
+    <script type="text/javascript">
+        $(function () {
+            $(document).ready(function () {
+                Highcharts.setOptions({
+                    global: {
+                        useUTC: false
+                    }
+                });
+
+                Highcharts.chart('coco', {
+                    chart: {
+                        type: 'spline',
+                        animation: Highcharts.svg, // don't animate in old IE
+                        marginRight: 10,
+                        events: {
+                            load: function () {
+
+                                @{var c = new EventController();}
+                                // set up the updating of the chart each second
+                                var series = this.series[0];
+                                setInterval(function () {
+                                    updateCount();
+
+
+                                    var x = (new Date()).getTime(), // current time
+
+
+                                        y = parseInt($("#toto").val());
+                                    series.addPoint([x, y], true, true);
+                                  
+                                }, 1000);
+                            }
+                        }
+                    },
+                    title: {
+                        text: 'Live random data'
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        tickPixelInterval: 150
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Value'
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        formatter: function () {
+                            return '<b>' + this.series.name + '</b><br/>' +
+                                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                                Highcharts.numberFormat(this.y, 2);
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    exporting: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: 'Random data',
+                        data: (function () {
+                            // generate an array of random data
+                            var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+
+                            for (i = -19; i <= 0; i += 1) {
+                                data.push({
+                                    x: time + i * 1000,
+                                    y: parseInt($("#toto").val())
+                                });
+                            }
+                            return data;
+                        }())
+                    }]
+                });
+            });
+        });
+       
+    </script>
+    
+  
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+}
+
+
+<input id="toto" type="hidden" name="name" value="" />
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
@@ -39,9 +177,6 @@
     </div>
 
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
 
 
     <div id="js-grid-juicy-projects" class="cbp">
@@ -59,10 +194,18 @@
 
                     </div>
                     <div class="cbp-caption-activeWrap">
-                        <div class="cbp-l-caption-alignCenter">
+                        <div class="">
                             <div class="cbp-l-caption-body">
-                                <a href="@Url.Action("Details", "Event", new {id = item.id })" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">more info</a>
-                                <a href="@{  foreach (var oneMedia in item.mymedias) { @oneMedia.pathMedia  break; } } " class="cbp-lightbox cbp-l-caption-buttonRight btn red uppercase btn red uppercase" data-title="@item.title <br>by @item.organization.organizationName">
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="@Url.Action("Details", "Event", new {id = item.id})" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">more info</a>
+                                <a href="@Url.Action("Edit", "Event", new {id = item.id})" class="btn red uppercase btn red uppercase" rel="nofollow">Edit</a>
+                                <a href=" @{
+                                              foreach (var oneMedia in item.mymedias)
+                                              {
+                                                  @oneMedia.pathMedia
+                                                  break;
+                                              }
+                                          } " class="cbp-lightbox cbp-l-caption-buttonRight btn red uppercase btn red uppercase" data-title="@item.title <br>by @item.organization.organizationName">
                                     view larger
                                 </a>
                             </div>
@@ -87,6 +230,14 @@
             <span class="cbp-l-loadMore-noMoreLoading">NO MORE EVENTS</span>
         </a>
     </div>
+
+   
+
+    <div id="coco" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+
+
 
 
 </div>

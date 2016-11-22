@@ -21,5 +21,7 @@ namespace Eventify.Service
 
         List<Myevent> GetEventThatUserParticipateIn(int idUser);
 
+        Boolean SendSMS(string userPhoneNumber);
+
     }
 }
