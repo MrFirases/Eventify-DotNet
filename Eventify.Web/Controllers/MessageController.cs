@@ -182,8 +182,9 @@ namespace Eventify.Web.Controllers
         }
 
 
-        public ActionResult Chat()
+        public ActionResult Chat(int id)
         {
+            ViewBag.idUser = id;
             return View();
         }
     }
