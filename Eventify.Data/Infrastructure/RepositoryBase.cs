@@ -57,22 +57,24 @@ namespace Eventify.Data.Infrastructure
 
         public IEnumerable<T> GetMany(Expression<Func<T, bool>> condition = null, Expression<Func<T, bool>> orderBy = null)
         {
+          
+
             if (condition != null)
             {
-                return dbSet.Where(condition);
+                return dbSet.Where(condition).AsNoTracking().ToList();
             }
 
             if (orderBy != null)
             {
-                return dbSet.OrderBy(orderBy);
+                return dbSet.OrderBy(orderBy).AsNoTracking().ToList();
             }
 
             if (condition != null && orderBy != null)
             {
-                return dbSet.Where(condition).OrderBy(orderBy);
+                return dbSet.Where(condition).OrderBy(orderBy).AsNoTracking().ToList();
 
             }
-            return dbSet;
+            return dbSet.AsNoTracking().ToList();
         }
 
         public void Update(T t)

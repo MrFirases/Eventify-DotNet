@@ -26,48 +26,19 @@ namespace Eventify.Web.Controllers
                     .Count();
 
             //Amount by Month
-            IEnumerable<Reservation> AmountByMonth = ReservationService.
-                GetMany(
-                    reservation => reservation.reservationState == "CONFIRMED" && reservation.timerState == "FINISHED")
-                .GroupBy(reservation => reservation.reservationDate.Value.Month)
-                .Select(
-                    grouping =>
-                        new Reservation()
-                        {
-                            id = grouping.Key,
-                            amount = grouping.Sum(reservation => reservation.amount)
-                        });
+            IEnumerable<Reservation> AmountByMonth = ReservationService.AmountByMonth();
             ViewBag.AmountByMonth = AmountByMonth;
 
 
             //Amount by Year
-            IEnumerable<Reservation> AmountByYear = ReservationService.
-                GetMany(
-                    reservation => reservation.reservationState == "CONFIRMED" && reservation.timerState == "FINISHED")
-                .GroupBy(reservation => reservation.reservationDate.Value.Year)
-                .Select(
-                    grouping =>
-                        new Reservation()
-                        {
-                            id = grouping.Key,
-                            amount = grouping.Sum(reservation => reservation.amount)
-                        });
+            IEnumerable<Reservation> AmountByYear = ReservationService.AmountByYear();
             ViewBag.AmountByYear = AmountByYear;
 
 
 
 
             //Reservation By Reservation State
-            IEnumerable<Reservation> reservationsbyState = ReservationService
-                .GetMany(reservation => reservation.timerState=="FINISHED")
-                .GroupBy(reservation => reservation.reservationState)
-                .Select(
-                    grouping =>
-                        new Reservation()
-                        {
-                            reservationState = grouping.Key,
-                            id = grouping.Count()
-                        });
+            IEnumerable<Reservation> reservationsbyState = ReservationService.reservationsbyState();
             ViewBag.ReservationByState = reservationsbyState;
 
             //All Reservation Finished
@@ -78,29 +49,13 @@ namespace Eventify.Web.Controllers
 
 
             //Reservation By Payment Method 
-            IEnumerable<Reservation> reservationsByPaymentMethod = ReservationService
-                .GetMany(reservation => reservation.timerState == "FINISHED")
-                .GroupBy(reservation => reservation.paymentMethod)
-                .Select(grouping => new Reservation()
-                {
-                    paymentMethod = grouping.Key,
-                    id = grouping.Count()
-                });
-
+            IEnumerable<Reservation> reservationsByPaymentMethod = ReservationService.reservationsByPaymentMethod();
             ViewBag.ReservationByPayment = reservationsByPaymentMethod;
 
 
 
             //Reservation By Timer State 
-            IEnumerable<Reservation> reservationsByTimerState = ReservationService
-                .GetMany()
-                .GroupBy(reservation => reservation.timerState)
-                .Select(grouping => new Reservation()
-                {
-                    timerState = grouping.Key,
-                    id = grouping.Count()
-                });
-
+            IEnumerable<Reservation> reservationsByTimerState = ReservationService.reservationsByTimerState();
             ViewBag.reservationsByTimerState = reservationsByTimerState;
 
 
@@ -189,35 +144,13 @@ namespace Eventify.Web.Controllers
 
 
             //Reservation By Events
-            IEnumerable<Reservation> reservationsByEvents = ReservationService
-                .GetMany(
-                    reservation => reservation.timerState == "FINISHED" && reservation.reservationState == "CONFIRMED").ToList()
-                .GroupBy(reservation => reservation.ticket.myevent.title)
-                .Select(
-                    grouping => new Reservation()
-                    {
-                        reservationState =  grouping.Key,
-                        amount = grouping.Sum(reservation => reservation.amount)
-                    }
-                );
-
+            IEnumerable<Reservation> reservationsByEvents = ReservationService.reservationsByEvents();
             ViewBag.reservationsByEvents = reservationsByEvents;
 
 
 
             //Reservation By Tickets In Events
-            IEnumerable<Reservation> reservationsByTicketsEvents = ReservationService
-                .GetMany(
-                    reservation => reservation.timerState == "FINISHED" && reservation.reservationState == "CONFIRMED").ToList()
-                .GroupBy(reservation => new { reservation.ticket.myevent.title , reservation.ticket.typeTicket})
-                .Select(
-                    grouping => new Reservation()
-                    {
-                         reservationState= grouping.Key.title,
-                        paymentMethod = grouping.Key.typeTicket,
-                        amount = grouping.Sum(reservation => reservation.amount)
-                    }
-                );
+            IEnumerable<Reservation> reservationsByTicketsEvents = ReservationService.reservationsByTicketsEvents();
             ViewBag.reservationsByTicketsEvents = reservationsByTicketsEvents;
 
 

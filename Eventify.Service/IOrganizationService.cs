@@ -10,6 +10,11 @@ namespace Eventify.Service
 {
    public interface IOrganizationService : IMyServiceGeneric<Organization>
     {
+        int getNbPhysique();
+        int getNbMorale();
+
+        IEnumerable<String> GetMonths();
+        IEnumerable<int> GetMonthsNumber();
 
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Eventify.Data.Models
 {
@@ -18,7 +19,9 @@ namespace Eventify.Data.Models
         }
 
         public int id { get; set; }
+        [JsonProperty(".created")]
         public Nullable<System.DateTime> createdAt { get; set; }
+        [JsonProperty(".end")]
         public Nullable<System.DateTime> endTime { get; set; }
         public string eventState { get; set; }
         public string eventType { get; set; }
@@ -27,6 +30,7 @@ namespace Eventify.Data.Models
         public double longitude { get; set; }
         public int nbViews { get; set; }
         public int placeNumber { get; set; }
+        [JsonProperty(".start")]
         public Nullable<System.DateTime> startTime { get; set; }
         public string theme { get; set; }
         public string title { get; set; }

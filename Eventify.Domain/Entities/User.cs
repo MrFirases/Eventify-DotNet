@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Eventify.Data.Models
 {
@@ -31,6 +32,7 @@ namespace Eventify.Data.Models
 
         public string accountState { get; set; }
         public string confirmationToken { get; set; }
+        [JsonProperty(".creationDate")]
         public Nullable<System.DateTime> creationDate { get; set; }
         public string email { get; set; }
         public string firstName { get; set; }
@@ -42,6 +44,8 @@ namespace Eventify.Data.Models
         public string profileImage { get; set; }
         public string username { get; set; }
         public string country { get; set; }
+        public string fblink { get; set; }
+        public string twitterlink { get; set; }
         public virtual ICollection<Answer> answers { get; set; }
         public virtual ICollection<Comment> comments { get; set; }
         public virtual ICollection<Favorite> favorites { get; set; }

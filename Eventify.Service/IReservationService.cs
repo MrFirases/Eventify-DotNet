@@ -13,9 +13,13 @@ namespace Eventify.Service
     {
         float getOurAmount();
         double getAllAmount();
-        IEnumerable<Reservation> getAmountByEvent(Myevent myevent);
-        IEnumerable<Reservation> getAmountByEvents();
         int countReservationByPaymentMethod(string method);
-
+        IEnumerable<Reservation> AmountByMonth();
+        IEnumerable<Reservation> AmountByYear();
+        IEnumerable<Reservation> reservationsByPaymentMethod();
+        IEnumerable<Reservation> reservationsByTimerState();
+        IEnumerable<Reservation> reservationsbyState();
+        IEnumerable<Reservation> reservationsByEvents();
+        IEnumerable<Reservation> reservationsByTicketsEvents();
     }
 }

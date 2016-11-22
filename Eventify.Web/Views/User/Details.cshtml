@@ -80,8 +80,8 @@
                                 <!-- END SIDEBAR USER TITLE -->
                                 <!-- SIDEBAR BUTTONS -->
                                 <div class="profile-userbuttons">
-                                    <button type="button" class="btn btn-circle green btn-sm">Follow</button>
-                                    <button type="button" class="btn btn-circle red btn-sm">Message</button>
+                                    <a href="http://@Html.DisplayFor(model => model.fblink)" type="button" class="btn btn-circle green btn-sm">Facebook</a>
+                                    <a href="http://@Html.DisplayFor(model => model.twitterlink)" type="button" class="btn btn-circle red btn-sm">Twitter</a>
                                 </div>
                                 <!-- END SIDEBAR BUTTONS -->
                                 <!-- SIDEBAR MENU -->
@@ -93,7 +93,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="@Url.Action("Edit", "User",new { id = @Html.DisplayFor(model => model.Id) })">
+                                            <a href="@Url.Action("Edit", "User", new { id = @Html.DisplayFor(model => model.Id) })">
                                                 <i class="icon-settings"></i> Account Settings
                                             </a>
 
@@ -131,14 +131,14 @@
 
 
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="row">
 
 
 
 
 
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <!-- BEGIN PORTLET -->
                                 <div class="portlet light ">
                                     <div class="portlet-title">
@@ -166,36 +166,7 @@
 
                                     </ul>
                                     <div class="portlet-body">
-                                        <div class="row number-stats margin-bottom-30">
-                                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                                <div class="stat-left">
-                                                    <div class="stat-chart">
-                                                        <!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
-                                                        <div id="sparkline_bar">
-                                                            <img src="http://imageshack.com/a/img923/4682/J8A1i4.png" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="stat-number">
-                                                        <div class="title"> Total </div>
-                                                        <div class="number"> 2460 </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                                <div class="stat-right">
-                                                    <div class="stat-chart">
-                                                        <!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
-                                                        <div id="sparkline_bar2">
-                                                            <img src="http://imageshack.com/a/img923/6977/XkBx2t.png" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="stat-number">
-                                                        <div class="title"> New </div>
-                                                        <div class="number"> 719 </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                          
 
 
                                         <div class="caption">
@@ -391,8 +362,8 @@
 
 
                             <!--end col-md-8-->
-                            <div class="col-md-4">
-                                <div class="portlet sale-summary">
+                            <div class="col-md-6">
+                              <!--  <div class="portlet sale-summary">
                                     <div class="portlet-title">
                                         <div class="caption font-red sbold"> Loyalty Points: </div>
                                         <div class="tools">
@@ -419,7 +390,7 @@
                                         </ul>
 
                                         
-                                            <a class="btn btn-lg red"  href="@Url.Action("Edit", "User",new { id = @Html.DisplayFor(model => model.Id) })">
+                                            <a class="btn btn-lg red"  href="@Url.Action("Edit", "User", new { id = @Html.DisplayFor(model => model.Id) })">
                                                 Edit User  <i class="fa fa-edit"></i> 
                                             </a>
                                       
@@ -428,6 +399,73 @@
                                      
                                     </div>
                                 </div>
+                                -->
+
+
+                                <!--HAHA-->
+
+                                
+                                    <div class="portlet light portlet-fit ">
+                           
+                                        <div class="portlet-body">
+                                            <div class="mt-element-list">
+                                                <div class="mt-list-head list-news ext-1 font-white bg-grey-gallery">
+                                                    <div class="list-head-title-container">
+                                                        <h3 class="list-title">Events that user participate in</h3>
+                                                    </div>
+                                                    <div class="list-count pull-right bg-red">@{i = 0;
+                                                        foreach (var events in ViewBag.ParticipatedEvents)
+                                                        { i++; } }
+                                                    @i</div>
+                                                </div>
+                                                <div class="mt-list-container list-news ext-1">
+                                                    <ul>
+
+
+@foreach (var events in ViewBag.ParticipatedEvents)
+{
+                                                        <li class="mt-list-item">
+                                                            <div class="list-icon-container">
+                                                                <a href="javascript:;">
+                                                                    <i class="fa fa-angle-right"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="list-thumb">
+                                                                <a href="javascript:;">
+                                                                    <img alt="" src="@{  foreach (var media in events.mymedias) { @media.pathMedia  break; } }" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="list-datetime bold uppercase font-red"> @events.theme </div>
+                                                            <div class="list-item-content">
+                                                                <h3 class="uppercase">
+                                                                    <a href="javascript:;">@events.title</a>
+                                                                </h3>
+                                                                <p> </p>
+                                                            </div>
+                                                        </li>
+}
+
+
+
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                               
+
+
+
+
+                                <!--HAHA-->
+
+                                
+
+
+
+
+
                             </div>
                             <!--end col-md-4-->
                         </div>

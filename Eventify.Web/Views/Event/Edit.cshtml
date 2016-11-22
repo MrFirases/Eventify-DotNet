@@ -1,148 +1,352 @@
 ﻿@model Eventify.Data.Models.Myevent
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="@Url.Content("~/Content/")assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/")assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/")assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/")assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/")assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+}
 
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-calendar"></i>
+            <a href="@Url.Action("Index", "Event")">EVENTS</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Event")">All Events</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Edit", "Event", new {id = Model.id })">Edit <b>  @Model.title </b>  Event</a>
 
+        </li>
+
+    </ul>
+
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PORTLET-->
+<div class="portlet box red">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-edit">
+            </i>Edit Event
+        </div>
+    </div>
+<div class="portlet-body form">
+<!-- BEGIN FORM-->
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
-        <h4>Myevent</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.createdAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.createdAt, new { htmlAttributes = new { @class = "form-control" } })
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+    <div class="form-group">
+        <label class="control-label col-md-2" for="title">
+            Title :
+        </label>
+        <div class="col-md-5">
+            <div class="input-group">
+                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                <span class="input-group-btn">
+                                <label for="title" class="btn default" type="button">
+                                    <i class="fa fa-newspaper-o">
+                                    </i>
+                                </label>
+                            </span>
+            </div>
+        </div>
+        @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="createdAt">
+            Created At :
+        </label>
+        <div class="col-md-5">
+            <div class="input-group">
+                @Html.EditorFor(model => model.createdAt, new { htmlAttributes = new { @class = "form-control form-control-inline date-picker" } })
+                <span class="input-group-btn">
+                                <label for="createdAt" class="btn default" type="button">
+                                    <i class="fa fa-calendar-plus-o">
+                                    </i>
+                                </label>
+                            </span>
                 @Html.ValidationMessageFor(model => model.createdAt, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.endTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.endTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.endTime, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="eventState">
+            Event State :
+        </label>
+        <div class="col-md-5">
+            <select name="eventState" class="form-control">
+                <option @{if (Model.eventState == "PUBLISHED") { Write("selected"); }} value="PUBLISHED">
+                    PUBLISHED
+                </option>
+                <option @{ if (Model.eventState == "UNPUBLISHED") { Write("selected"); } } value="UNPUBLISHED">
+                    UNPUBLISHED
+                </option>
+            </select>
+            @Html.ValidationMessageFor(model => model.eventState, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="eventType">
+            Event Type :
+        </label>
+        <div class="col-md-5">
+            <select name="eventType" class="form-control">
+                <option @{if (Model.eventType == "Class_Workshop") { Write("selected"); }} value="Class_Workshop">
+                    Class Workshop
+                </option>
+                <option @{ if (Model.eventType == "Conference") { Write("selected"); } } value="Conference">
+                    Conference
+                </option>
+                <option @{ if (Model.eventType == "Concert_Performance") { Write("selected"); } } value="Concert_Performance">
+                    Concert Performance
+                </option>
+                <option @{ if (Model.eventType == "Dinner_Gala") { Write("selected"); } } value="Dinner_Gala">
+                    Dinner Gala
+                </option>
+                <option @{ if (Model.eventType == "Meeting") { Write("selected"); } } value="Meeting">
+                    Meeting
+                </option>
+            </select>
+            @Html.ValidationMessageFor(model => model.eventType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="facebookLink">
+            Facebook :
+        </label>
+        <div class="col-md-5">
+            <div class="input-group">
+                @Html.EditorFor(model => model.facebookLink, new { htmlAttributes = new { @class = "form-control", @type = "url" } })
+                <span class="input-group-btn">
+                                <label for="facebookLink" class="btn default" type="button">
+                                    <i class="fa fa-facebook-official">
+                                    </i>
+                                </label>
+                            </span>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.eventState, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.eventState, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.eventState, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(model => model.facebookLink, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="twitterLink">
+            Twitter :
+        </label>
+        <div class="col-md-5">
+            <div class="input-group">
+                @Html.EditorFor(model => model.twitterLink, new { htmlAttributes = new { @class = "form-control", @type = "url" } })
+                <span class="input-group-btn">
+                                <label for="twitterLink" class="btn default" type="button">
+                                    <i class="fa fa-twitter-square">
+                                    </i>
+                                </label>
+                            </span>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.eventType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.eventType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.eventType, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.facebookLink, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.facebookLink, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.facebookLink, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.latitude, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        @Html.ValidationMessageFor(model => model.twitterLink, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="latitude">
+            Latitude :
+        </label>
+        <div class="col-md-5">
+            <div class="input-group">
                 @Html.EditorFor(model => model.latitude, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.latitude, "", new { @class = "text-danger" })
+                <span class="input-group-btn">
+                                <label for="latitude" class="btn default" type="button">
+                                    <i class="fa fa-location-arrow">
+                                    </i>
+                                </label>
+                            </span>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.longitude, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        @Html.ValidationMessageFor(model => model.latitude, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="longitude">
+            Longitude :
+        </label>
+        <div class="col-md-5">
+            <div class="input-group">
                 @Html.EditorFor(model => model.longitude, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.longitude, "", new { @class = "text-danger" })
+                <span class="input-group-btn">
+                                <label for="longitude" class="btn default" type="button">
+                                    <i class="fa fa-map-marker">
+                                    </i>
+                                </label>
+                            </span>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.nbViews, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nbViews, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nbViews, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(model => model.longitude, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="nbViews">
+            Views :
+        </label>
+        <div class="col-md-5">
+            <div class="input-group">
+                @Html.EditorFor(model => model.nbViews, new { htmlAttributes = new { @class = "form-control", ReadOnly = "ReadOnly" } })
+                <span class="input-group-btn">
+                                <label for="nbViews" class="btn default" type="button">
+                                    <i class="fa fa-eye">
+                                    </i>
+                                </label>
+                            </span>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.placeNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        @Html.ValidationMessageFor(model => model.nbViews, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="placeNumber">
+            Places° :
+        </label>
+        <div class="col-md-5">
+            <div class="input-group">
                 @Html.EditorFor(model => model.placeNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.placeNumber, "", new { @class = "text-danger" })
+                <span class="input-group-btn">
+                                <label for="placeNumber" class="btn default" type="button">
+                                    <i class="fa fa-group">
+                                    </i>
+                                </label>
+                            </span>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.startTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.startTime, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.placeNumber, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="startTime">
+            Start Time :
+        </label>
+        <div class="col-md-5">
+            <div class="input-group">
+                @Html.EditorFor(model => model.startTime, new { htmlAttributes = new { @class = "form-control form-control-inline date-picker" } })
+                <span class="input-group-btn">
+                                <label for="startTime" class="btn default" type="button">
+                                    <i class="fa fa-hourglass-start">
+                                    </i>
+                                </label>
+                            </span>
                 @Html.ValidationMessageFor(model => model.startTime, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.theme, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.theme, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.theme, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.twitterLink, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.twitterLink, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.twitterLink, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.category_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.category_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.organization_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.organization_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.organization_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="endTime">
+            End Time :
+        </label>
+        <div class="col-md-5">
+            <div class="input-group">
+                @Html.EditorFor(model => model.endTime, new { htmlAttributes = new { @class = "form-control form-control-inline date-picker" } })
+                <span class="input-group-btn">
+                                <label for="endTime" class="btn default" type="button">
+                                    <i class="fa fa-hourglass-end">
+                                    </i>
+                                </label>
+                            </span>
+                @Html.ValidationMessageFor(model => model.endTime, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="theme">
+            Theme :
+        </label>
+        <div class="col-md-5">
+            <div class="input-group">
+                @Html.EditorFor(model => model.theme, new { htmlAttributes = new { @class = "form-control" } })
+                <span class="input-group-btn">
+                                <label for="theme" class="btn default" type="button">
+                                    <i class="fa fa-commenting">
+                                    </i>
+                                </label>
+                            </span>
+            </div>
+        </div>
+        @Html.ValidationMessageFor(model => model.theme, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="category_id">
+            Category :
+        </label>
+        <div class="col-md-5">
+            <select name="category_id" class="form-control">
+                @foreach (var item in ViewBag.MyCategories)
+                {
+                    <option @if (item.id == Model.category_id) { Write("selected"); } value="@item.id">
+                        @item.categoryName
+                    </option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="organization_id">
+            Organization :
+        </label>
+        <div class="col-md-5">
+            <select name="organization_id" class="form-control">
+                @foreach (var item in ViewBag.MyOrganizations)
+                {
+                    <option @if (item.id == Model.organization_id) { Write("selected"); } value="@item.id">
+                        @item.organizationName
+                    </option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.organization_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input data-toggle="confirmation" data-original-title="Are you sure ?" type="submit" value="Save" class="btn btn-default" />
+           
+        
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>
+    </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<!-- END FORM-->
 </div>
+   
+</div>
+<!-- END PORTLET-->
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/Scripts/components-date-time-pickers.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/moment.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/clockface/js/clockface.js" type="text/javascript">
+    </script>
+    <script src="~/Scripts/ui-confirmations.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap-confirmation.min.js" type="text/javascript"></script>
+
+
 }

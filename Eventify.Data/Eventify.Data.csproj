@@ -79,12 +79,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MySQL\Connector.NET 6.9\Assemblies\v4.5\MySql.Fabric.Plugin.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -98,6 +98,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -116,6 +120,22 @@
     <Compile Include="Migrations\201611170050260_IntegratingUserandIdentity.cs" />
     <Compile Include="Migrations\201611170050260_IntegratingUserandIdentity.Designer.cs">
       <DependentUpon>201611170050260_IntegratingUserandIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611181628190_addingEmailMessage.cs" />
+    <Compile Include="Migrations\201611181628190_addingEmailMessage.Designer.cs">
+      <DependentUpon>201611181628190_addingEmailMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611181630447_addingEmailMessageV2.cs" />
+    <Compile Include="Migrations\201611181630447_addingEmailMessageV2.Designer.cs">
+      <DependentUpon>201611181630447_addingEmailMessageV2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611171921355_AddingSocialNetworksToUser.cs" />
+    <Compile Include="Migrations\201611171921355_AddingSocialNetworksToUser.Designer.cs">
+      <DependentUpon>201611171921355_AddingSocialNetworksToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611201508324_AddingNotificationStatus.cs" />
+    <Compile Include="Migrations\201611201508324_AddingNotificationStatus.Designer.cs">
+      <DependentUpon>201611201508324_AddingNotificationStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\eventifyContext.cs" />
@@ -161,6 +181,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611170050260_IntegratingUserandIdentity.resx">
       <DependentUpon>201611170050260_IntegratingUserandIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611181628190_addingEmailMessage.resx">
+      <DependentUpon>201611181628190_addingEmailMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611181630447_addingEmailMessageV2.resx">
+      <DependentUpon>201611181630447_addingEmailMessageV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611171921355_AddingSocialNetworksToUser.resx">
+      <DependentUpon>201611171921355_AddingSocialNetworksToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611201508324_AddingNotificationStatus.resx">
+      <DependentUpon>201611201508324_AddingNotificationStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

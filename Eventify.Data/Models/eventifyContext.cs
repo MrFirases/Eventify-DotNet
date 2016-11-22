@@ -18,6 +18,7 @@ namespace Eventify.Data.Models
             : base("Name=eventifyContext")
         {
         }
+        
 
         public DbSet<Answer> answers { get; set; }
         public DbSet<Attribut> attributs { get; set; }

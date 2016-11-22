@@ -1,0 +1,127 @@
+﻿@using Eventify.Web.Controllers
+@using Eventify.Web.Utils
+@model IEnumerable<Eventify.Data.Models.Message>
+
+@{
+    ViewBag.Title = "MessageByUser";
+}
+
+
+@section Styles {
+    <link href="@Url.Content("~/Content/")assets/apps/css/chat-style.css" rel="stylesheet" type="text/css" />
+}
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.signalR-2.2.1.js"></script>
+    <script src="~/SignalR/hubs"></script>
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    @*<script src="~/Scripts/ChatScript.js"></script>*@
+    
+    <script>
+        (function () {
+            var perfHub = $.connection.chatHub;
+            $.connection.hub.logging = false;
+            $.connection.hub.start().done(init);
+
+
+            console.log("ready!");
+
+
+            perfHub.client.newMessage = function (message) {
+                model.addMessage(message);
+            };
+
+            perfHub.client.displayMessages = function (messages) {
+                console.log("here");
+                console.log(messages);
+                for (var i = 0; i < messages.length; i++) {
+                    console.log(messages[i].message1);
+                    var result;
+                    if (messages[i].sended)
+                        result = "<div class='bubble me'>" + messages[i].message1 + "</div>";
+                    else {
+                        result = "<div class='bubble you'>" + messages[i].message1 + "</div>";
+                    }
+                    // $("#getMessages").text("ssss");
+                    document.getElementById('getOldMessages').innerHTML += result;
+
+                }
+            };
+
+            function init() {
+                perfHub.server.getmessages(@ViewBag.idUser);
+            }
+
+
+
+            var Model = function () {
+                var self = this;
+                self.message = ko.observable(""),
+                    self.messages = ko.observableArray();
+
+
+            };
+
+            Model.prototype = {
+                sendMessage: function () {
+                    var self = this;
+                    perfHub.server.send(self.message(), @ViewBag.idUser);
+
+                    self.message("");
+                },
+                addMessage: function (message) {
+                    var self = this;
+                    self.messages.push(message);
+                }
+            };
+
+            var model = new Model();
+
+            $(function () {
+                ko.applyBindings(model);
+            })
+
+        }());
+
+    </script>
+
+}
+
+<h2>@ViewBag.UserFullName</h2>
+
+<div class="wrapper" >
+    <div class="container-chat">
+
+        <div class="right">
+            <div class="top">
+                <span>To: <span class="name">@ViewBag.UserFullName</span></span>
+            </div>
+            <div class="chat active-chat scroller" data-chat="person2">
+                <div class="conversation-start">
+                    <span>Today</span>
+                </div>
+                <div id="getOldMessages" ></div>
+                <div data-bind="foreach:messages">
+
+                    <div data-bind="text: $data" class="bubble you">
+                        <br />
+                        <span data-bind="">@DateFormat.GetPrettyDate(DateTime.Now)</span>
+
+                    </div>
+                </div>
+
+
+                
+            </div>
+
+                <div class="col-md-12">
+
+
+                    <input class="form-control" type="text" placeholder="Message" data-bind="value:message"/>
+                    <button class="btn btn-block green" data-bind="click:sendMessage">Send</button>
+
+                </div>
+        </div>
+    </div>
+</div>
