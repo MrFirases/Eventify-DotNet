@@ -12,5 +12,9 @@ namespace Eventify.Service
     {
         int getNbPhysique();
         int getNbMorale();
+
+        IEnumerable<String> GetMonths();
+        IEnumerable<int> GetMonthsNumber();
+
     }
 }

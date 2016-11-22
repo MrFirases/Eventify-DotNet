@@ -49,6 +49,8 @@
 
 <script>
     $(function () {
+
+
         Highcharts.chart('containerp', {
             chart: {
                 type: 'column',
@@ -79,8 +81,27 @@
                 }
             },
             series: [{
-                name: 'Sales',
-                data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
+
+
+                name: 'Create Number of Event',
+
+
+                data: [
+                @foreach (var item in @ViewBag.MonthNumbers)
+                {
+
+
+                    Write(item+",");
+
+                }
+                ]
+            
+       
+
+
+
+
+
             }]
         });
     });
