@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Eventify.Data.Infrastructure;
 using Microsoft.AspNet.Identity;
+using Twilio;
+
 namespace Eventify.Service
 {
     public class UserService : MyServiceGeneric<User>, IUserService
@@ -135,6 +137,27 @@ namespace Eventify.Service
             return list_course;
         }
 
+        public bool SendSMS(string userPhoneNumber)
+        {
+            var accountSid = "ACc01a36028ee877166424ab96c711cf34"; // Your Account SID from www.twilio.com/console
+            var authToken = "cd3ddc33390ff747859d9733f8a22055";  // Your Auth Token from www.twilio.com/console
 
+            var twilio = new TwilioRestClient(accountSid, authToken);
+            var message = twilio.SendMessage(
+                "(413) 776-4608", // From (Replace with your Twilio number)
+                "+21653851047", // To (Replace with your phone number)
+                "Unfortunately! You have been banned from eventify. Please feel free to contact us for more informations."
+                );
+
+            if (message.RestException != null)
+            {
+                var error = message.RestException.Message;
+                Console.WriteLine(error);
+                Console.Write("Press any key to continue.");
+                Console.ReadKey();
+                return false;
+            }
+            return true;
+        }
     }
 }
