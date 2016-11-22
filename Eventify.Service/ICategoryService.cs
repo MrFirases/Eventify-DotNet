@@ -11,12 +11,15 @@ namespace Eventify.Service
     public interface ICategoryService :IMyServiceGeneric<Category>
     {
          IEnumerable<Category> getAllCategory();
-        IEnumerable<Category> getCategoryById();
+        Category getCategoryById(int idCategory);
         IEnumerable<Category> getCategoryByName();
         Boolean addCategory(Category cateegory);
         Boolean deteCategory(int idCategory);
         Boolean updateCategory(Category category);
-
+        int categoryPerUser(int idCategory);
+        List<Tuple<int, int>> mostUsedCategory();
+        int totalCategoryUsers();
+        void twitterCategory();
 
     }
 }
